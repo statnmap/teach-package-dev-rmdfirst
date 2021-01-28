@@ -126,4 +126,4 @@ He participates in the development of open-source R packages proposed on GitHub 
 He gave different presentations and tutorials on package development with the 'Rmd first' method as summed up in ["Rmd first: When development starts with documentation"](https://rtask.thinkr.fr/when-development-starts-with-documentation/)
 He is co-author of the book ["Engineering Production-Grade Shiny Apps"](https://engineering-shiny.org/) that promotes an adapted RMDD method for Shiny application using {golem}.
 
-- Emily Riederer
+- Emily Riederer (@emilyriederer) is a Senior Analytics Manager at Capital One where she leads a team building analytics infrastrucutre in R. Emily is a propoent of [R Markdown Driven Development](https://emilyriederer.netlify.app/post/rmarkdown-driven-development/) and a co-author of the [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/). She also maintains the `projmgr` and `convo` R packages, and frequently blogs about R [on her website](emily.rbind.io).
