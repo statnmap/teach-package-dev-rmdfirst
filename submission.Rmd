@@ -41,8 +41,8 @@ By the end of the tutorial participants should:
 
 - understand the methodology proposed by the Rmd Driven Development
 - be able to factorize their code into correctly formatted functions
-- be able to build a documented and tested R package
 - understand the structure of a package
+- be able to build a documented and tested R package
 - know how to share their work with the community
 
 ## Time zone preference and time slot (please mention at least three different time zones you are comfortable with)
