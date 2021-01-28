@@ -1,0 +1,64 @@
+---
+title: "How to build a package following Rmd Driven Development"
+subtitle: "useR! 2021 - remote"
+output: 
+  formation::chapitre:
+    seal: false
+  xaringan::moon_reader: default
+---
+class: center middle inverse title-slide
+
+```{r include=FALSE}
+knitr::opts_chunk$set(
+  cache = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  eval = TRUE
+)
+```
+
+<style>
+.top_left {
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+.top_left img {
+margin: 0;
+}
+</style>
+
+.top_left[
+```{r logo, echo=FALSE, out.width="20%", eval=TRUE}
+knitr::include_graphics("images/marmot.png")
+```
+]
+
+
+# How to build a package following Rmd Driven Development
+
+## <span style='color:#f26537;'>_useR! 2021 - remote_</span> 
+
+### Sébastien Rochette, Emily Riederer, Malcolm Barett
+
+.prez_github[
+Material of this course is on Github: <a href="https://github.com/statnmap/user2021.rmdd" target='_blank'><span style='color:#f26537;'>statnmap/user2021.rmdd</span></a>
+]
+
+---
+
+layout:true
+.remark-slide-number-left[`r '\u200B'`]
+
+---
+class: slide
+
+## Thanks for joining this tutorial!
+
+### <span style="color:#000000">Sébastien Rochette, Emily Riederer, Malcolm Barett</span>
+### @statnmap, @EmilyRiederer, @malco_barrett
+
+.prez_github[
+Material of this course is on Github (with answers): <a href="https://github.com/statnmap/user2021.rmdd" target='_blank'><span style='color:#f26537;'>statnmap/user2021.rmdd</span></a>
+]
+
