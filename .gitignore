@@ -6,3 +6,4 @@
 *.md
 *_files/
 !README.md
+token.txt

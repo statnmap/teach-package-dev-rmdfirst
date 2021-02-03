@@ -10,7 +10,8 @@
 This repository contains the course material of our [useR\! 2021
 tutorial](https://user2021.r-project.org/).
 
-Instructors: Sébastien Rochette, Emily Riederer
+Instructors: [Sébastien Rochette](https://statnmap.com), [Emily
+Riederer](emily.rbind.io)
 
 ## Tutorial purpose
 
@@ -25,22 +26,66 @@ to add them in the *master*. You can assign me to this.
 
 ## Content of this repository
 
-### Slides
-
   - `courses/`: Rmd for different courses
   - `data/`: shapefiles and data used in the slides and in exercises
   - `exercises/` : Rmd of the exercises with complete answers
+  - `submission.Rmd` : Tutorial submission
 
 ## What we proposed
 
-**Learning objectives**:  
+### Abstract
+
+“Rmd First” method can reduce mental load when building packages by
+keeping users in a natural environment, using a tool they know: a
+RMarkdown document.
+
+The step between writing your own R code to analyze some data and
+refactoring it into a well-documented, ready-to-share R package seems
+unreachable to many R users. The package structure is sometimes
+perceived as useful only for building general-purpose tools for data
+analysis to be shared on official platforms. However, packages can be
+used for a broader range of purposes, from internal use to open-source
+sharing. Because packages are designed for robustness and enforce
+helpful standards for documentation and testing, the package structure
+provides a useful framework for refactoring analyses and preparing them
+to go into production. The following approach to write a development or
+an analysis inside a Rmd, will significantly reduce the work to
+transform a Rmd into a package :
+
+  - *Design* : define the goal of your next steps and the tools needed
+    to reach them
+  - *Prototype* : use some small examples to prototype your script in
+    Rmd
+  - *Build* : Build your script as functions and document your work to
+    be able to use them, in the future, on real-life datasets
+  - *Strengthen* : Create tests to assure stability of your code and
+    follow modifications through time
+  - *Deploy* : Transform as a well-structured package to deploy and
+    share with your community
+
+During this tutorial, we will work through the steps of Rmd Driven
+Development to persuade attendees that their experience writing R code
+means that they already know how to build a package. They only need to
+be in a safe environment to find it out, which will be what we propose.
+We will take advantage of all existing tools such as {devtools},
+{testthat}, {attachment} and {usethis} that ease package development
+from Rmd to building a package. The recent package
+[{fusen}](https://thinkr-open.github.io/fusen), which “inflates a
+package from a simple flat Rmd”, will be presented to further reduce the
+step between well-designed Rmd and package deployment. Attendees will
+leave this workshop having built their first package with the “Rmd
+First” method and with the skills and tools to build more packages on
+their own.
+
+### The learning goals
+
 By the end of the tutorial participants should:
 
-  - understand the methodology proposed by the Rmd Driven Development
-  - be able to factorize their code into correctly formatted functions
-  - be able to build a documented and tested R package
+  - understand the methodology proposed by Rmd Driven Development
+  - be able to refactor their code into correctly formatted functions
   - understand the structure of a package
-  - know how to share their work with the community
+  - be able to build a documented and tested R package
+  - know how to share their work with the community on GitHub
 
 ## What can you do after this tutorial?
 
