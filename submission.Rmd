@@ -7,11 +7,11 @@ output: html_document
 
 ## The title of the tutorial
 
-How to build a package with Rmd Driven Development
+How to build a package with "Rmd First" method
 
 ## Abstract
 
-"Rmd Driven Development" can reduce mental load when building packages by keeping users in a natural environment, using a tool they know : a RMarkdown document. 
+"Rmd First" method can reduce mental load when building packages by keeping users in a natural environment, using a tool they know: a RMarkdown document. 
 
 The step between writing your own R code to analyze some data and refactoring it into a well-documented, ready-to-share R package seems unreachable to many R users.
 The package structure is sometimes perceived as useful only for building general-purpose tools for data analysis to be shared on official platforms.
@@ -21,14 +21,14 @@ The following approach to write a development or an analysis inside a Rmd, will 
 
 - _Design_ : define the goal of your next steps and the tools needed to reach them
 - _Prototype_ : use some small examples to prototype your script in Rmd
-- _Build_ : Build your script as a functions and document your work to be able to use them, in the future, on real-life datasets
+- _Build_ : Build your script as functions and document your work to be able to use them, in the future, on real-life datasets
 - _Strengthen_ : Create tests to assure stability of your code and follow modifications through time
 - _Deploy_ : Transform as a well-structured package to deploy and share with your community
 
 During this tutorial, we will work through the steps of Rmd Driven Development to persuade attendees that their experience writing R code means that they already know how to build a package. They only need to be in a safe environment to find it out, which will be what we propose.
-We will take advantage of all existing tools such as {devtools}, {testthat}, and {usethis} that ease package development from Rmd to building a package.
+We will take advantage of all existing tools such as {devtools}, {testthat}, {attachment} and {usethis} that ease package development from Rmd to building a package.
 The recent package [{fusen}](https://thinkr-open.github.io/fusen), which "inflates a package from a simple flat Rmd", will be presented to further reduce the step between well-designed Rmd and package deployment. 
-Attendees will leave this workshop having built their first package with the Rmd Driver Development method and with the skills and tools to build more packages on their own.
+Attendees will leave this workshop having built their first package with the "Rmd First" method and with the skills and tools to build more packages on their own.
 
 ## The broad topic it covers
 
@@ -91,8 +91,8 @@ Upper-beginner to Intermediate.
 Attendees should already have experience with R and be able to:
 
 - Manipulate rectangular data with {dplyr}: select, filter, mutate, group_by, summarize
-- Work with Rmarkdown documents
-- understand the meaning of this line of code and how to use it:
+- Work with RMarkdown documents
+- Understand the meaning of this line of code and how to use it:
 ```
 my_mean <- function(x, na.rm = TRUE) { sum(x, na.rm = na.rm) / length(x) }
 ```
@@ -122,8 +122,8 @@ Here is a presentation of the platform that will be provided: https://thinkr.fr/
 ## A brief biography of the instructors
 
 - Sébastien Rochette (@statnmap) is R trainer and consultant at [ThinkR](https://rtask.thinkr.fr). 
-He participates in the development of open-source R packages proposed on GitHub by ThinkR and himself, and has also created multiple internal packages for ThinkR and different clients. 
-He gave different presentations and tutorials on package development with the 'Rmd first' method as summed up in ["Rmd first: When development starts with documentation"](https://rtask.thinkr.fr/when-development-starts-with-documentation/)
+He participates in the development of open-source R packages proposed on GitHub by ThinkR and himself, including {fusen} and {attachment}. He also has created multiple internal packages for ThinkR and different clients. 
+He gave different presentations and tutorials on package development with the 'Rmd first' method as summed up in ["Rmd first: When development starts with documentation"](https://rtask.thinkr.fr/when-development-starts-with-documentation/) and blogs about R [on his website](https://statnmap.com).
 He is co-author of the book ["Engineering Production-Grade Shiny Apps"](https://engineering-shiny.org/) that promotes an adapted RMDD method for Shiny application using {golem}.
 
-- Emily Riederer (@emilyriederer) is a Senior Analytics Manager at Capital One where she leads a team building analytics infrastrucutre in R. Emily is a propoent of [R Markdown Driven Development](https://emilyriederer.netlify.app/post/rmarkdown-driven-development/) and a co-author of the [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/). She also maintains the `projmgr` and `convo` R packages, and frequently blogs about R [on her website](emily.rbind.io).
+- Emily Riederer (@emilyriederer) is a Senior Analytics Manager at Capital One where she leads a team building analytics infrastrucutre in R. Emily is a propoent of [R Markdown Driven Development](https://emilyriederer.netlify.app/post/rmarkdown-driven-development/) and a co-author of the [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/). She also maintains the {projmgr} and {convo} R packages, and frequently blogs about R [on her website](emily.rbind.io).

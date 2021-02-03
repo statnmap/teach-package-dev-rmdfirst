@@ -2,7 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-dev_history.R
 *.html
 *.md
 *_files/
