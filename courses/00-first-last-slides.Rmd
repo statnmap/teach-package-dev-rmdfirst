@@ -35,11 +35,11 @@ knitr::include_graphics("images/marmot.png")
 ]
 
 
-# How to build a package following Rmd Driven Development
+# How to build a package following 'Rmd First' method?
 
 ## <span style='color:#f26537;'>_useR! 2021 - remote_</span> 
 
-### Sébastien Rochette, Emily Riederer, Malcolm Barett
+### Sébastien Rochette, Emily Riederer, Malcolm Barrett
 
 .prez_github[
 Material of this course is on Github: <a href="https://github.com/statnmap/user2021.rmdd" target='_blank'><span style='color:#f26537;'>statnmap/user2021.rmdd</span></a>
@@ -55,7 +55,7 @@ class: slide
 
 ## Thanks for joining this tutorial!
 
-### <span style="color:#000000">Sébastien Rochette, Emily Riederer, Malcolm Barett</span>
+### <span style="color:#000000">Sébastien Rochette, Emily Riederer, Malcolm Barrett</span>
 ### @statnmap, @EmilyRiederer, @malco_barrett
 
 .prez_github[
