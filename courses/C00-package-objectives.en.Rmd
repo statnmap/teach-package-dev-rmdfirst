@@ -1,0 +1,49 @@
+---
+title: "One step package building"
+subtitle: "From Rmd to package"
+code: "M13S01C00"
+prerequis: [""]
+output: formation::chapitre
+obj_pred: ["Objectives of the course"]
+slug: package-flash-build
+---
+class: slide 
+
+```{r, results='asis', eval=FALSE}
+# cat('<style>
+# .remark-slide-number-left {
+#     background: url("', knitr::image_uri("images/marmot.png"),'") no-repeat left top ! important;
+# }
+# </style>')
+```
+
+
+### Learning goals
+
+- Understand the methodology proposed by the "Rmd First" method
+- Be able to refactor a code into correctly formatted functions
+- Understand the structure of a package
+- Be able to build a documented and tested R package
+- Know how to share your work with the community on GitHub
+
+---
+class: slide
+
+### Building a package in a few steps
+
+- Start with a Rmd
+- Build your functions inside
+- Document your functions
+- Inflate as a Package
+
+.pull-left[
+```{r, echo=FALSE, out.width="90%"}
+knitr::include_graphics("images/squirrels_rmd_html_snapshot.png")
+```
+
+]
+.pull-right[
+```{r, echo=FALSE, out.width="90%"}
+knitr::include_graphics("images/squirrels_inflated.png")
+```
+]
