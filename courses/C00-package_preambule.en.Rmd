@@ -3,7 +3,9 @@ title: "Start with the documentation"
 subtitle: "What are vignettes?"
 code: "M13S01C00"
 prerequis: [""]
-output: formation::chapitre
+output: 
+  formation::chapitre: default
+  xaringan::moon_reader: default
 obj_pred: ["know what is a vignette"]
 slug: package-preambule
 ---

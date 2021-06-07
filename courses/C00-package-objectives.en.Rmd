@@ -9,7 +9,7 @@ slug: package-flash-build
 ---
 class: slide 
 
-```{r, results='asis', eval=FALSE}
+```{r, results='asis', eval=FALSE, echo=FALSE}
 # cat('<style>
 # .remark-slide-number-left {
 #     background: url("', knitr::image_uri("images/marmot.png"),'") no-repeat left top ! important;

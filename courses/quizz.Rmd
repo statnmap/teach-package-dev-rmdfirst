@@ -9,4 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+**Write additionnal quizz here, ready for Slack poll ?**
+
 ## Quizz
