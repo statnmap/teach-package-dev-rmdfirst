@@ -1,7 +1,9 @@
 ---
 title: "What is CRUZ?"
 subtitle: "The ThinkR e-learning platform"
-output: formation::chapitre
+output: 
+  formation::chapitre: default
+  xaringan::moon_reader: default
 params:
   dataWD: "data"
 ---
@@ -27,7 +29,7 @@ knitr::opts_chunk$set(
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="50%"}
-knitr::include_graphics("img/cruz_classic_fondnoir.png")
+knitr::include_graphics("images/cruz_classic_fondnoir.png")
 ```
 <br/><br/>
 **Please take this tour to get used to the platform**
@@ -38,7 +40,7 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/00_connection.png")
+knitr::include_graphics("images/00_connection.png")
 ```
 
 ---
@@ -47,17 +49,7 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/01_home.png")
-```
-
----
-class: slide
-
-### Home page
-
-<br/><br/>
-```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/02_chapters.png")
+knitr::include_graphics("images/01_home.png")
 ```
 
 ---
@@ -67,7 +59,17 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/03_launch.png")
+knitr::include_graphics("images/02_chapters.png")
+```
+
+---
+class: slide
+
+### Home page
+
+<br/><br/>
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/03_launch.png")
 ```
 
 ---
@@ -77,7 +79,7 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/04_separator.png")
+knitr::include_graphics("images/04_separator.png")
 ```
 
 ---
@@ -87,7 +89,7 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/05_slides.png")
+knitr::include_graphics("images/05_slides.png")
 ```
 
 ---
@@ -97,7 +99,7 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/05_slides_overview.png")
+knitr::include_graphics("images/05_slides_overview.png")
 ```
 
 ---
@@ -107,7 +109,7 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/06_rstudio_right.png")
+knitr::include_graphics("images/06_rstudio_right.png")
 ```
 
 ---
@@ -117,7 +119,7 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/07_export.png")
+knitr::include_graphics("images/07_export.png")
 ```
 
 *We recommend to download your full project at the end of the course.*
@@ -129,7 +131,7 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/08_back_home.png")
+knitr::include_graphics("images/08_back_home.png")
 ```
 
 ---
@@ -139,7 +141,7 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/09_back_courses.png")
+knitr::include_graphics("images/09_back_courses.png")
 ```
 
 ---
@@ -149,7 +151,7 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/10_rstudio_full.png")
+knitr::include_graphics("images/10_rstudio_full.png")
 ```
 
 ---
@@ -160,7 +162,7 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/11_go_to_chat.png")
+knitr::include_graphics("images/11_go_to_chat.png")
 ```
 
 ---
@@ -171,7 +173,7 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/12_rocket_chat.png")
+knitr::include_graphics("images/12_rocket_chat.png")
 ```
 
 *This will be the place to discuss and share with instructors and other attendees.*
@@ -183,7 +185,7 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/13_resources.png")
+knitr::include_graphics("images/13_resources.png")
 ```
 
 ---
@@ -193,6 +195,6 @@ class: slide
 
 <br/><br/>
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/14_disconnect.png")
+knitr::include_graphics("images/14_disconnect.png")
 ```
 

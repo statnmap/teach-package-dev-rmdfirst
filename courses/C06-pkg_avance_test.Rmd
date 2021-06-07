@@ -115,7 +115,7 @@ class: slide
 
 ### Automate the testing of your code
 
-#### Exemple of test script in a package:
+#### Example of test script in a package:
 
 ```{r eval = FALSE}
 test_that("test de weighted.mean", {
