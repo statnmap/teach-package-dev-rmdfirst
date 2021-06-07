@@ -77,3 +77,15 @@ By the end of the tutorial participants should:
   
 - Try ["{fusen}: inflate a package from a simple flat Rmd"](https://rtask.thinkr.fr/fusen-create-a-package-from-a-single-rmarkdown-file/)
 
+# For instructors
+
+The content will be built using an internal ThinkR package called {formation}.
+This ensures that the HTML output, datasets, and extra files are stored in the correct place to be added to the ThinkR e-learning platform.  
+Each instructor is still able to locally knit each chapter using {xaringan}.  
+The content of the course is:  
+
+- courses/C00-package-objectives.en.Rmd: What we will present during this tutorial, and how it will be held
+- courses/00-cruz.Rmd: How the e-learning platform works
+- courses/C00-package_preambule.en.Rmd: What means package first ?
+- courses/C01-package_express_fusen.en.Rmd: Build a package using {fusen}
+- courses/C06-pkg_avance_test.Rmd: Go further with unit tests

@@ -4,10 +4,9 @@
 # How to build a package following Rmd Driven Development
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
-This repository contains the course material of our [useR\! 2021
+This repository contains the course material of our [useR! 2021
 tutorial](https://user2021.r-project.org/).
 
 Instructors: [Sébastien Rochette](https://statnmap.com), [Emily
@@ -26,10 +25,10 @@ to add them in the *master*. You can assign me to this.
 
 ## Content of this repository
 
-  - `courses/`: Rmd for different courses
-  - `data/`: shapefiles and data used in the slides and in exercises
-  - `exercises/` : Rmd of the exercises with complete answers
-  - `submission.Rmd` : Tutorial submission
+-   `courses/`: Rmd for different courses
+-   `data/`: shapefiles and data used in the slides and in exercises
+-   `exercises/` : Rmd of the exercises with complete answers
+-   `submission.Rmd` : Tutorial submission
 
 ## What we proposed
 
@@ -52,15 +51,15 @@ to go into production. The following approach to write a development or
 an analysis inside a Rmd, will significantly reduce the work to
 transform a Rmd into a package :
 
-  - *Design* : define the goal of your next steps and the tools needed
+-   *Design* : define the goal of your next steps and the tools needed
     to reach them
-  - *Prototype* : use some small examples to prototype your script in
+-   *Prototype* : use some small examples to prototype your script in
     Rmd
-  - *Build* : Build your script as functions and document your work to
+-   *Build* : Build your script as functions and document your work to
     be able to use them, in the future, on real-life datasets
-  - *Strengthen* : Create tests to assure stability of your code and
+-   *Strengthen* : Create tests to assure stability of your code and
     follow modifications through time
-  - *Deploy* : Transform as a well-structured package to deploy and
+-   *Deploy* : Transform as a well-structured package to deploy and
     share with your community
 
 During this tutorial, we will work through the steps of Rmd Driven
@@ -81,18 +80,36 @@ their own.
 
 By the end of the tutorial participants should:
 
-  - understand the methodology proposed by Rmd Driven Development
-  - be able to refactor their code into correctly formatted functions
-  - understand the structure of a package
-  - be able to build a documented and tested R package
-  - know how to share their work with the community on GitHub
+-   understand the methodology proposed by Rmd Driven Development
+-   be able to refactor their code into correctly formatted functions
+-   understand the structure of a package
+-   be able to build a documented and tested R package
+-   know how to share their work with the community on GitHub
 
 ## What can you do after this tutorial?
 
-  - Practice again, following complementary ‘Rmd-first’ / ‘RMDD’
+-   Practice again, following complementary ‘Rmd-first’ / ‘RMDD’
     presentations
-      - <https://rtask.thinkr.fr/when-development-starts-with-documentation/>
-      - <https://emilyriederer.netlify.com/post/rmarkdown-driven-development/>
-      - <https://malco.io/talk/you-re-already-ready-zen-and-the-art-of-r-package-development-rsg/>
-  - Try [“{fusen}: inflate a package from a simple flat
+    -   <https://rtask.thinkr.fr/when-development-starts-with-documentation/>
+    -   <https://emilyriederer.netlify.com/post/rmarkdown-driven-development/>
+    -   <https://malco.io/talk/you-re-already-ready-zen-and-the-art-of-r-package-development-rsg/>
+-   Try [“{fusen}: inflate a package from a simple flat
     Rmd”](https://rtask.thinkr.fr/fusen-create-a-package-from-a-single-rmarkdown-file/)
+
+# For instructors
+
+The content will be built using an internal ThinkR package called
+{formation}. This ensures that the HTML output, datasets, and extra
+files are stored in the correct place to be added to the ThinkR
+e-learning platform.  
+Each instructor is still able to locally knit each chapter using
+{xaringan}.  
+The content of the course is:
+
+-   courses/C00-package-objectives.en.Rmd: What we will present during
+    this tutorial, and how it will be held
+-   courses/00-cruz.Rmd: How the e-learning platform works
+-   courses/C00-package\_preambule.en.Rmd: What means package first ?
+-   courses/C01-package\_express\_fusen.en.Rmd: Build a package using
+    {fusen}
+-   courses/C06-pkg\_avance\_test.Rmd: Go further with unit tests
