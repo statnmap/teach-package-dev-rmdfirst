@@ -47,3 +47,20 @@ knitr::include_graphics("images/squirrels_rmd_html_snapshot.png")
 knitr::include_graphics("images/squirrels_inflated.png")
 ```
 ]
+
+---
+class: slide
+
+### How this tutorial will be held
+
+- E-learning platform: https://cruz.thinkr.fr
+- Instructors speak on slides
+- Slack group: https://package-rmd-first-dev.slack.com
+- Discussion, questions on the Slack group to keep track (better than Zoom)
+- Quizz where every attendees will be able to participate on Slack
+- Direct questions where attendees are asked to participate
+- Hands-on parts, in breakout rooms, where attendees are asked to share their screens for instructors to help
+
+
+
+
