@@ -397,6 +397,13 @@
       "Repository": "CRAN",
       "Hash": "38c2580abbda249bd6afeec00d14f531"
     },
+    "git2r": {
+      "Package": "git2r",
+      "Version": "0.28.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "f64fd34026f6025de71a4354800e6d79"
+    },
     "gitcreds": {
       "Package": "gitcreds",
       "Version": "0.1.1",
@@ -777,10 +784,10 @@
     },
     "remotes": {
       "Package": "remotes",
-      "Version": "2.3.0",
+      "Version": "2.4.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "92ea77818b3bb83c699008451af32b86"
+      "Hash": "a85ebb35721573b196317b49ddd2dfe4"
     },
     "renv": {
       "Package": "renv",

@@ -1,0 +1,130 @@
+---
+title: "Création de packages - Encapsuler ses données"
+subtitle: "et les data dans tout ca ?"
+code: "M13S02C09"
+output: formation::chapitre
+prerequis: ["M06-rbase"]
+obj_ped: "savoir intégrer des données dans un packages"
+slug: encapsuler-donnees
+---
+class: slide 
+
+
+### Fabriquer ses propres packages - Données externes
+
+Dans un package, il peut être utile d'incorporer des données externes.
+
++ Pour démontrer l'usage d'une fonction avec un exemple pertinent
++ Diffuser de l'information
+--
+
+
+Il existe trois types de données externes, et donc trois façons de les incorporer dans un package. 
+
+1. Un jeu de données d’exemple en format `rda`, disponible pour l'utilisateur,  stockés dans le dossier `data/`. (comme `iris` ou `mtcars` par exemple)
+<!-- > Si vous avez spécifié `LazyData: true` dans votre `DESCRIPTION`, ces jeux de données seront chargés de manière paresseuse, c'est-à-dire qu'ils ne seront disponibles que si l'utilisateur les charge explicitement.  -->
+
+--
+
+2. Un fichier de données (xlsx, csv ou autre) non transformé en `rda` disponible à l'utilisateur final car déposé dans le dossier `inst/` du package
+
+--
+
+3. Un fichier de données (xlsx, csv ou autre) non transformé en `rda` **NON** disponible à l'utilisateur final, mais accessible au développeur
+
+---
+class: slide 
+
+### Fabriquer ses propres packages - Données externes
+
+#### 1 Jeux de données disponible pour l'utilisateur 
+
+depuis `dev/dev_history.R` :
+
+```{r eval=FALSE}
+usethis::use_data_raw("my_dataset")
+```
+
+dans le fichier `R/my_dataset.R` crée :
+
+```{r eval = FALSE}
+my_dataset <- sample_frac(iris, 0.2)
+
+usethis::use_data(my_dataset, overwrite = TRUE) 
+```
+
+Ici, on va utiliser le paramètre `overwrite = TRUE`, qui va écraser le fichier s'il existe déjà.
+
+Une fois le package installé et chargé, l'utilisateur pourra taper `data(my_dataset)` pour charger le jeu de données d'exemple `my_dataset`.
+
+---
+class: slide 
+
+### Fabriquer ses propres packages - Données externes
+
+Puisqu'un jeu de données se documente au même titre qu'une fonction,
+on va placer la documentation dans un fichier `doc_my_dataset.R` dans le dossier R/:
+
+
+```{r eval=FALSE}
+#' mon jeu de données
+#'
+#' Un jeu de données contenant un bout d'iris
+#'
+#' @name my_dataset
+#' @docType data
+#' @author Colin \email{colin@@thinkr.fr}
+#' @source \url{google.com}{unlien}
+#' @format data.frame
+#' @keywords data
+"my_dataset"
+```
+
+Les deux tags importants pour les données sont (en plus des tags classiques) `@format`, donnant le format du jeu de données, et `@source`. 
+
+> On `@export` pas un dataset
+
+---
+class: slide 
+
+### Fabriquer ses propres packages - Données externes
+
+#### 2 Jeux de données brutes 
+
+Vous pouvez insérer des jeux de données brutes sous n'importe quel format dans le dossier `inst/extdata`. 
+
+Un fichier "my_dataset.csv" placé dans `inst/extdata` sera accessible via : 
+
+```{r eval = FALSE}
+system.file("extdata", "my_dataset.csv", package = "monpackage")
+```
+
+Ensuite libre à vous d'utiliser le chemin retourné pour alimenter vos exemples, tests et vignettes.
+
+
+_En pratique vous pouvez mettre n'importe quoi dans le dossier `inst/`: un pdf, un film, un executable..._
+
+--
+
+_il faut bien penser a (ré-)installer le package avec `remotes::install_local()` pour que les fichiers déposés dans `inst/` soient bien pris en compte_
+
+---
+class: slide 
+
+### Fabriquer ses propres packages - `data_raw`
+ 
+#### 3 Jeux de données internes 
+ 
+Le dossier `data-raw/` à la racine du package est fabriqué par l'instruction `usethis::use_data_raw()`, il contient les scripts qui ont permis de générer les jeux de données d'exemple à rendre disponible à l'utilisateur. 
+
+Ce dossier n'existe que dans les sources du packages, il ne se retrouve pas sur le poste de l'utilisateur du package. Il peut contenir toutes les ressources necessaire aux développeurs et mainteneurs du package sans poluer le package généré.
+
+cf : <https://github.com/ThinkR-open/prenoms/tree/master/data-raw>
+
+
+---
+class: slide 
+
+### TD
+
+> faites le TD du fichier "projet1/td_data_package.html"
