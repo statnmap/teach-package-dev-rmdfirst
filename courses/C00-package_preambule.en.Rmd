@@ -11,18 +11,172 @@ slug: package-preambule
 ---
 class: slide 
 
-### Let's talk about vignettes
- 
-#### Package documentation
+```{r echo=FALSE, include=FALSE}
+library(dplyr)
+```
 
-- An R package contains, among other things, functions
-  + Documentation is accessed with `?function_name`
+
+### Do you know package {attachment} ?
+
+Let's say you don't !
+
+#### How to discover what does a package?
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### My questions as a user
+
+- What does it do?
+- How to install it with its dependencies?
+- What are its function?
+- How to fill parameters of this function?
+- Can I have an example on how to use this function?
+- Can I have an example on how to use the package as a whole?
+- Will it work with the last version of R and dependencies?
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### What does it do?
+
+- CRAN page: https://cran.r-project.org/web/packages/attachment/index.html
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/pkg_attachment_cran.png")
+```
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### How to install it with its dependencies?
+
+- `install.packages('attachment')`
+
+???
+
+You don't have to think about dependencies...  
+The developers prepared everything for you
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### What are its functions?
+
+- Index of the package
+
+```{r echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/pkg_attachment_index.png")
+```
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### How to fill parameters of this function?
+
+- `?att_amend_desc`
+
+```{r echo=FALSE, out.width="75%"}
+knitr::include_graphics("images/pkg_attachment_doc_function.png")
+```
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### Can I have an example on how to use this function?
+
+- `?att_amend_desc` => Examples
+
+```{r echo=FALSE, out.width="90%"}
+knitr::include_graphics("images/pkg_attachment_examples.png")
+```
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### Can I have an overview on how to use the package as a whole?
+
+- Vignettes
+- GitHub: https://thinkr-open.github.io/attachment/articles/fill-pkg-description.html
+
+```{r echo=FALSE, out.width="60%"}
+knitr::include_graphics("images/pkg_attachment_vignette.png")
+```
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### Will it work with the last version of R and dependencies?
+
+- README Check, https://github.com/ThinkR-open/attachment
+- Unit tests, code coverage, Continuous Integration
+
+```{r echo=FALSE, out.width="85%"}
+knitr::include_graphics("images/pkg_attachment_badges.png")
+```
+
+???
+
+Unit tests and CI are set up by developers to ensure reproducibility and maintainability
+
+---
+class: slide
+
+### How to discover what does a package?
+#### My answers as a user
+
+```{r, echo=FALSE}
+tribble(
+  ~Questions, ~Answers,
+"What does it do?", "CRAN page: https://cran.r-project.org/web/packages/attachment/index.html",
+"How to install it with its dependencies?", "`install.packages('attachment')`",
+"What are its functions?",  "`?attachment` => Index",
+"How to fill parameters of this function?", "`?att_amend_desc`",
+"Can I have an example on how to use this function?",  "`?att_amend_desc` => Examples",
+"Can I have an overview on how to use the package as a whole?", "Vignettes, GitHub: https://thinkr-open.github.io/attachment/articles/fill-pkg-description.html",
+"Will it work with the last version of R and dependencies?", "Readme Check, https://github.com/ThinkR-open/attachment"
+) %>% 
+  knitr::kable()
+```
+
+_There is a dedicated website that gathers all these answers: https://thinkr-open.github.io/attachment/_
+
+???
+
+We will explore this website later
+
+
+---
+class: slide
+
+### How to discover what does a package?
+#### Developers point of view
+
+- All these sources of information are adressed by developers
 
 --
 
-- Documentation is also vignettes
-  + HTML pages telling the stories of the package
-  + List vignettes using: `vignette(package = "thepackage")`.
+#### If you start with the documentation, from the vignette, you will not have to think too much about all of these
+
+???
+
+You will build all the doc along the way
+
+---
+class: slide
+
+### Let's talk again about vignettes
+
++ HTML pages telling the stories of the package
++ List vignettes using: `vignette(package = "thepackage")`.
 
 ```{r, echo=FALSE, out.width="90%"}
 knitr::include_graphics("images/vignette.png")
@@ -31,7 +185,7 @@ knitr::include_graphics("images/vignette.png")
 ---
 class: slide 
 
-### Let's talk about vignettes
+### Let's talk again about vignettes
  
 #### Content of a vignette
 
@@ -43,10 +197,14 @@ vignette(topic = "colwise", package = "dplyr")
 knitr::include_graphics("images/vignette2.png")
 ```
  
+???
+
+The story of the package as a whole
+ 
 ---
 class: slide 
 
-### Let's talk about vignettes
+### Let's talk again about vignettes
 
 #### Vignette = Rmarkdown (usually)
 
@@ -54,7 +212,7 @@ class: slide
 - What is the function for
 - How to use it with or without parameters
 - Reproducible examples
-- Different outputs
+- Different outputs depending on chosen parameters
 
 --
 

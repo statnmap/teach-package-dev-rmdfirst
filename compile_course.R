@@ -58,7 +58,7 @@ tous_les_cours <- list(
     # "courses/00-zoom.Rmd",
     "courses/C00-package_preambule.en.Rmd",
     "courses/C01-package_express_fusen.en.Rmd",
-    "courses/C06-pkg_avance_test.Rmd"
+    "courses/C09-pkg_avance_data.Rmd"
   )
 )
 
