@@ -1,0 +1,319 @@
+---
+title: "Include datasets in your package"
+subtitle: "What about data?"
+code: "M13S02C09"
+output: formation::chapitre
+prerequis: ["M06-rbase"]
+obj_ped: "savoir intégrer des données dans un packages"
+slug: encapsuler-donnees-en
+---
+class: slide 
+
+
+### Include datasets
+
+In a package, it can be useful to include data.
+
++ To demonstrate the use of a function with a relevant example
++ To disseminate information
+
+--
+
+There are three types of datasets to include, thus three ways to include them into a package. 
+
+1. A raw data file (xlsx, csv or other), **NOT** available to the end user, but accessible to the developers only, stored in `data-raw/` folder
+
+--
+
+2. An example dataset in `rda` format, to be loaded as is, available to the user, stored in the `data/` folder (such as `iris` or `mtcars` for example)
+<!-- > If you specified `LazyData: true` in your `DESCRIPTION`, these datasets will be loaded lazily, i.e., they will only be available if the user explicitly loads them.  -->
+
+--
+
+3. A data file (xlsx, csv or other) not transformed into `rda`, available to the end user, stored in the `inst/` folder
+
+
+???
+
+Let's see how and why
+
+---
+class: slide 
+
+### 1. Include datasets in `data-raw/`
+ 
+#### Internal dataset, accessible to developers only
+ 
+- Developers store raw datasets to keep the source of examples close to them
+- Users can not access them, there are not installed
+
+--
+
+*Steps:*  
+
+- Create folder `data-raw/` at the root of the package using: `usethis::use_data_raw()`
+- Insert raw datasets inside
+- Use R/Rmd scripts to prepare a cleaner / smaller dataset for future examples  
+
+--
+
+*Information:*  
+
+- `data-raw` is not installed with the package
+  + It is not accessible to the user
+- Example: <https://github.com/ThinkR-open/prenoms/tree/master/data-raw>
+
+???
+
+- Prepare data that you will need for your reproducible examples
+- Keep the original source of your datasets in a safe place
+- Note that with {fusen}, you can realise the preparation steps in a `development` chunk.
+
+---
+class: slide 
+
+### 2. Include datasets in `data/`
+
+#### Exported dataset, accessible to the user
+
+- Developers includes a dataset in the package using: `usethis::use_data(my_dataset)` 
+- Users load the dataset named `my_dataset` using: `data(my_dataset)`
+
+--
+
+*Steps:*  
+
+- Create `data-raw/` to prepare your dataset using: `usethis::use_data_raw()`
+- Prepare your dataset as needed for reproducible examples
+- Store `my_dataset` as internal data
+
+```{r eval = FALSE}
+# Read some raw data 
+# my_data_to_clean <- readr::read_csv("my_raw_data.csv")
+
+# Or use existing dataset like `iris`
+my_dataset <- dplyr::slice_sample(iris, prop = 0.2)
+usethis::use_data(my_dataset, overwrite = TRUE) 
+```
+
+- `overwrite = TRUE` overwrite the dataset if already exists, as for an update
+- Have a look at the content of newly created folder `data/`
+
+???
+
+- We use the directory `data-raw` previously created to prepare dataset
+- `use_data()` stores the reproducible example at the right place in the right format
+
+---
+class: slide 
+
+### 2. Include datasets in `data/`
+
+#### Exported dataset, accessible to the user
+
+- Developers includes a dataset in the package using: `usethis::use_data(my_dataset)` 
+- Users load the dataset named `my_dataset` using: `data(my_dataset)`
+
+
+*Information:*  
+
+- `my_dataset` is accessible to the user after package installation
+```{r, eval=FALSE}
+library(mypackage)
+data(my_dataset)
+```
+- `my_dataset` is stored as `.rda` file, only readable by R, similar to `.RData` files
+
+???
+
+Package needs to be installed to access the dataset
+
+---
+class: slide 
+
+### 2. Include datasets in `data/`
+
+#### Exported dataset, accessible to the user
+
+- Exported datasets need to be documented, like functions
+
+--
+
+*Steps:*  
+
+- Create a dedicated script in "R/" folder using `usethis::use_r("my_dataset")`
+- Fill in the 'roxygen2' documentation to describe the dataset
+
+```{r eval=FALSE}
+#' Prices of 50,000 round cut diamonds.
+#'
+#' A dataset containing the prices and other attributes of almost 54,000
+#' diamonds.
+#'
+#' @format A data frame with 53940 rows and 10 variables:
+#' \describe{
+#'   \item{price}{price, in US dollars}
+#'   \item{carat}{weight of the diamond, in carats}
+#'   ...
+#' }
+#' @source \url{http://www.diamondse.info/}
+"diamonds"
+```
+
+???
+
+Documentation is always the key for a correct package. 
+Check will remind you of missing data documentation.
+
+
+---
+class: slide 
+
+### 2. Include datasets in `data/`
+
+#### Exported dataset, accessible to the user
+
+- Exported datasets need to be documented, like functions
+
+*Information:*  
+
+- Documentation requires at least `@format` and `@source`
+- We do not `@export` a dataset
+
+---
+class: slide 
+
+### 3. Include datasets in `inst/`
+
+#### Raw dataset, accessible to the user
+
+- Developers includes a dataset in the `inst/` folder directly
+- Users find the dataset using `system.file("my_dataset.csv", package = "mypackage")`
+
+--
+
+*Steps*
+
+- Create `inst/` folder using: `dir.create(here::here("inst"))`
+- Add a dataset inside
+- Install the package
+- Users can access the path of the dataset and read the file as usual
+
+```{r, eval=FALSE}
+# Store "my_dataset.csv" in "inst/" folder
+the_data_path <- system.file("my_dataset.csv", package = "mypackage")
+the_data <- readr::read_csv(the_data_path)
+```
+
+--
+
+*Information*
+
+- Any type of data is allowed
+- Use the path for your reproducible examples
+- Organise the content of `inst/` as your want
+
+???
+
+- system.file() does not read the dataset, it returns the path to the dataset
+- The dataset is only available after installation of the package
+
+---
+class: slide
+
+### Deal with datasets during development
+
+- Datasets in `data/` or `inst/` are only available after package installation
+- Simulate installation using `pkgload::load_all()` during development
+  + `system.file()` temporarily returns development path (not installed path)
+
+--
+
+*Steps*
+
+- Check your reproducible examples in the Rmd file with package data
+
+```{r, eval=FALSE}
+# For development only
+pkgload::load_all()
+
+# Same code to add in your `examples` or `tests`
+# Can be tested directly during development
+the_data_path <- system.file("my_dataset.csv", package = "mypackage")
+the_data <- readr::read_csv(the_data_path)
+```
+
+--
+
+> Note that `pkgload::load_all()` also loads functions in development, as it simulates a real installation
+
+???
+
+
+---
+class: slide 
+
+### Your turn!
+
+- Look at the instructor demonstration
+- Do it yourself
+
+*Steps*  
+
+- Create a new project
+- Run `fusen::add_dev_history()`
+- Run the content of the `description` chunk
+- Uncomment `development` chunk in Read data section
+- Play with data in `inst/` during development
+
+*Bonus*
+
+- Clean the "median" and "mean" example sections
+- Create function `check_data_integrity()` that reads a dataset like `nyc_squirrels` and check its integrity
+  + For instance, `primary_fur_color` columns should only contains a unique color, there should not be any `+` sign inside this column.
+  + Stop the function if the integrity is not good
+  + Return a message if everything is ok
+- Create a reproducible example using the dataset saved in `inst` using `system.file()`
+
+???
+
+https://github.com/statnmap/squirrels.fusen/blob/main/dev/dev_history.Rmd
+
+```{r function-1, echo=TRUE, eval=FALSE}
+#' Check data integrity
+#'
+#' @param x dataframe with at least colums "lat", "long" and "primary_fur_color"
+#'
+#' @return Original dataframe if all tests are good. Otherwise stops.
+#' @export
+check_data_integrity <- function(x) {
+  # Verify points are in New York around Central Park
+  all_coords_ok <- all(
+    c(
+      min(x[["lat"]]) > 40.76400,
+      max(x[["lat"]]) < 40.80100,
+      min(x[["long"]]) > -73.98300,
+      max(x[["long"]]) < -73.94735
+    )
+  )
+  if (!all_coords_ok) {stop("Not all data are in Central Park")}
+  
+  # Verify there is only one color in primary_fur_color.
+  # A `+` in the column is a sign of multiple colours
+  if (any(grepl("+", x[["primary_fur_color"]], fixed = TRUE))) {
+    stop("There are multiple colors in some 'primary_fur_color'")
+  }
+  
+  message("All tests are good !")
+}
+```
+
+```{r examples-1, echo=TRUE, eval=FALSE}
+# A working example
+my_data_example <- data.frame(
+  lat = c(40.77, 40.78),
+  long = c(-73.95, -73.96),
+  primary_fur_color = c("grey", "black")
+)
+check_data_integrity(my_data_example)
+```

@@ -13,6 +13,8 @@ renv::init()
 renv::install("git2r")
 renv::install("remotes")
 options(remotes.git_credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GITLAB_THINKR_TOKEN")))
+options(renv.auth.formation = list(GIT_PAT = Sys.getenv("GITLAB_THINKR_TOKEN")))
+renv::install("git::https://git.thinkr.fr/ThinkR/formation")
 remotes::install_git("https://git.thinkr.fr/ThinkR/formation", upgrade = FALSE)
 
 # Snapshot before push
