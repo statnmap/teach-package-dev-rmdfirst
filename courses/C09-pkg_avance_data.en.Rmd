@@ -253,6 +253,19 @@ the_data <- readr::read_csv(the_data_path)
 ---
 class: slide 
 
+### Quizz
+
+If I want to provide a dataset to the user in any format I want, where do I store it?
+
+- A: `extdata/`
+- B: `inst/`
+- C: `data/`
+- D: `data-raw/`
+
+
+---
+class: slide 
+
 ### Your turn!
 
 - Look at the instructor demonstration
