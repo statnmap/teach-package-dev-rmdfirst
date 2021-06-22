@@ -38,7 +38,10 @@ jobs:
         run: |
           R -e 'install.packages("renv")'
           R -e 'install.packages("git2r")'
-          R -e 'options(remotes.git_credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GITLAB_THINKR_PAT")));renv::restore()'
+          R -e 'options(renv.auth.formation = list(GIT_PAT = Sys.getenv("GITLAB_THINKR_PAT")));renv::restore()'
+          # R -e 'options(remotes.git_credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GITLAB_THINKR_PAT")));renv::restore()'
+
+# Mettre les options pour avec renv, qui n'est pas pareil que remotes...
 
       - name: Render Rmarkdown files
         run: |
