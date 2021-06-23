@@ -64,3 +64,7 @@ renv::restore()
 
 # Set Actions
 usethis::use_github_action("render-rmarkdown")
+# Move course
+dir.create("public")
+file.copy("les_cours/complet/support", "public", recursive = TRUE)
+writeLines("!*.html\n!*.pdf\n!*_files/", "public/support/.gitignore")
