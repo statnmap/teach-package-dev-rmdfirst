@@ -56,6 +56,7 @@ renv::snapshot(packages = custom_packages)
 
 
 # Snapshot before push
+options(repos = c("CRAN" = "https://packagemanager.rstudio.com/all/__linux__/focal/latest"))
 renv::snapshot()
 
 # Restore after pull
