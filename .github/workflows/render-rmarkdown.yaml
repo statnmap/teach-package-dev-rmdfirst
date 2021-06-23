@@ -68,6 +68,7 @@ jobs:
       - name: Render Rmarkdown files
         run: |
           Rscript -e 'source("compile_course.R")'
+          Rscript -e 'writeLines("!*.html\n!*.pdf", "les_cours/complet/support/.gitignore")'
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
