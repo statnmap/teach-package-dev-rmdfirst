@@ -58,7 +58,8 @@ tous_les_cours <- list(
     # "courses/00-zoom.Rmd",
     "courses/C00-package_preambule.en.Rmd",
     "courses/C01-package_express_fusen.en.Rmd",
-    "courses/C09-pkg_avance_data.Rmd"
+    "courses/C06-pkg_avance_test.en.Rmd",
+    "courses/C09-pkg_avance_data.en.Rmd"
   )
 )
 
@@ -73,11 +74,11 @@ tous_les_cours <- list(
 home <- list(
   projet1 = list(
     root =  c(
-      formateur = "courses/quizz.Rmd",
-      render = "nyc_squirrels_rmd/nyc_squirrels_rmd_simple.Rmd"
+      formateur = "courses/quizz.Rmd"# ,
+      # render = "nyc_squirrels_rmd/nyc_squirrels_rmd_simple.Rmd"
     ),
     data = c(
-      "nyc_squirrels_rmd"
+      # "nyc_squirrels_rmd"
     )
   )
 )
