@@ -36,7 +36,6 @@ jobs:
 
       - name: Install packages
         run: |
-          install.packages("renv")
           source("renv/activate.R")
           install.packages("git2r")
           tmpform <- tempfile(pattern = "form-")
