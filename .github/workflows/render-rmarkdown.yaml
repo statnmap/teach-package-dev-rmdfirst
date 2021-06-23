@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: ubuntu-20.04
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       GITLAB_THINKR_PAT: ${{ secrets.GITLAB_THINKR_PAT }}
@@ -39,12 +39,12 @@ jobs:
           source("renv/activate.R")
           install.packages("git2r")
           install.packages("remotes")
+          options(renv.auth.formation = list(GIT_PAT = Sys.getenv("GITLAB_THINKR_PAT")))
+          renv::restore()
           tmpform <- tempfile(pattern = "form-")
           git2r::clone("https://git.thinkr.fr/ThinkR/formation", local_path = tmpform,
              credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GITLAB_THINKR_PAT")))
           remotes::install_local(path = tmpform, upgrade = FALSE)
-          options(renv.auth.formation = list(GIT_PAT = Sys.getenv("GITLAB_THINKR_PAT")))
-          renv::restore()
           # Rscript -e 'options(remotes.git_credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GITLAB_THINKR_PAT")));renv::restore()'
         shell: Rscript {0}
 
