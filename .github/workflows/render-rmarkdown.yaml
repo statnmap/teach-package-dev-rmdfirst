@@ -40,7 +40,7 @@ jobs:
           install.packages("git2r")
           tmpform <- tempfile(pattern = "form-")
           git2r::clone("https://git.thinkr.fr/ThinkR/formation", local_path = tmpform,
-             credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GITLAB_THINKR_TOKEN")))
+             credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GITLAB_THINKR_PAT")))
           remotes::install_local(path = tmpform, upgrade = FALSE)
           options(renv.auth.formation = list(GIT_PAT = Sys.getenv("GITLAB_THINKR_PAT")))
           renv::restore()
