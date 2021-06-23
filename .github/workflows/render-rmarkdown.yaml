@@ -67,12 +67,13 @@ jobs:
 
       - name: Render Rmarkdown files
         run: |
-          Rscript -e 'source("compile_course.R")'
-          Rscript -e 'writeLines("!*.html\n!*.pdf", "les_cours/complet/support/.gitignore")'
+          source("compile_course.R")
+          dir.create("public")
+          file.copy("les_cours/complet/support", "public", recursive = TRUE)
+        shell: Rscript {0}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./les_cours/complet/support
-          exclude_assets: ''
+          publish_dir: ./public/support
