@@ -15,6 +15,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       GITLAB_THINKR_PAT: ${{ secrets.GITLAB_THINKR_PAT }}
+      REPO_NAME: "https://packagemanager.rstudio.com/all/__linux__/focal/latest"
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
