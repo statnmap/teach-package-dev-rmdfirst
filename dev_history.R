@@ -34,12 +34,25 @@ all_deps_compils <- attachment::att_from_rscripts(all_compil_to_test)
 supplements_imports <- c("git2r", "attachment", "testthat", "here", "flextable",
                          "remotes")
 
+all_imports <- unique(c(supplements_imports, all_deps_courses))
+all_deps_compils <- all_deps_compils[!all_deps_compils == "formation"]
 # Add to DESCRIPTION
 # usethis::use_description()
 attachment::att_to_desc_from_is(
-  imports = unique(c(supplements_imports, all_deps_courses)),
+  imports = all_imports,
   suggests = all_deps_compils
 )
+
+custom_packages <- c(
+  attachment::att_from_description(),
+  "renv"#,
+  # "devtools", "roxygen2", "usethis", "pkgload",
+  # "testthat", "covr", "attachment",
+  # remotes::install_github("ThinkR-open/checkhelper")
+  # "pkgdown", "styler", "checkhelper"
+)
+renv::snapshot(packages = custom_packages)
+
 
 
 # Snapshot before push
