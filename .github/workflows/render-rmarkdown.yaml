@@ -54,9 +54,8 @@ jobs:
         run: |
           Rscript -e 'source("compile_course.R")'
 
-      # - name: Commit results
-      #   run: |
-      #     git config --local user.name "$GITHUB_ACTOR"
-      #     git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-      #     git commit ${RMD_PATH[*]/.Rmd/.md} -m 'Re-build Rmarkdown files' || echo "No changes to commit"
-      #     git push origin || echo "No changes to commit"
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./les_cours/complet/support
