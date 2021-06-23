@@ -70,6 +70,7 @@ jobs:
           source("compile_course.R")
           dir.create("public")
           file.copy("les_cours/complet/support", "public", recursive = TRUE)
+          writeLines("!*.html\n!*.pdf\n!*_files/", "public/support/.gitignore")
         shell: Rscript {0}
 
       - name: Deploy
