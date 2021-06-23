@@ -268,7 +268,7 @@ class: slide
 
 ### Your turn!
 
-- Look at the instructor demonstration
+- Look at the instructor demonstration with *Steps*
 - Do it yourself
 
 *Steps*  
@@ -276,17 +276,17 @@ class: slide
 - Create a new project
 - Run `fusen::add_dev_history()`
 - Run the content of the `description` chunk
-- Uncomment `development` chunk in Read data section
+- Uncomment `development` chunk in "Read data" section
 - Play with data in `inst/` during development
 
 *Bonus*
 
-- Clean the "median" and "mean" example sections
 - Create function `check_data_integrity()` that reads a dataset like `nyc_squirrels` and check its integrity
   + For instance, `primary_fur_color` columns should only contains a unique color, there should not be any `+` sign inside this column.
   + Stop the function if the integrity is not good
   + Return a message if everything is ok
-- Create a reproducible example using the dataset saved in `inst` using `system.file()`
+- Create a reproducible example using the dataset saved in `inst` and `system.file()`
+- Create unit tests with repoducible examples where function should fail
 
 ???
 
