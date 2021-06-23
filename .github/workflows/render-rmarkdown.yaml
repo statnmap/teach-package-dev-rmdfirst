@@ -38,6 +38,7 @@ jobs:
         run: |
           source("renv/activate.R")
           install.packages("git2r")
+          install.packages("remotes")
           tmpform <- tempfile(pattern = "form-")
           git2r::clone("https://git.thinkr.fr/ThinkR/formation", local_path = tmpform,
              credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GITLAB_THINKR_PAT")))
