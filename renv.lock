@@ -334,12 +334,11 @@
     "formation": {
       "Package": "formation",
       "Version": "0.0.7.3",
-      "Source": "Git",
+      "Source": "Local",
       "Remotes": "gadenbuie/xaringanExtra",
-      "RemoteType": "git2r",
-      "RemoteUrl": "https://git.thinkr.fr/ThinkR/formation",
-      "RemoteSha": "58ffc04dca0e4859455fb35b1462f9f19e0368df",
-      "Hash": "9f580a7674772609eb5cfb241ec855ba"
+      "RemoteType": "local",
+      "RemoteUrl": "/tmp/RtmpBpxgr2/form-13635453f11cf",
+      "Hash": "134d8c5e93b5aea855d3bd241e67eadf"
     },
     "fs": {
       "Package": "fs",
