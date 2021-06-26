@@ -1,5 +1,5 @@
 ---
-title: "How to build a package following Rmd Driven Development"
+title: 'How to build a package with "Rmd First" method'
 author: "Sébastien Rochette"
 date: "28/01/2021"
 output: html_document

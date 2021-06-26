@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# How to build a package following Rmd Driven Development
+# How to build a package with “Rmd First” method
 
 <!-- badges: start -->
 <!-- badges: end -->
