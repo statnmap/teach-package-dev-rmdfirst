@@ -17,6 +17,12 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r xaringanExtra-search, echo=FALSE}
+xaringanExtra::use_search(show_icon = TRUE, case_sensitive = FALSE, position = "top-right")
+# xaringanExtra::use_xaringan_extra("tile_view")
+# xaringanExtra::style_search(match_background = "pink")
+```
+
 <style>
 .top_left {
     left: 0;

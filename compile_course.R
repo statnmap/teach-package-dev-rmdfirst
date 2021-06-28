@@ -54,8 +54,9 @@ create_session <- purrr::partial(
 tous_les_cours <- list(
   cours_1 = c(
     "courses/C00-package-objectives.en.Rmd",
-    "courses/00-cruz.Rmd",
-    # "courses/00-zoom.Rmd",
+    # "courses/00-cruz.Rmd"#,
+    "courses/C05-comment_utiliser_bakacode.en.Rmd",
+    "courses/C04-comment_interagir_zoom.en.Rmd",
     "courses/C00-package_preambule.en.Rmd",
     "courses/C01-package_express_fusen.en.Rmd",
     "courses/C06-pkg_avance_test.en.Rmd",

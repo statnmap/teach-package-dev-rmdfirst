@@ -1,0 +1,299 @@
+---
+title: "What is Bakacode?"
+subtitle: "The ThinkR e-learning platform"
+output: formation::chapitre
+params:
+  dataWD: "/mnt/Data/ThinkR/Seafile/Dossier_ThinkR/ressources Formations/support/data"
+slug: what-is-bakacode-en
+---
+class: slide 
+
+```{r include=FALSE}
+knitr::opts_chunk$set(
+  cache = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  eval = TRUE,
+  fig.align = "center"
+)
+```
+
+### Take a tour!
+
+**BakACode** is the home-made [ThinkR](https://rtask.thinkr.fr) e-learning platform
+
+- Everything you need during the course is available in one place
+- The server has all dependencies required for your tutorial
+- You can communicate directly with your instructors
+
+<br/><br/>
+```{r, echo=FALSE, out.width="55%"}
+knitr::include_graphics("images/bakacode_long_3.png")
+```
+<br/><br/>
+**Please take this tour to get used to the platform**
+
+---
+class: slide
+### Connection
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_login.png")
+```
+]
+.pull-right[
+#### Connection
+
+- Use your credentials to connect with username and password
+]
+
+Connect to <https://baka.thinkr.fr>
+
+---
+class: slide
+### Home page
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_courses.png")
+```
+]
+.pull-right[
+#### Learning objectives
+
+- Learning objectives of the tutorial
+
+]
+
+---
+class: slide
+### Home page
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_courses.png")
+```
+]
+.pull-right[
+#### Learning objectives
+
+- Learning objectives of the tutorial
+
+#### Sections
+
+- A box for each section
+- Date and description of the section
+- Click on the box to show chapters presented
+
+]
+
+
+---
+class: slide
+### Home page - launch
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_courses_launch.png")
+```
+]
+.pull-right[
+#### Launch tutorial
+
+- Click on the Launch ("Lancer") button to start the tutorial
+
+]
+
+---
+class: slide
+
+### Pratice - presentation
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_rstudio.png")
+```
+]
+.pull-right[
+#### Vertical separator
+
+- Maintain left click on the vertical bar and use the mouse to change left/right windows ratio
+
+]
+
+---
+class: slide
+
+### Pratice - presentation
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_rstudio.png")
+```
+]
+.pull-right[
+#### Vertical separator
+
+- Maintain left click on the vertical bar and use the mouse to resize the window
+
+#### Slides
+
+- Use arrows of your keyboard to go up and down in the slides
+- You can copy-paste code parts
+
+]
+
+---
+class: slide
+
+### Pratice - presentation
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_rstudio.png")
+```
+]
+.pull-right[
+#### Vertical separator
+
+- Maintain left click on the vertical bar and use the mouse to resize the window
+
+#### Slides
+
+- Use arrows of your keyboard to go up and down
+- You can copy-paste code parts
+
+#### RStudio server
+
+- RStudio project opened with your data and Rmd files for exercises
+- Be sure to work in a project!
+]
+
+---
+class: slide
+
+### Pratice - search
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_search.png")
+```
+]
+.pull-right[
+#### Search words
+
+- Click on the slides
+- Use CTRL + F to open the slides search bar or click on the magnifier icon
+- Write your words
+- Use ESC / ECH to quit the search bar and navigate
+
+]
+---
+class: slide
+
+### Pratice - export
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_export.png")
+```
+]
+.pull-right[
+#### Download your files
+
+- Download files on your computer
+- Select one or more files in the file Pane using checkboxes
+- Open the 'More' menu
+- Choose 'Export'
+- 'Download'
+]
+
+> We recommend that you export your full project at the end of the course
+
+---
+class: slide
+
+### Top menu
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_rstudio.png")
+```
+]
+.pull-right[
+#### Home
+
+- Go back to home page "Accueil"
+
+]
+---
+class: slide
+
+### Top menu
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_rstudio.png")
+```
+]
+.pull-right[
+#### Cours
+
+- Navigate through the list of courses sections available
+]
+
+---
+class: slide
+
+### Top menu
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_rstudio.png")
+```
+]
+.pull-right[
+#### RStudio
+
+- Opens your current RStudio session as full screen in a new tab
+- Note that this will close the RStudio session in the "Practice" interface
+
+]
+
+---
+class: slide
+
+### Top menu
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_rstudio.png")
+```
+]
+.pull-right[
+#### Resources
+
+- Opens a new tab with R cheatsheets as PDF
+- You can open or download them
+
+]
+
+---
+class: slide
+
+### Top menu
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_rstudio.png")
+```
+]
+.pull-right[
+
+#### Disconnect
+
+- Disconnect from BakACode
+
+]
+
