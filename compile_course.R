@@ -73,15 +73,19 @@ tous_les_cours <- list(
 # - les autres (avec ou sans nom) sont déposés tel quel dans le dossier
 
 # Create empty fusen packages
-# mytools
 dirfusen <- tempfile(pattern = "fusen-")
+dir.create(dirfusen)
 mytools <- file.path(dirfusen, "mytools.solution")
-dir.create(mytools, recursive = TRUE)
-fusen::add_dev_history(pkg = mytools, name = "teaching", open = FALSE)
-# hello
 hello <- file.path(dirfusen, "hello.solution")
-dir.create(hello, recursive = TRUE)
-fusen::add_dev_history(pkg = hello, name = "minimal", open = FALSE)
+
+usethis::with_project(path = dirfusen, {
+  # mytools
+  dir.create(mytools, recursive = TRUE)
+  fusen::add_dev_history(pkg = mytools, name = "teaching", open = FALSE)
+  # hello
+  dir.create(hello, recursive = TRUE)
+  fusen::add_dev_history(pkg = hello, name = "minimal", open = FALSE)
+}, force = TRUE)
 
 
 home <- list(
