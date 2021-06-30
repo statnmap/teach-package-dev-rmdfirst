@@ -22,6 +22,9 @@ git2r::clone("https://git.thinkr.fr/ThinkR/formation", local_path = tmpform,
              credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GITLAB_THINKR_TOKEN")))
 remotes::install_local(path = tmpform, upgrade = FALSE, force = TRUE)
 
+# fusen
+remotes::install_github("ThinkR-open/fusen")
+
 # Description
 # _Get all deps to run courses, except old ones -- SUGGESTS --
 all_courses <- list.files(here::here("courses"), full.names = TRUE, pattern = "[.]Rmd", recursive = TRUE)
@@ -35,6 +38,7 @@ supplements_imports <- c("git2r", "attachment", "testthat", "here", "flextable",
                          "remotes")
 
 all_imports <- unique(c(supplements_imports, all_deps_courses))
+all_imports <- all_imports[!all_imports == "formation"]
 all_deps_compils <- all_deps_compils[!all_deps_compils == "formation"]
 # Add to DESCRIPTION
 # usethis::use_description()

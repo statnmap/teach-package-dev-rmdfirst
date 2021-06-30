@@ -166,6 +166,7 @@ class: slide
 
 - Restart your RStudio session
   + File > Recent Projects > mytools (same as current project)
+  + Or `rstudioapi::openProject()`
   + The 'Build' tab should appear in RStudio
   
 - Install the package
@@ -199,7 +200,7 @@ class: slide
 
 ---
 class: slide
-### Exercice: Can you draw ?
+### Exercise: Can you draw ?
 
 - Draw a schematic view of the links between "dev_history.Rmd" content and package structure
 - Explore the multiple files and folders created
@@ -254,7 +255,7 @@ In Rstudio :
 
 - Choose the directory where to save the project
 
-```{r, echo=FALSE, out.width="50%"}
+```{r, echo=FALSE, out.width="45%"}
 knitr::include_graphics("images/fusen_start_hello.png")
 ```
 
@@ -649,6 +650,8 @@ Check that the package follows the packages rules
 
 - Reach **0 Error, 0 Warnings, 0 Notes**
 
+> Store this commands in a `development` chunk
+
 <br/>
 
 > Note that `fusen::inflate()` already launches this two commands, but who knows!
@@ -663,6 +666,8 @@ class: slide
 ### Step 10 : Install and use your package
 
 - Restart your RStudio session
+  + File > Recent Projects > hello (same as current project)
+  + Or `rstudioapi::openProject()`
   + The 'Build' tab should appear in RStudio
   
 - Install the package
@@ -675,6 +680,7 @@ class: slide
   
 - Check that the help for your function appears
   + `?say_hello`
+  + Run the reproducible example from help
 
 ---
 class: slide
@@ -694,6 +700,23 @@ knitr::include_graphics("images/fusen_rmd_folds_pkg.png")
 <br/>
 <br/>
 > If you are motivated, you can start again from the beginning of the 10 steps procedure
+
+---
+class: slide
+
+### Add new functionnalities
+
+Start over from 'Step 4' to:
+
+- Upgrade your existing function
+- Add a new function
+  + New entitled section with `function`, `examples`, `tests`
+  + Inflate
+  + Install
+
+--
+
+- Create a new "dev_history.Rmd" using `fusen::add_dev_history(name = "additional")` for a new family of functions
 
 ---
 class: slide
@@ -722,9 +745,9 @@ pkgdown::build_site() will drop the site into the docs folder by default
 ---
 class: slide
 
-### Quiz
+### Quizz
 
-Where were the pieces of code for the :
+Where were moved the pieces of code from chunks :
 
 - `description` ?
 - `function` ?
@@ -762,6 +785,34 @@ class: slide
 - Note that you can still do these actions using {fusen} after `inflate()`
 
 > Be careful, when using {fusen}, if you want to modify some code, go back to the "dev_history.Rmd" and do `inflate()` again
+
+---
+class: slide
+
+### The package is stored on two places
+
+.pull-left[
+**Development directory**
+
+- Where you chose to create your project
+- All files and directory for development
+- "data-raw/", "inst/" included
+- Called with `pkgload::load_all()`
+
+]
+.pull-right[
+**Installed directory**
+
+- Along with other R packages
+- You do not choose its place
+- Only files and directories not in '.RBuildignore'
+- Compiled code if required
+- Documentation compiled and included
+- Updated with `devtools::install()`
+- Called with `library(hello)`
+]
+
+> There maybe mismatch between code in development and installed package 
 
 ---
 class: slide 

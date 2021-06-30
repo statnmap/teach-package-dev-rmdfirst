@@ -24,7 +24,6 @@ class: slide
 - Be able to refactor a code into correctly formatted functions
 - Understand the structure of a package
 - Be able to build a documented and tested R package
-- Know how to share your work with the community on GitHub
 
 ---
 class: slide
@@ -53,7 +52,7 @@ class: slide
 
 ### How this tutorial will be held
 
-- E-learning platform: https://cruz.thinkr.fr
+- E-learning platform: https://baka.thinkr.fr
 - Instructors speak on slides
 - Slack group: https://package-rmd-first-dev.slack.com
 - Discussion, questions on the Slack group to keep track (better than Zoom)

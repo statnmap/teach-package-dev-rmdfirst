@@ -72,6 +72,18 @@ tous_les_cours <- list(
 # - "formateur" : les fichiers à déplacer dans le dossier formateur uniquement
 # - les autres (avec ou sans nom) sont déposés tel quel dans le dossier
 
+# Create empty fusen packages
+# mytools
+dirfusen <- tempfile(pattern = "fusen-")
+mytools <- file.path(dirfusen, "mytools.solution")
+dir.create(mytools, recursive = TRUE)
+fusen::add_dev_history(pkg = mytools, name = "teaching", open = FALSE)
+# hello
+hello <- file.path(dirfusen, "hello.solution")
+dir.create(hello, recursive = TRUE)
+fusen::add_dev_history(pkg = hello, name = "minimal", open = FALSE)
+
+
 home <- list(
   projet1 = list(
     root =  c(
@@ -81,6 +93,12 @@ home <- list(
     data = c(
       # "nyc_squirrels_rmd"
     )
+  ),
+  mytools.solution = list(
+    root = c(file.path(mytools, "dev"))
+  ),
+  hello.solution = list(
+    root = c(file.path(hello, "dev"))
   )
 )
 

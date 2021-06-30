@@ -19,8 +19,10 @@ Imports:
     knitr,
     remotes,
     testthat,
-    xaringan
+    xaringan,
+    xaringanExtra
 Suggests: 
+    fusen,
     future,
     purrr,
     tidyverse
