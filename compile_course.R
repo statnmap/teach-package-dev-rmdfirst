@@ -3,7 +3,7 @@ library(tidyverse)
 library(formation)
 
 # Compiler en parallèle
-future::plan(future::multisession) # Parallèle
+future::plan(future::multisession(workers = 4)) # Parallèle
 # plan(sequential) # Non parallèle. Default.
 
 # Client - Nom de dossier
@@ -77,6 +77,7 @@ dirfusen <- tempfile(pattern = "fusen-")
 dir.create(dirfusen)
 mytools <- file.path(dirfusen, "mytools.solution")
 hello <- file.path(dirfusen, "hello.solution")
+wd <- getwd()
 
 usethis::with_project(path = dirfusen, {
   # mytools
@@ -87,6 +88,7 @@ usethis::with_project(path = dirfusen, {
   fusen::add_dev_history(pkg = hello, name = "minimal", open = FALSE)
 }, force = TRUE)
 
+setwd(wd)
 
 home <- list(
   projet1 = list(
@@ -120,6 +122,6 @@ if (TRUE) {
 
 # Fonction - peuple_home() ----
 formation::peuple_home(home = home, dossier = paste0(client_dir, "_home"))
-
+formation::copy_pdf()
 # Fonction - export_pour_sc() ----
 # formation::export_pour_sc(pattern = client_dir)

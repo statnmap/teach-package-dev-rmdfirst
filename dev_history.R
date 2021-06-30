@@ -20,6 +20,7 @@ remotes::install_git("https://git.thinkr.fr/ThinkR/formation", upgrade = FALSE, 
 tmpform <- tempfile(pattern = "form-")
 git2r::clone("https://git.thinkr.fr/ThinkR/formation", local_path = tmpform,
              credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GITLAB_THINKR_TOKEN")))
+             # credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GIT_TOKEN")))
 remotes::install_local(path = tmpform, upgrade = FALSE, force = TRUE)
 
 # fusen

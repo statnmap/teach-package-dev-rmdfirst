@@ -602,7 +602,7 @@ What is the correct order for documentation to be correclty associate to files a
 
 - a: ACBDE
 
-- b: EABCD
+- c: EABCD
 ]
 .pull-right[
 *Documentation*  
@@ -745,7 +745,7 @@ pkgdown::build_site() will drop the site into the docs folder by default
 ---
 class: slide
 
-### Quizz
+### Exercise: Take time to finish your drawings
 
 Where were moved the pieces of code from chunks :
 
@@ -755,7 +755,7 @@ Where were moved the pieces of code from chunks :
 - `tests` ?
 - `development` ?
 
-> Verify your previous drawings
+> Verify and update your previous drawings
 
 ???
 

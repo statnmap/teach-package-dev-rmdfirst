@@ -12,3 +12,25 @@ knitr::opts_chunk$set(echo = TRUE)
 **Write additionnal quizz here, ready for Slack poll ?**
 
 ## Quizz
+
+Diapo 41:
+
+/poll "What is a vignette?" "A: A website somewhere on Internet" "B: A Sticker you can add on your laptop" "C: A R script with the help of function accessible in the installed package" "D: A html page built from a Rmd file, accessible in the installed package"
+
+
+Diapo 42: 
+
+/poll "Have you already built a package with all these?" "A: Yes, everything. Functions, examples, tests, vignettes" "B: Only part of documentation. Functions, examples, maybe vignettes" "C: Only functions in a R/ directory" "D: No. I never built a package from scratch"
+
+
+Diapo 68:
+
+/poll "What is the correct order for documentation to be correclty associate to files and folders?" "a: ACBDE" "b: EDCBA" "c: EABCD" "d: BAECD"
+
+Diapo 87:
+
+/poll "How to test what is supposed to fail?" "A : expect_equal()" "B : expect_false()" "C : expect_error()" "D : expect_warning()"
+
+Diapo 98:
+
+/poll "If I want to provide a dataset to the user in any format I want, where do I store it?" "A: extdata/" "B: inst/" "C: data/" "D: data-raw/"
