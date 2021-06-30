@@ -4,6 +4,8 @@ subtitle: "useR! 2021 - remote"
 output: 
   formation::chapitre:
     seal: false
+    add_auto_title_slide: true
+    add_footer_chapitre: false
   xaringan::moon_reader: default
 ---
 class: center middle inverse title-slide
@@ -45,7 +47,7 @@ knitr::include_graphics("images/marmot.png")
 
 ## <span style='color:#f26537;'>_useR! 2021 - remote_</span> 
 
-### Sébastien Rochette, Emily Riederer, Malcolm Barrett
+### Sébastien Rochette, Emily Riederer
 
 .prez_github[
 Material of this course is on Github: <a href="https://github.com/statnmap/user2021.rmdd" target='_blank'><span style='color:#f26537;'>statnmap/user2021.rmdd</span></a>
@@ -61,8 +63,8 @@ class: slide
 
 ## Thanks for joining this tutorial!
 
-### <span style="color:#000000">Sébastien Rochette, Emily Riederer, Malcolm Barrett</span>
-### @statnmap, @EmilyRiederer, @malco_barrett
+### <span style="color:#000000">Sébastien Rochette, Emily Riederer</span>
+### @statnmap, @EmilyRiederer
 
 .prez_github[
 Material of this course is on Github (with answers): <a href="https://github.com/statnmap/user2021.rmdd" target='_blank'><span style='color:#f26537;'>statnmap/user2021.rmdd</span></a>
