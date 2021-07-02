@@ -72,41 +72,44 @@ tous_les_cours <- list(
 # - "formateur" : les fichiers à déplacer dans le dossier formateur uniquement
 # - les autres (avec ou sans nom) sont déposés tel quel dans le dossier
 
-# Create empty fusen packages
-dirfusen <- tempfile(pattern = "fusen-")
-dir.create(dirfusen)
-mytools <- file.path(dirfusen, "mytools.solution")
-hello <- file.path(dirfusen, "hello.solution")
-wd <- getwd()
+# Do not create home on Github Actions
+if (Sys.getenv("FILL_HOME", unset = "TRUE") == "TRUE") {
+  # Create empty fusen packages
+  dirfusen <- tempfile(pattern = "fusen-")
+  dir.create(dirfusen)
+  mytools <- file.path(dirfusen, "mytools.solution")
+  hello <- file.path(dirfusen, "hello.solution")
+  wd <- getwd()
 
-usethis::with_project(path = dirfusen, {
-  # mytools
-  dir.create(mytools, recursive = TRUE)
-  fusen::add_dev_history(pkg = mytools, name = "teaching", open = FALSE)
-  # hello
-  dir.create(hello, recursive = TRUE)
-  fusen::add_dev_history(pkg = hello, name = "minimal", open = FALSE)
-}, force = TRUE)
+  usethis::with_project(path = dirfusen, {
+    # mytools
+    dir.create(mytools, recursive = TRUE)
+    fusen::add_dev_history(pkg = mytools, name = "teaching", open = FALSE)
+    # hello
+    dir.create(hello, recursive = TRUE)
+    fusen::add_dev_history(pkg = hello, name = "minimal", open = FALSE)
+  }, force = TRUE)
 
-setwd(wd)
+  setwd(wd)
 
-home <- list(
-  projet1 = list(
-    root =  c(
-      formateur = "courses/quizz.Rmd"# ,
-      # render = "nyc_squirrels_rmd/nyc_squirrels_rmd_simple.Rmd"
+  home <- list(
+    projet1 = list(
+      root =  c(
+        formateur = "courses/quizz.Rmd"# ,
+        # render = "nyc_squirrels_rmd/nyc_squirrels_rmd_simple.Rmd"
+      ),
+      data = c(
+        # "nyc_squirrels_rmd"
+      )
     ),
-    data = c(
-      # "nyc_squirrels_rmd"
+    mytools.solution = list(
+      root = c(file.path(mytools, "dev"))
+    ),
+    hello.solution = list(
+      root = c(file.path(hello, "dev"))
     )
-  ),
-  mytools.solution = list(
-    root = c(file.path(mytools, "dev"))
-  ),
-  hello.solution = list(
-    root = c(file.path(hello, "dev"))
   )
-)
+}
 
 # All sessions - Normally used
 if (TRUE) {
@@ -120,8 +123,11 @@ if (TRUE) {
   )
 }
 
-# Fonction - peuple_home() ----
-formation::peuple_home(home = home, dossier = paste0(client_dir, "_home"))
-formation::copy_pdf()
-# Fonction - export_pour_sc() ----
-# formation::export_pour_sc(pattern = client_dir)
+# Do not create home on Github Actions
+if (Sys.getenv("FILL_HOME", unset = "TRUE") == "TRUE") {
+  # Fonction - peuple_home() ----
+  formation::peuple_home(home = home, dossier = paste0(client_dir, "_home"))
+  formation::copy_pdf()
+  # Fonction - export_pour_sc() ----
+  # formation::export_pour_sc(pattern = client_dir)
+}

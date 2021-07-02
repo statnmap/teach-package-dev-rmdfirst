@@ -66,7 +66,8 @@ class: slide
 ### <span style="color:#000000">Sébastien Rochette, Emily Riederer</span>
 ### @statnmap, @EmilyRiederer
 
-.prez_github[
 Material of this course is on Github (with answers): <a href="https://github.com/statnmap/user2021.rmdd" target='_blank'><span style='color:#f26537;'>statnmap/user2021.rmdd</span></a>
-]
 
+```{r meetup-lille-21, out.width="50%", echo=FALSE}
+knitr::include_graphics("images/fusen-write-package.png")
+```
