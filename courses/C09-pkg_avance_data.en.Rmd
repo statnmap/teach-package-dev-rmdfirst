@@ -286,7 +286,7 @@ class: slide
   + Stop the function if the integrity is not good
   + Return a message if everything is ok
 - Create a reproducible example using the dataset saved in `inst` and `system.file()`
-- Create unit tests with repoducible examples where function should fail
+- Create unit tests with reproducible examples where function should fail
 
 ???
 
@@ -295,7 +295,7 @@ https://github.com/statnmap/squirrels.fusen/blob/main/dev/dev_history.Rmd
 ```{r function-1, echo=TRUE, eval=FALSE}
 #' Check data integrity
 #'
-#' @param x dataframe with at least colums "lat", "long" and "primary_fur_color"
+#' @param x dataframe with at least columns "lat", "long" and "primary_fur_color"
 #'
 #' @return Original dataframe if all tests are good. Otherwise stops.
 #' @export

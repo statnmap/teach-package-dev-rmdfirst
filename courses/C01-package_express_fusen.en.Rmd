@@ -1,6 +1,6 @@
 ---
 title: "Package express with {fusen}"
-subtitle: "A Rmd is a package"
+subtitle: "An Rmd is a package"
 code: "M13S01C02"
 prerequis: ["M13S01C00"]
 output: 
@@ -204,7 +204,7 @@ class: slide
 
 - Draw a schematic view of the links between "dev_history.Rmd" content and package structure
 - Explore the multiple files and folders created
-- Can you spot where went each part of the "dev_history.Rmd" ?
+- Can you spot where each part of the "dev_history.Rmd" went?
   + Some were copied in multiple places
   + Some were copied nowhere
 
@@ -431,14 +431,14 @@ As you just wrote the code of your function, you know exactly
 - what is the output 
 - what are the dependencies needed
 
-Write it now. In an hour, you will have forget it !
+Write it now. In an hour, you will have forgotten it !
 
 Note that:
 
-- because we are in a Rmd, you won't be able to get the auto-completion for roxygen
-- because we are in a RStudio Server, the keyboard shortcut for roxygen may be in competition with your browser shortcuts
+- because we are in an Rmd, you won't be able to get the auto-completion for roxygen
+- because we are in an RStudio Server, the keyboard shortcut for roxygen may be in competition with your browser shortcuts
 
-Let's see how it looks like in the next slide
+Let's see how it looks on the next slide
 
 ---
 class: slide 
@@ -658,7 +658,7 @@ Check that the package follows the packages rules
 
 ???
 
-It is always good to know this commands, although `inflate()` already do it. You may need them if you go back to a classical way of maintaining your package
+It is always good to know these commands, although `inflate()` already does them. You may need them if you go back to a classical way of maintaining your package
 
 ---
 class: slide 

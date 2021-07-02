@@ -43,7 +43,7 @@ knitr::include_graphics("images/marmot.png")
 ]
 
 
-# How to build a package following 'Rmd First' method?
+# How to build a package following the 'Rmd First' method?
 
 ## <span style='color:#f26537;'>_useR! 2021 - remote_</span> 
 

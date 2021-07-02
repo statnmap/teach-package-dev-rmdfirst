@@ -1,6 +1,6 @@
 ---
 title: "Test your code"
-subtitle: "Do yourself a favor by taking the right decisions"
+subtitle: "Do yourself a favor by making the right decisions"
 code: "M13S02C06"
 output: formation::chapitre
 prerequis: ["M06-rbase"]
@@ -57,7 +57,7 @@ class: slide
 
 ### Writing tests 
 
-Each test file is composed of one of multiple sections, with one or multiple tests:
+Each test file is composed of one or multiple sections, with one or multiple tests:
 
 ```{r eval = FALSE}
 test_that("detail serie1", {
@@ -76,7 +76,7 @@ If `test2b` fails, I will be informed that it is the second test of "detail seri
 
 ???
 
-Note that if a test fails with {fusen}, you better modify it in the dev_history.Rmd and `inflate()` again
+Note that if a test fails with {fusen}, you had better modify it in the dev_history.Rmd and `inflate()` again
 
 ---
 class: slide 
@@ -203,7 +203,7 @@ knitr::include_graphics("images/exemple_test.png")
 
 + Each line corresponds to a test file
 + Each test is counted as `OK`, `FAIL`, `WARNING`, `SKIP`.
-+ Each test file is launched in its own environment, it is necessary to think about loading the necessary libraries and data each time  
++ Each test file is launched in its own environment, so it is necessary to think about loading the necessary libraries and data each time  
 
 
 
@@ -245,7 +245,7 @@ exclude: true
 
 **Version A**
 
-Add unit tests to your {mytools} package containing funtions `save_as_csv()` and `clean_names()`.
+Add unit tests to your {mytools} package containing functions `save_as_csv()` and `clean_names()`.
 
 > Your package must be documented, **tested** and return 0 errors, 0 warnings, and 0 notes
 
