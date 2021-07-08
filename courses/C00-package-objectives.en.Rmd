@@ -54,7 +54,7 @@ class: slide
 
 - E-learning platform: https://baka.thinkr.fr
 - Instructors speak on slides
-- Slack group: https://package-rmd-first-dev.slack.com
+- Slack group: https://app.slack.com/client/T0270SMAND9/C0270SMATJP
 - Discussion, questions on the Slack group to keep track
 - Quizz where every attendees will be able to participate on Slack
 - Direct questions where attendees are asked to participate

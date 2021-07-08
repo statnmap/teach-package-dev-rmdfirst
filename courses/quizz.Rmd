@@ -34,3 +34,8 @@ Diapo 87:
 Diapo 98:
 
 /poll "If I want to provide a dataset to the user in any format I want, where do I store it?" "A: extdata/" "B: inst/" "C: data/" "D: data-raw/"
+
+
+Google Form - Bakacode
+https://forms.gle/ZT886vrvTuVVV6uq7
+
