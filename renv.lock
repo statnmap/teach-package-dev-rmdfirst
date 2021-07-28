@@ -53,10 +53,10 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.5",
+      "Version": "1.0.7",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "125dc7a0ed375eb68c0ce533b48d291f"
+      "Repository": "RSPM",
+      "Hash": "dab19adae4440ae55aa8a9d238b246bb"
     },
     "askpass": {
       "Package": "askpass",
@@ -408,10 +408,10 @@
     },
     "here": {
       "Package": "here",
-      "Version": "0.1",
+      "Version": "1.0.1",
       "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "2c0406b8e0a4c3516ab37be62da74e3c"
+      "Repository": "CRAN",
+      "Hash": "24b224366f9c2e7534d2344d10d59211"
     },
     "highr": {
       "Package": "highr",

@@ -155,8 +155,6 @@ test_that("log fails ", {
 })
 ```
 
-
-
 ---
 class: slide 
 
@@ -261,7 +259,7 @@ Add unit tests to your {mytools} package containing functions `save_as_csv()` an
 > Your package must be documented, **tested** and return 0 errors, 0 warnings, and 0 notes
 
 ---
-class: slide 
+class: slide
 
 
 ### TD - Version B
