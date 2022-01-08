@@ -11,6 +11,35 @@ slug: package-express-fusen-en
 ---
 class: slide 
 
+```{r include=FALSE}
+# Verify {fusen} works here
+library(fusen)
+library(testthat)
+
+# Create a new project
+dummypackage <- tempfile("inflate.tests")
+dir.create(dummypackage)
+
+# {fusen} steps
+fill_description(pkg = dummypackage, fields = list(Title = "Dummy Package"))
+dev_file <- suppressMessages(add_flat_template(pkg = dummypackage, overwrite = TRUE, open = FALSE))
+flat_file <- dev_file[grepl("flat_", dev_file)]
+
+usethis::with_project(dummypackage, {
+  suppressMessages(
+    inflate(pkg = dummypackage, flat_file = flat_file,
+            vignette_name = "Get started", check = FALSE,
+            open_vignette = FALSE)
+  )
+})
+
+test_that("inflate() worked correctly", {
+  # R files
+  my_median_file <- file.path(dummypackage, "R", "my_median.R")
+  expect_true(file.exists(my_median_file))
+})
+```
+
 ### Preparation : Tools
  
 To create a package, we will use :
@@ -19,12 +48,12 @@ To create a package, we will use :
 + {fusen} package
 + the packages {pkgbuild}, {devtools}, {usethis} and {attachment} to save time.
 + the {roxygen2} package to generate the documentation.
++ the {testthat} package to generate unit tests.
 + Rtools.exe (optional and under windows only).
 
 
 ```{r eval = FALSE}
-remotes::install_github("ThinkR-open/fusen")
-install.packages(c("devtools", "usethis", "pkgbuild", "roxygen2", "attachment", "testthat"))
+install.packages(c("fusen", "devtools", "usethis", "pkgbuild", "roxygen2", "attachment", "testthat"))
 ```
 
 Rtools is available here :   [https://cran.r-project.org/bin/windows/Rtools/](https://cran.r-project.org/bin/windows/Rtools/)  
@@ -54,7 +83,7 @@ knitr::include_graphics("images/fusen_fold_inflate.png")
 
 ---
 class: slide 
-### Short version - Preamble
+### [Short version] - Preamble
 
 - What is going on when building a package using {fusen}?
 - Where do I have to write what?
@@ -70,20 +99,21 @@ We suggest you to :
 
 ---
 class: slide 
-### [Short] 1: Create a new (classical) project
+### [Short] 1: Create a new {fusen} project
 
 In Rstudio : 
 
-- File > New project > new directory > New project  
+- File > New project > New directory > Package using {fusen} 
 - Choose the name of the package (explicit, in lower case) 
-  - Name of the package : "mytools"
-
-> _no capital letters, underscores, spaces or special characters_.
+  - Name of the package: "mytools"
+> _no capital letters, underscores, spaces or special characters_
+- Choose the {fusen} template in the dropdown menu: "teaching"
 
 - Choose the directory where to save the project
+- Create the project
 
-```{r, echo=FALSE, out.width="50%"}
-knitr::include_graphics("images/fusen_new_project.png")
+```{r, echo=FALSE, out.width="43%"}
+knitr::include_graphics("images/new_package_fusen_teaching.png")
 ```
 
 ???
@@ -97,18 +127,15 @@ Thus, {mytools}
 
 ---
 class: slide 
-### [Short] 2: Add the {fusen} Rmd template
+### [Short] 2: Open the {fusen} Rmd flat template
 
-- Create the RMarkdown template of your package using {fusen}: "dev_history.Rmd"
-  + Run this line in the Console
-```{r, eval=FALSE}
-fusen::add_dev_history(name = "teaching")
-```
+- The project opens up on a flat template file: "flat_teaching.Rmd"
 
 --
 
 - Here are the main parts of a package, in a unique Rmd file
   + Note the name of the chunks that are required
+  + The present file is pre-filled with examples
 
 ```{r, echo=FALSE, out.width="50%"}
 knitr::include_graphics("images/fusen_skeleton.png")
@@ -116,7 +143,7 @@ knitr::include_graphics("images/fusen_skeleton.png")
 
 ???
 
-You can see that {fusen} opens up the "dev_history.Rmd" file in RStudio.  
+You can see that {fusen} opens up the "flat_teaching.Rmd" file in RStudio.  
 There are a few additional files that we will explore later.  
 This Rmd file is the "teaching" template with different chunks, which you will not modify this time.
 
@@ -127,16 +154,19 @@ And a final 'development' chunk asking to inflate
 class: slide 
 ### [Short] 3 : Description
 
+Describe your future package: 
+
 - Change the name with yours in the `description` chunk
 - Execute the complete content of the `description` chunk
-  + "CTRL + Enter" should be good
+  + "CTRL + SHIFT + ENTER" should be good
+  + There are two functions to execute here
 - A "DESCRIPTION" file appears with the same information
 
 --
 
 #### DESCRIPTION is the first source of documentation for your package
 
-```{r, echo=FALSE, out.width="50%"}
+```{r, echo=FALSE, out.width="45%"}
 knitr::include_graphics("images/fusen_description_file.png")
 ```
 
@@ -153,22 +183,24 @@ class: slide
 - Go down the Rmd file and inflate
 
 ```{r, eval=FALSE}
-fusen::inflate(rmd = "dev/dev_history.Rmd")
+fusen::inflate(flat_file = "dev/flat_teaching.Rmd")
 ```
 
 ```{r, echo=FALSE, out.width="80%"}
 knitr::include_graphics("images/fusen_fold_inflate.png")
 ```
 
+--
+
+**You built a package!**
+
 ---
 class: slide 
 ### [Short] 5 : Does it work ?
 
-- Restart your RStudio session
-  + File > Recent Projects > mytools (same as current project)
-  + Or `rstudioapi::openProject()`
-  + The 'Build' tab should appear in RStudio
-  
+- The 'Build' tab should already appear in RStudio
+  + Otherwise, restart your RStudio session
+
 - Install the package
   + Panel Build > Install and Restart
   
@@ -176,6 +208,8 @@ class: slide
   + `mytools::my_median(1:4)`
 
 - Test the knit of the *vignette*
+  + The vignette is opened "get-started.Rmd"
+  + Hit the "Knit" button
   
 - Check that the help for your function appears
   + `?my_median`
@@ -202,9 +236,9 @@ class: slide
 class: slide
 ### Exercise: Can you draw ?
 
-- Draw a schematic view of the links between "dev_history.Rmd" content and package structure
+- Draw a schematic view of the links between "flat_teaching.Rmd" content and package structure
 - Explore the multiple files and folders created
-- Can you spot where each part of the "dev_history.Rmd" went?
+- Can you spot where each part of the "flat_teaching.Rmd" went?
   + Some were copied in multiple places
   + Some were copied nowhere
 
@@ -239,27 +273,29 @@ We suggest you to :
 
 --
 
-> Procedure is split in two parts to let you practice.
+> Procedure is split in two parts to let you practice. You will thus have 2 times: "Watch - Do"
 
 ---
 class: slide 
-### Step 1: Create a new project
+### Step 1: Create a new {fusen} project
 
 In Rstudio : 
 
-- File > New project > new directory > New project  
+- File > New project > New directory > Package using {fusen} 
 - Choose the name of the package (explicit, in lower case) 
-  - Name of the package : "hello"
-
-> _no capital letters, underscores, spaces or special characters_.
+  - Name of the package: "hello"
+> _no capital letters, underscores, spaces or special characters_
+- Choose the {fusen} template in the dropdown menu: "minimal"
 
 - Choose the directory where to save the project
+- Create the project
 
-```{r, echo=FALSE, out.width="45%"}
-knitr::include_graphics("images/fusen_start_hello.png")
+
+```{r, echo=FALSE, out.width="35%"}
+knitr::include_graphics("images/new_package_fusen_minimal.png")
 ```
 
-> You could also directly run: `usethis::create_project(path = "~/hello")`
+> You could also directly run: `fusen::create_fusen(path = "~/hello", template = "minimal")`
 
 ???
 
@@ -271,22 +307,20 @@ Thus, {hello}
 ---
 class: slide
 
-### Step 2 : Add the {fusen} Rmd template
+### Step 2 : Open the {fusen} Rmd templates
 
-- Create the RMarkdown template of your package using {fusen}: "dev_history.Rmd"
-  + Use template name `minimal` to get empty named chunks
-  
-```{r, eval=FALSE}
-fusen::add_dev_history(name = "minimal")
-```
+This time the template is divided into two flat Rmd files
 
-```{r, echo=FALSE, out.width="50%"}
-knitr::include_graphics("images/fusen_skeleton.png")
+- "0-dev_history.Rmd" with the general development commands. In particular the `description` part.
+- "flat_minimal.Rmd" with the empty skeleton for creating a function like in the previous "teaching" template
+
+```{r, echo=FALSE, out.width="55%"}
+knitr::include_graphics("images/flat_minimal_skeleton.png")
 ```
 
 ???
 
-You can see that {fusen} opens up the "dev_history.Rmd" file in RStudio.  
+You can see that {fusen} opens up the "0-dev_history.Rmd" file in RStudio.  
 There are a few additional files that we will explore later.  
 This Rmd file is the "minimal" template with different chunks, empty or not empty, that we will fill together in the next steps
 
@@ -300,13 +334,12 @@ The first fields to fill in :
 
 - Title: "Quick Description of the Goal of your Package" (Title Case, no dot at the end)
 - Description : "Long description. Sentence case with a dot at the end of the sentences."
-- `Authors@R`: vector of one or more `person` 
+- `Authors@R`: vector of one or more `person()` 
   + `person("Sébastien", "Rochette", email = "sebastien@thinkr.fr", role = c("aut", "cre"))`
 - License : The choice of the license
 
 --
 
-#### Let's run the content of chunk `development`
 #### Let's run the content of chunk `description`
 
 > Observe the content of file "DESCRIPTION" created
@@ -330,7 +363,14 @@ Starting with the documentation forces you to think about the structure of the p
 - Say what you do in the Rmd text part
 - Do what you said in the `function` chunk
 
---
+#### Open the "flat_minimal.Rmd" template
+
+#### Let's run the content of chunk `development`
+
+---
+class: slide 
+
+### Step 4 : Documentation of the package
 
 #### Let's see the process of writing a function
 
@@ -341,11 +381,13 @@ Starting with the documentation forces you to think about the structure of the p
 
 You can say hello to someone in particular using `say_hello()`.
 
-```{r function}`r ''`
+```{r development}`r ''`
+library(glue) # On top with others
+
 message("Hello someone")
 
 someone <- "Seb"
-message(glue::glue("Hello {someone}"))
+message(glue("Hello {someone}"))
 ```
 ````
 ]
@@ -354,7 +396,8 @@ message(glue::glue("Hello {someone}"))
 .pull-right[
 1. Describe in words the first operation that the package will have to solve
 2. Define the input data, the possible modifiable parameters, the output result
-3. Write the R code to perform these operations
+3. Write the R code to perform these operations in a `development` chunk
+4. Call necessary packages in a `development` chunk only, at the very beginning, with other `library()` calls
 ]
 
 ???
@@ -370,10 +413,8 @@ class: slide
 
 ### Step 5 : Embed in a function
 
-As soon as we have a code that performs a specific task, we embed it in function
-
-- We modify the code of the `function` chunk as we go along
-- We add examples in the `examples` chunk
+- Move code in the `function` chunk as soon as you transformed it as a function
+- Add examples of use in the `examples` chunk
 
 
 ````markdown
@@ -383,7 +424,7 @@ You can say hello to someone in particular using `say_hello()`.
 
 ```{r function}`r ''`
 say_hello <- function(someone) {
-  message(glue::glue("Hello {someone}"))
+  message(glue("Hello {someone}"))
 }
 ```
 
@@ -393,6 +434,7 @@ say_hello(someone = "Seb")
 ````
 
 - Each chunk has a specific task
+- Run the chunk `function` to make it available
 - Run the function in the `examples` chunk of the Rmd to try it
 
 
@@ -420,7 +462,10 @@ The created function can now be documented
   + `@importFrom package function` for functions coming from other packages
   + `@return` to describe the object that comes out of the function
 
-> Use RStudio menu: Code > Insert Roxygen Skeleton
+- Use RStudio menu: Code > Insert Roxygen Skeleton
+
+> You must declare the dependencies for the package with `@importFrom`.
+The calls to `library()` are only there for development, like a classic Rmd, but are not used by the package when inflated
 
 ???
 
@@ -445,7 +490,7 @@ class: slide
 
 ### Step 5 : Embed in a function
 
-- You "dev_history.Rmd" file should look like this:
+- Your "dev_history.Rmd" file should look like this:
 
 ````markdown
 ## Say hello to someone
@@ -462,7 +507,7 @@ You can say hello to someone in particular using `say_hello()`.
 #' @export
 
 say_hello <- function(someone) {
-  message(glue::glue("Hello {someone}"))
+  message(glue("Hello {someone}"))
 }
 ```
 
@@ -481,6 +526,7 @@ Here you can see the minimal roxygen content.
 - return an output. This one's special. There is no re-usable output.
 - example is in the following chunk. We will let {fusen} deal with this. This is specific to {fusen} to not fill the example here. We'll see this later.
 - export the function to let it available to the user when they will call library(your package)
+- There may still be a `development` chunk. That's ok.
 
 
 ---
@@ -528,14 +574,14 @@ class: slide
 - Let {fusen} inflate the Rmd into a documented and tested package
 
 ```{r, eval=FALSE}
-fusen::inflate(rmd = "dev/dev_history.Rmd", name = "Say Hello !")
+fusen::inflate(flat_file = "dev/flat_minimal.Rmd", vignette_name = "Say Hello !")
 ```
 
 ```{r, echo=FALSE, out.width="80%"}
 knitr::include_graphics("images/fusen_fold_inflate.png")
 ```
 
-> If there are any errors or warnings, read them carrefuly, address them in the "dev_history.Rmd" and inflate the package again.
+> If there are any errors or warnings, read them carrefuly, address them in the "flat_minimal.Rmd" and inflate the package again.
 
 ???
 
@@ -587,7 +633,7 @@ What is the correct order for documentation to be correclty associate to files a
 
 1. DESCRIPTION  
   
-2. dev_history  
+2. dev_history / flat_minimal  
   
 3. vignettes  
   
@@ -642,15 +688,14 @@ Generate documentation
 
 Check that the package follows the packages rules
 
-- Panel "Build" > "Check"
-    + or `devtools::check()`  
+- `devtools::check()`  
   
-- Solve potential problems in the "dev_history.Rmd"
+- Solve potential problems in the "flat_minimal.Rmd"
 - Re-inflate the package if necessary
 
 - Reach **0 Error, 0 Warnings, 0 Notes**
 
-> Store this commands in a `development` chunk
+> Store this commands in the "0-dev_history.Rmd" file
 
 <br/>
 
@@ -665,10 +710,11 @@ class: slide
 
 ### Step 10 : Install and use your package
 
-- Restart your RStudio session
-  + File > Recent Projects > hello (same as current project)
-  + Or `rstudioapi::openProject()`
-  + The 'Build' tab should appear in RStudio
+- The 'Build' tab should already appear in RStudio
+  + Otherwise, restart your RStudio session
+  
+- Note that you can "check" in the 'Build' panel
+  + Panel "Build" > "Check"
   
 - Install the package
   + Panel "Build" > "Install and Restart
@@ -690,7 +736,7 @@ class: slide
 - Go back to step 6 of this Longer version
 - Continue development and inflate your package
 
-> Edit "dev_history.Rmd" and re-execute `inflate()` as many times as necessary until everything runs smoothly.
+> Edit "flat_minimal.Rmd" and re-execute `inflate()` as many times as necessary until everything runs smoothly.
 
 <br/>
 ```{r echo=FALSE, out.width="90%"}
@@ -699,48 +745,91 @@ knitr::include_graphics("images/fusen_rmd_folds_pkg.png")
 
 <br/>
 <br/>
-> If you are motivated, you can start again from the beginning of the 10 steps procedure
+> Bonus: If you are motivated, you can start again from the beginning of the 10 steps procedure with a new package name {hello2}
 
 ---
 class: slide
 
-### Add new functionnalities
+### How to add new functionnalities ?
 
-Start over from 'Step 4' to:
+This would require to start over from 'Step 4' to:
 
 - Upgrade your existing function
-- Add a new function
+- Add a new function in the current flat template
   + New entitled section with `function`, `examples`, `tests`
   + Inflate
   + Install
+- There is a RStudio Addin to "Add {fusen} chunks"
 
 --
 
-- Create a new "dev_history.Rmd" using `fusen::add_dev_history(name = "additional")` for a new family of functions
+- Or create a new flat template using `fusen::add_flat_template("add")` for a new family of functions, thus new vignette
+
+--
+
+- And `inflate()` this new "flat_additional.Rmd"
 
 ---
 class: slide
 
-### Present the documentation in a website
+### And the classical way without {fusen} ?
 
-Creation of a web site dedicated to the presentation of the package
+- You can use the 'Rmd first ' approach writing your code in a Rmarkdown file
+  + this can directly be your vignette
+- Then, you'll need to fill / copy the different files yourself
+  - "R/"
+  - "tests/"
+  - "vignettes/"
+  
 
-- Add these lines in the `development` chunk and run
+---
+class: slide
 
-```{r, eval=FALSE}
-usethis::use_pkgdown()
-pkgdown::build_site()
-```
+### And the classical way without {fusen} ?
 
-```{r echo=FALSE, out.width="70%"}
-knitr::include_graphics("images/squirrels_pkgdown.png")
-```
+- File > New Project > New directory > Package with devtools
+- Fill DESCRIPTION file
+- Run function for the desired license
+  + `usethis::use_*_license()`
+- Develop in a Rmd
+  + Either in the sub-directory "dev/" + `usethis::use_build_ignore("dev/")`
+  + Or, develop in a vignette directly
+- Copy/Cut in the correct place
+  + functions + examples => "R/"
+      + `usethis::use_r("ma_fonction")`
+  + tests => "tests/testthat/"
+      + `usethis::use_testthat()`
+      + `usethis::use_test("ma_fonction")`
+  + vignettes => "vignettes/"
+      + `usethis::use_vignette("Le titre de ma vignette")`
+- Generate documentation
+  + Either `attachment::att_amend_desc()`
+  + Ou `roxygen2::roxygenise()` + Fill in DESCRIPTION (Suggests, Imports)
+- Check the package
+  + `devtools::check()` => `0 errors, 0 warnings, 0 notes`
 
+---
+class: slide
+
+### And the classical way without {fusen} ?
+
+- You need to fill the different files yourself
+  - "R/"
+  - "tests/"
+  - "vignettes/"
+
+- While developing you could
+  - Run an example of your function in "R/" directly with Ctrl + Enter
+  - Run the unit test by clicking on "Run test"
+  - Run the vignette if your package is installed
+
+- Note that you can still do these actions using {fusen} after `inflate()`
+
+> Be careful, when using {fusen}, if you want to modify some code, go back to the "flat_*.Rmd" and do `inflate()` again
 
 ???
 
-usethis::use_pkgdown() will put the /docs folder in the gitignore, and the buildignore.
-pkgdown::build_site() will drop the site into the docs folder by default
+Show that we can do it with fusen too as it is a real classical package
 
 ---
 class: slide
@@ -755,7 +844,8 @@ Where were moved the pieces of code from chunks :
 - `tests` ?
 - `development` ?
 
-> Verify and update your previous drawings
+> Verify and update your previous drawings.
+> See each thing that {fusen} does for you!
 
 ???
 
@@ -766,85 +856,4 @@ Where were moved the pieces of code from chunks :
   + in the thumbnail
 - tests`: in the independent tests/testthat folder with the function name
 - development`: nowhere. it stays in the development tracking file "dev_history.Rmd
-
----
-class: slide
-
-### What about classical way of developing a package?
-
-- You would have to fill the different files yourself
-  - "R/"
-  - "tests/"
-  - "vignettes/"
-
-- While developing you could
-  - Run an example of your function directly with Ctrl + Enter
-  - Run the unit test by clicking on "Run test"
-  - Run the vignette if your package is installed
-
-- Note that you can still do these actions using {fusen} after `inflate()`
-
-> Be careful, when using {fusen}, if you want to modify some code, go back to the "dev_history.Rmd" and do `inflate()` again
-
----
-class: slide
-
-### The package is stored on two places
-
-.pull-left[
-**Development directory**
-
-- Where you chose to create your project
-- All files and directory for development
-- "data-raw/", "inst/" included
-- Called with `pkgload::load_all()`
-
-]
-.pull-right[
-**Installed directory**
-
-- Along with other R packages
-- You do not choose its place
-- Only files and directories not in '.RBuildignore'
-- Compiled code if required
-- Documentation compiled and included
-- Updated with `devtools::install()`
-- Called with `library(hello)`
-]
-
-> There maybe mismatch between code in development and installed package 
-
----
-class: slide 
-
-### The rest is just as important
-
-Store and execute these functions in a `development` chunk
-
-- Doing version control with git
-  + `usethis::use_git()`
-  
-- Add the README to your git repository
-  + `usethis::use_readme_rmd()`
-  
-- Use a test set for your examples and tests
-  + `usethis::use_data()`: function to create an internal dataset  
-  
-- Add a version tracking file
-  + `usethis::use_news_md()`
-  + In accordance with `usethis::use_version()` to bump version number
-  
-- Add continuous integration
-  + `usethis::use_github_actions()` or `gitlabr::use_gitlab_ci()`
-        
-- Add a code of conduct
-  + `usethis::use_code_of_conduct()`
-
-
-???
-
-- These are steps you will be able to add in a `development` chunk, like any {usethis} functions
-- We let this here for your future
-- We'll speak about data in the next chapter
-
 

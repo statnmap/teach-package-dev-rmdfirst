@@ -14,15 +14,16 @@ Imports:
     attachment,
     dplyr,
     flextable,
+    fusen,
     git2r,
     here,
     knitr,
     remotes,
     testthat,
+    usethis,
     xaringan,
     xaringanExtra
 Suggests: 
-    fusen,
     future,
     purrr,
     tidyverse
