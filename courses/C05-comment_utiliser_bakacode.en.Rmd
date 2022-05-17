@@ -16,6 +16,9 @@ knitr::opts_chunk$set(
   eval = TRUE,
   fig.align = "center"
 )
+
+# pagedown::chrome_print(here::here("courses/M01-presentation/M01S02-a_quelle_sauce_on_va_vous_manger/C05-comment_utiliser_bakacode.html"), here::here("C05-comment_utiliser_bakacode.en.pdf"))
+
 ```
 
 ### Take a tour!
@@ -34,6 +37,19 @@ knitr::include_graphics("images/bakacode_long_3.png")
 **Please take this tour to get used to the platform**
 
 ---
+class: slide 
+
+### Take the tour and use it to answer the quiz at the end of the chapter
+
+- The instructor creates a file named "hello.Rmd" in the "shared/" directory
+  + You will need it for the quiz
+
+--
+
+Now we let you 3 minutes to read the following slides and answer the quiz at the end of this chapter
+
+
+---
 class: slide
 ### Connection
 
@@ -48,7 +64,23 @@ knitr::include_graphics("images/baka_login.png")
 - Use your credentials to connect with username and password
 ]
 
-Connect to <https://baka.thinkr.fr>
+Connect to <https://bakacode.io>
+
+---
+class: slide
+### Sessions
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_sessions.png")
+```
+]
+.pull-right[
+#### Sessions overview
+
+- View your current and past training sessions
+
+]
 
 ---
 class: slide
@@ -135,7 +167,7 @@ knitr::include_graphics("images/baka_rstudio.png")
 .pull-right[
 #### Vertical separator
 
-- Maintain left click on the vertical bar and use the mouse to resize the window
+- Maintain left click on the vertical bar and use the mouse to change left/right windows ratio
 
 #### Slides
 
@@ -157,7 +189,7 @@ knitr::include_graphics("images/baka_rstudio.png")
 .pull-right[
 #### Vertical separator
 
-- Maintain left click on the vertical bar and use the mouse to resize the window
+- Maintain left click on the vertical bar and use the mouse to change left/right windows ratio
 
 #### Slides
 
@@ -177,6 +209,26 @@ class: slide
 
 .pull-left[
 ```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/baka_toc.png")
+```
+]
+.pull-right[
+#### Search chapter
+
+- Click on the slides
+- Click on the black box in the top right corner to open the table of content
+- Choose your chapter
+- Click on the black box to quit the table of content and navigate
+
+]
+
+---
+class: slide
+
+### Pratice - search
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/baka_search.png")
 ```
 ]
@@ -185,10 +237,12 @@ knitr::include_graphics("images/baka_search.png")
 
 - Click on the slides
 - Use CTRL + F to open the slides search bar or click on the magnifier icon
-- Write your words
+- Write your word
+- Press Enter to find the next occurence of your word
 - Use ESC / ECH to quit the search bar and navigate
 
 ]
+
 ---
 class: slide
 
@@ -238,7 +292,7 @@ knitr::include_graphics("images/baka_rstudio.png")
 ```
 ]
 .pull-right[
-#### Cours
+#### Courses
 
 - Navigate through the list of courses sections available
 ]
@@ -296,4 +350,20 @@ knitr::include_graphics("images/baka_rstudio.png")
 - Disconnect from BakACode
 
 ]
+
+---
+class: slide
+
+## Quiz
+
+- Can you download the pdf of the courses?
+  + It is stored in the "pdf/" folder, in the Home directory 
+  + If you loose the connection, at least you have the slides
+  
+- Did you find the "shared/hello.Rmd" file ?
+  + You can open it and write your name in it.
+  + Save it quickly as it is shared with other attendees!
+  
+- Can you use the table of content or the search bar to retrieve my email somewhere at the end of the slides?
+  + Write it in the chat in private, and keep it for yourself, just in case
 

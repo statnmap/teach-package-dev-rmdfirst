@@ -87,10 +87,10 @@ if (Sys.getenv("FILL_HOME", unset = "TRUE") == "TRUE") {
   usethis::with_project(path = dirfusen, {
     # mytools
     dir.create(mytools, recursive = TRUE)
-    fusen::add_dev_history(pkg = mytools, name = "teaching", open = FALSE)
+    fusen::add_flat_template(pkg = mytools, flat_name = "teaching", open = FALSE)
     # hello
     dir.create(hello, recursive = TRUE)
-    fusen::add_dev_history(pkg = hello, name = "minimal", open = FALSE)
+    fusen::add_flat_template(pkg = hello, flat_name = "minimal", open = FALSE)
   }, force = TRUE)
 
   setwd(wd)
