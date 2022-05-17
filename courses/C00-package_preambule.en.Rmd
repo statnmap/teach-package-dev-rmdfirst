@@ -7,7 +7,7 @@ output:
   formation::chapitre: default
   xaringan::moon_reader: default
 obj_pred: ["know what is a vignette"]
-slug: package-preambule
+slug: package-preambule-en
 ---
 class: slide 
 
@@ -16,9 +16,9 @@ library(dplyr)
 ```
 
 
-### Do you know package {attachment} ?
+### Do you know package {attachment}?
 
-Let's say you don't !
+Let's say you don't!
 
 #### How to discover what does a package?
 
@@ -69,7 +69,7 @@ class: slide
 
 - Index of the package
 
-```{r echo=FALSE, out.width="80%"}
+```{r echo=FALSE, out.width="70%"}
 knitr::include_graphics("images/pkg_attachment_index.png")
 ```
 
@@ -81,7 +81,7 @@ class: slide
 
 - `?att_amend_desc`
 
-```{r echo=FALSE, out.width="75%"}
+```{r echo=FALSE, out.width="70%"}
 knitr::include_graphics("images/pkg_attachment_doc_function.png")
 ```
 
@@ -106,7 +106,7 @@ class: slide
 - Vignettes
 - GitHub: https://thinkr-open.github.io/attachment/articles/fill-pkg-description.html
 
-```{r echo=FALSE, out.width="60%"}
+```{r echo=FALSE, out.width="50%"}
 knitr::include_graphics("images/pkg_attachment_vignette.png")
 ```
 
@@ -119,7 +119,7 @@ class: slide
 - README Check, https://github.com/ThinkR-open/attachment
 - Unit tests, code coverage, Continuous Integration
 
-```{r echo=FALSE, out.width="85%"}
+```{r echo=FALSE, out.width="80%"}
 knitr::include_graphics("images/pkg_attachment_badges.png")
 ```
 
@@ -136,13 +136,13 @@ class: slide
 ```{r, echo=FALSE}
 tribble(
   ~Questions, ~Answers,
-"What does it do?", "CRAN page: https://cran.r-project.org/web/packages/attachment/index.html",
+"What does it do?", "<a href='https://cran.r-project.org/web/packages/attachment/index.html'>CRAN page</a>",
 "How to install it with its dependencies?", "`install.packages('attachment')`",
 "What are its functions?",  "`?attachment` => Index",
 "How to fill parameters of this function?", "`?att_amend_desc`",
 "Can I have an example on how to use this function?",  "`?att_amend_desc` => Examples",
-"Can I have an overview on how to use the package as a whole?", "Vignettes, GitHub: https://thinkr-open.github.io/attachment/articles/fill-pkg-description.html",
-"Will it work with the last version of R and dependencies?", "Readme Check, https://github.com/ThinkR-open/attachment"
+"Can I have an overview on how to use the package as a whole?", "<a href='https://thinkr-open.github.io/attachment/articles/fill-pkg-description.html'>Vignettes, GitHub</a>",
+"Will it work with the last version of R and dependencies?", "<a href='https://github.com/ThinkR-open/attachment'>README Check</a>"
 ) %>% 
   knitr::kable()
 ```

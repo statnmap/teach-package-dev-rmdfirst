@@ -40,9 +40,9 @@ test_that("inflate() worked correctly", {
 })
 ```
 
-### Preparation : Tools
+### Preparation: Tools
  
-To create a package, we will use :
+To create a package, we will use:
 
 + RStudio.
 + {fusen} package
@@ -56,7 +56,7 @@ To create a package, we will use :
 install.packages(c("fusen", "devtools", "usethis", "pkgbuild", "roxygen2", "attachment", "testthat"))
 ```
 
-Rtools is available here :   [https://cran.r-project.org/bin/windows/Rtools/](https://cran.r-project.org/bin/windows/Rtools/)  
+Rtools is available here:   [https://cran.r-project.org/bin/windows/Rtools/](https://cran.r-project.org/bin/windows/Rtools/)  
 Once (properly) installed `pkgbuild::has_rtools()` should return `TRUE`. 
 Rtools installs everything needed to compile c++ etc.
 
@@ -67,7 +67,7 @@ All of these should be installed on the server already
 ---
 class: slide 
 
-### {fusen} : adopt "Rmd-first" method
+### {fusen}: adopt "Rmd-first" method
 
 - Start with documentation
 - Develop everything in a familiar place: the RMarkdown
@@ -82,176 +82,11 @@ knitr::include_graphics("images/fusen_fold_inflate.png")
 ```
 
 ---
-class: slide 
-### [Short version] - Preamble
-
-- What is going on when building a package using {fusen}?
-- Where do I have to write what?
-
-
-We suggest you to :
-
-+ Watch your trainers create a package {mytools} by following these short steps, without practicing yourself
-
---
-
-+ Redo this package {mytools} on your own in a new project
-
----
-class: slide 
-### [Short] 1: Create a new {fusen} project
-
-In Rstudio : 
-
-- File > New project > New directory > Package using {fusen} 
-- Choose the name of the package (explicit, in lower case) 
-  - Name of the package: "mytools"
-> _no capital letters, underscores, spaces or special characters_
-- Choose the {fusen} template in the dropdown menu: "teaching"
-
-- Choose the directory where to save the project
-- Create the project
-
-```{r, echo=FALSE, out.width="43%"}
-knitr::include_graphics("images/new_package_fusen_teaching.png")
-```
-
-???
-
-- You are about to build a package. This is a set of tools for testing package structure.   
-Thus, {mytools}
-
-- The directory is the "Home" in our platform using `~`
-
-
-
----
-class: slide 
-### [Short] 2: Open the {fusen} Rmd flat template
-
-- The project opens up on a flat template file: "flat_teaching.Rmd"
-
---
-
-- Here are the main parts of a package, in a unique Rmd file
-  + Note the name of the chunks that are required
-  + The present file is pre-filled with examples
-
-```{r, echo=FALSE, out.width="50%"}
-knitr::include_graphics("images/fusen_skeleton.png")
-```
-
-???
-
-You can see that {fusen} opens up the "flat_teaching.Rmd" file in RStudio.  
-There are a few additional files that we will explore later.  
-This Rmd file is the "teaching" template with different chunks, which you will not modify this time.
-
-Let's quickly explore the content of this Rmd. A description, some functions along with examples and tests.
-And a final 'development' chunk asking to inflate
-
----
-class: slide 
-### [Short] 3 : Description
-
-Describe your future package: 
-
-- Change the name with yours in the `description` chunk
-- Execute the complete content of the `description` chunk
-  + "CTRL + SHIFT + ENTER" should be good
-  + There are two functions to execute here
-- A "DESCRIPTION" file appears with the same information
-
---
-
-#### DESCRIPTION is the first source of documentation for your package
-
-```{r, echo=FALSE, out.width="45%"}
-knitr::include_graphics("images/fusen_description_file.png")
-```
-
-
-???
-
-Yeah, you started with documentation !  
-There are some more fields in the DESCRIPTION file, but we'll see them later
-
----
-class: slide 
-### [Short] 4 : Inflate the package
-
-- Go down the Rmd file and inflate
-
-```{r, eval=FALSE}
-fusen::inflate(flat_file = "dev/flat_teaching.Rmd")
-```
-
-```{r, echo=FALSE, out.width="80%"}
-knitr::include_graphics("images/fusen_fold_inflate.png")
-```
-
---
-
-**You built a package!**
-
----
-class: slide 
-### [Short] 5 : Does it work ?
-
-- The 'Build' tab should already appear in RStudio
-  + Otherwise, restart your RStudio session
-
-- Install the package
-  + Panel Build > Install and Restart
-  
-- Test the package directly in the console
-  + `mytools::my_median(1:4)`
-
-- Test the knit of the *vignette*
-  + The vignette is opened "get-started.Rmd"
-  + Hit the "Knit" button
-  
-- Check that the help for your function appears
-  + `?my_median`
-  + Run the reproducible example from help
-
----
-class: slide 
-### [Short] 5 : Does it work ?
-
-If you verified everything listed above, your RStudio should look like this
-
-```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/fusen_mytools_complete.png")
-```
-
----
 class: slide
-### Your turn
 
-#### Go back to section "[Short] 1" and execute the steps yourself until this slide
+### How {fusen} works?
 
-
----
-class: slide
-### Exercise: Can you draw ?
-
-- Draw a schematic view of the links between "flat_teaching.Rmd" content and package structure
-- Explore the multiple files and folders created
-- Can you spot where each part of the "flat_teaching.Rmd" went?
-  + Some were copied in multiple places
-  + Some were copied nowhere
-
-```{r, echo=FALSE, out.width="40%"}
-knitr::include_graphics("images/fusen_skeleton.png")
-```
-
-> You can take a picture and post it in the Chat room
-
-???
-
-You can take a picture and post it in the Chat room
-Here's mine
+- {fusen} copy-pastes in the right place
 
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/fusen_inflate_functions.png")
@@ -264,7 +99,7 @@ class: slide
 This procedure contains **10 steps**, to be done in order.
 Some points are not explained in detail to allow you to obtain a functional R package quickly.
 
-We suggest you to :
+We suggest you to:
 
 + Watch your trainers create a package by following these steps, without practicing yourself
 --
@@ -279,7 +114,7 @@ We suggest you to :
 class: slide 
 ### Step 1: Create a new {fusen} project
 
-In Rstudio : 
+In Rstudio: 
 
 - File > New project > New directory > Package using {fusen} 
 - Choose the name of the package (explicit, in lower case) 
@@ -291,7 +126,7 @@ In Rstudio :
 - Create the project
 
 
-```{r, echo=FALSE, out.width="35%"}
+```{r, echo=FALSE, out.width="30%"}
 knitr::include_graphics("images/new_package_fusen_minimal.png")
 ```
 
@@ -307,14 +142,14 @@ Thus, {hello}
 ---
 class: slide
 
-### Step 2 : Open the {fusen} Rmd templates
+### Step 2: Open the {fusen} Rmd templates
 
 This time the template is divided into two flat Rmd files
 
 - "0-dev_history.Rmd" with the general development commands. In particular the `description` part.
 - "flat_minimal.Rmd" with the empty skeleton for creating a function like in the previous "teaching" template
 
-```{r, echo=FALSE, out.width="55%"}
+```{r, echo=FALSE, out.width="50%"}
 knitr::include_graphics("images/flat_minimal_skeleton.png")
 ```
 
@@ -326,17 +161,17 @@ This Rmd file is the "minimal" template with different chunks, empty or not empt
 
 ---
 class: slide 
-### Step 3 : Description
+### Step 3: Description
 
 The description of the package takes place in the first `description` chunk of the "dev_history.Rmd" file  
   
-The first fields to fill in :
+The first fields to fill in:
 
 - Title: "Quick Description of the Goal of your Package" (Title Case, no dot at the end)
-- Description : "Long description. Sentence case with a dot at the end of the sentences."
+- Description: "Long description. Sentence case with a dot at the end of the sentences."
 - `Authors@R`: vector of one or more `person()` 
   + `person("Sébastien", "Rochette", email = "sebastien@thinkr.fr", role = c("aut", "cre"))`
-- License : The choice of the license
+- License: The choice of the license
 
 --
 
@@ -355,7 +190,7 @@ Observe the content of DESCRIPTION. Note that what you wrote in the Rmd is now c
 ---
 class: slide 
 
-### Step 4 : Documentation of the package
+### Step 4: Documentation of the package
 
 A package is created to automate some operations.
 Starting with the documentation forces you to think about the structure of the package and the logical sequence of operations.
@@ -370,7 +205,7 @@ Starting with the documentation forces you to think about the structure of the p
 ---
 class: slide 
 
-### Step 4 : Documentation of the package
+### Step 4: Documentation of the package
 
 #### Let's see the process of writing a function
 
@@ -411,7 +246,7 @@ So I add a parameter.
 ---
 class: slide 
 
-### Step 5 : Embed in a function
+### Step 5: Embed in a function
 
 - Move code in the `function` chunk as soon as you transformed it as a function
 - Add examples of use in the `examples` chunk
@@ -452,7 +287,7 @@ say_hello(someone = "Seb")
 ---
 class: slide 
 
-### Step 5 : Embed in a function
+### Step 5: Embed in a function
 
 The created function can now be documented
 
@@ -476,7 +311,7 @@ As you just wrote the code of your function, you know exactly
 - what is the output 
 - what are the dependencies needed
 
-Write it now. In an hour, you will have forgotten it !
+Write it now. In an hour, you will have forgotten it!
 
 Note that:
 
@@ -488,9 +323,9 @@ Let's see how it looks on the next slide
 ---
 class: slide 
 
-### Step 5 : Embed in a function
+### Step 5: Embed in a function
 
-- Your "dev_history.Rmd" file should look like this:
+- Your "flat_minimal.Rmd" file should look like this:
 
 ````markdown
 ## Say hello to someone
@@ -532,7 +367,7 @@ Here you can see the minimal roxygen content.
 ---
 class: slide
 
-### Your turn !
+### Your turn!
 
 - We are in the half way point of the process
 - Got back to Step 1 of this Longer version
@@ -545,10 +380,10 @@ Tell us in the Chatroom when you are done
 ---
 class: slide 
 
-### Step 6 : Write a unit test
+### Step 6: Write a unit test
 
-- What do you look for when you run your example ?
-- What makes you say "it works" ?
+- What do you look for when you run your example?
+- What makes you say "it works"?
 
 #### Write your thoughts into code
 
@@ -569,12 +404,12 @@ test_that("say_hello works", {
 ---
 class: slide
 
-### Step 7 : Inflate the package
+### Step 7: Inflate the package
 
 - Let {fusen} inflate the Rmd into a documented and tested package
 
 ```{r, eval=FALSE}
-fusen::inflate(flat_file = "dev/flat_minimal.Rmd", vignette_name = "Say Hello !")
+fusen::inflate(flat_file = "dev/flat_minimal.Rmd", vignette_name = "Say Hello!")
 ```
 
 ```{r, echo=FALSE, out.width="80%"}
@@ -592,7 +427,7 @@ knitr::include_graphics("images/fusen_fold_inflate.png")
 ---
 class: slide
 
-### Step 8 : Explore created folders and files
+### Step 8: Explore created folders and files
 
 - "DESCRIPTION" with dependencies
 - "R/" with the function
@@ -608,7 +443,7 @@ knitr::include_graphics("images/fusen_inflate_functions.png")
 ---
 class: slide
 
-### Step 8 : Explore created folders and files
+### Step 8: Explore created folders and files
 
 - "DESCRIPTION" with dependencies
 - "R/" with the function
@@ -624,9 +459,9 @@ knitr::include_graphics("images/fusen_inflate_vignette.png")
 ---
 class: slide
 
-### Quizz : Find good definitions
+### Quiz: Find good definitions
 
-What is the correct order for documentation to be correclty associate to files and folders?
+Link files to their description:
 
 .pull-left[
 *Files and folders*  
@@ -655,9 +490,9 @@ What is the correct order for documentation to be correclty associate to files a
   
 A. Development process for developers
   
-B. Overview and use of the package for users  
+B. Present all the functions of the package and its story  
    
-C. Use of the functions for the users  
+C. How to use each function (for the user)  
 
 D. Testing the functions for the developers
   
@@ -680,7 +515,7 @@ E. Content and objectives of the package for all
 ---
 class: slide 
 
-### Step 9 : Verify again the package
+### Step 9: Verify again the package
 
 Generate documentation
 
@@ -708,7 +543,7 @@ It is always good to know these commands, although `inflate()` already does them
 ---
 class: slide 
 
-### Step 10 : Install and use your package
+### Step 10: Install and use your package
 
 - The 'Build' tab should already appear in RStudio
   + Otherwise, restart your RStudio session
@@ -750,20 +585,24 @@ knitr::include_graphics("images/fusen_rmd_folds_pkg.png")
 ---
 class: slide
 
-### How to add new functionnalities ?
+### How to add new functionnalities?
 
 This would require to start over from 'Step 4' to:
 
 - Upgrade your existing function
+
 - Add a new function in the current flat template
   + New entitled section with `function`, `examples`, `tests`
   + Inflate
   + Install
-- There is a RStudio Addin to "Add {fusen} chunks"
+  
+- There is a RStudio _Addin_ to "Add {fusen} chunks"
 
 --
 
 - Or create a new flat template using `fusen::add_flat_template("add")` for a new family of functions, thus new vignette
+
+- There is a RStudio _Addin_ to "Add {fusen} flat template"
 
 --
 
@@ -772,7 +611,7 @@ This would require to start over from 'Step 4' to:
 ---
 class: slide
 
-### And the classical way without {fusen} ?
+### And the classical way without {fusen}?
 
 - You can use the 'Rmd first ' approach writing your code in a Rmarkdown file
   + this can directly be your vignette
@@ -785,7 +624,7 @@ class: slide
 ---
 class: slide
 
-### And the classical way without {fusen} ?
+### And the classical way without {fusen}?
 
 - File > New Project > New directory > Package with devtools
 - Fill DESCRIPTION file
@@ -811,7 +650,7 @@ class: slide
 ---
 class: slide
 
-### And the classical way without {fusen} ?
+### And the classical way without {fusen}?
 
 - You need to fill the different files yourself
   - "R/"
@@ -836,22 +675,22 @@ class: slide
 
 ### Exercise: Take time to finish your drawings
 
-Where were moved the pieces of code from chunks :
+Where were moved the pieces of code from chunks:
 
-- `description` ?
-- `function` ?
-- `example` ?
-- `tests` ?
-- `development` ?
+- `description`?
+- `function`?
+- `example`?
+- `tests`?
+- `development`?
 
 > Verify and update your previous drawings.
 > See each thing that {fusen} does for you!
 
 ???
 
-- `description` : in DESCRIPTION
-- `function` : in the independent .R file with the name of the function
-- `example` : in the independent .R file
+- `description`: in DESCRIPTION
+- `function`: in the independent .R file with the name of the function
+- `example`: in the independent .R file
   + in the independent .R file with the function name
   + in the thumbnail
 - tests`: in the independent tests/testthat folder with the function name

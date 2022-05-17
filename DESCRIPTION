@@ -2,10 +2,7 @@ Package: user2021.rmdd
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
+    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
@@ -28,7 +25,7 @@ Suggests:
     purrr,
     tidyverse
 Remotes:
-    thinkr-open/attachment
+    gadenbuie/xaringanExtra
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

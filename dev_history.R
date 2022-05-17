@@ -12,13 +12,13 @@ usethis::pr_push()
 renv::init()
 renv::install("git2r")
 renv::install("remotes")
-options(remotes.git_credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GITLAB_THINKR_TOKEN")))
-options(renv.auth.formation = list(GIT_PAT = Sys.getenv("GITLAB_THINKR_TOKEN")))
-renv::install("git::https://git.thinkr.fr/ThinkR/formation")
-remotes::install_git("https://git.thinkr.fr/ThinkR/formation", upgrade = FALSE, git = "git2r")
+options(remotes.git_credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("FORGE_THINKR_TOKEN")))
+options(renv.auth.formation = list(GIT_PAT = Sys.getenv("FORGE_THINKR_TOKEN")))
+renv::install("git::https://forge.thinkr.fr/thinkr/thinkrverse/formation")
+remotes::install_git("https://forge.thinkr.fr/thinkr/thinkrverse/formation", upgrade = FALSE, git = "git2r")
 
 tmpform <- tempfile(pattern = "form-")
-git2r::clone("https://git.thinkr.fr/ThinkR/formation", local_path = tmpform,
+git2r::clone("https://forge.thinkr.fr/thinkr/thinkrverse/formation", local_path = tmpform,
              credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GITLAB_THINKR_TOKEN")))
              # credentials = git2r::cred_user_pass("gitlab-ci-token", Sys.getenv("GIT_TOKEN")))
 remotes::install_local(path = tmpform, upgrade = FALSE, force = TRUE)

@@ -83,7 +83,7 @@ class: slide
 
 *Steps:*  
 
-- Create `data-raw/` to prepare your dataset using: `usethis::use_data_raw()`
+- Create `data-raw/` to prepare your dataset using: `usethis::use_data_raw("my_dataset")`
 - Prepare your dataset as needed for reproducible examples
 - Store `my_dataset` as internal data
 
@@ -91,9 +91,9 @@ class: slide
 # Read some raw data 
 # my_data_to_clean <- readr::read_csv("my_raw_data.csv")
 
-# Or use existing dataset like `iris`
-my_dataset <- dplyr::slice_sample(iris, prop = 0.2)
-usethis::use_data(my_dataset, overwrite = TRUE) 
+# Or use existing dataset like `diamonds`
+my_dataset <- dplyr::slice_sample(diamonds, prop = 0.2)
+usethis::use_data(my_dataset, overwrite = TRUE)
 ```
 
 - `overwrite = TRUE` overwrite the dataset if already exists, as for an update
@@ -136,29 +136,23 @@ class: slide
 #### Exported dataset, accessible to the user
 
 - Exported datasets need to be documented, like functions
-
+- by convention the documentation will be written in a file of the form "R/doc_my_dataset.R".
 --
 
-*Steps:*  
+- The following script will automatically build the documentation to be completed:
 
-- Create a dedicated script in "R/" folder using `usethis::use_r("my_dataset")`
-- Fill in the 'roxygen2' documentation to describe the dataset
 
 ```{r eval=FALSE}
-#' Prices of 50,000 round cut diamonds.
-#'
-#' A dataset containing the prices and other attributes of almost 54,000
-#' diamonds.
-#'
-#' @format A data frame with 53940 rows and 10 variables:
-#' \describe{
-#'   \item{price}{price, in US dollars}
-#'   \item{carat}{weight of the diamond, in carats}
-#'   ...
-#' }
-#' @source \url{http://www.diamondse.info/}
-"diamonds"
+my_dataset <- dplyr::slice_sample(diamonds, prop = 0.2)
+usethis::use_data(my_dataset, overwrite = TRUE)
+
+cat(sinew::makeOxygen("my_dataset"), 
+    file = "R/doc_my_dataset.R")
+rstudioapi::navigateToFile("R/doc_my_dataset.R")
 ```
+
+_à rajouter dans "data-raw/my_dataset.R"_
+
 
 ???
 
@@ -177,8 +171,14 @@ class: slide
 
 *Information:*  
 
-- Documentation requires at least `@format` and `@source`
-- We do not `@export` a dataset
+2 main tags:
+
+- `@format` (required) a summary of the data.
+  - if `@format` is not specified, then roxygen will edit a standard one.
+
+- `@source` : the origin of the data, the source.
+
+We do not `@export` a dataset.
 
 ---
 class: slide 
@@ -187,7 +187,7 @@ class: slide
 
 #### Raw dataset, accessible to the user
 
-- Developers includes a dataset in the `inst/` folder directly
+- Developers includes a dataset in the `inst/` folder as is directly
 - Users find the dataset using `system.file("my_dataset.csv", package = "mypackage")`
 
 --
@@ -205,7 +205,16 @@ the_data_path <- system.file("my_dataset.csv", package = "mypackage")
 the_data <- readr::read_csv(the_data_path)
 ```
 
---
+---
+class: slide 
+
+### 3. Include datasets in `inst/`
+
+#### Raw dataset, accessible to the user
+
+- Developers includes a dataset in the `inst/` folder as is directly
+- Users find the dataset using `system.file("my_dataset.csv", package = "mypackage")`
+
 
 *Information*
 
@@ -268,24 +277,25 @@ class: slide
 
 ### Your turn!
 
-- Look at the instructor demonstration with *Steps*
-- Do it yourself
+1. Look at the instructor demonstration with *Steps*
+2. Do it yourself
 
 *Steps*  
 
-- Create a new project
-- Run `fusen::add_dev_history()`
-- Run the content of the `description` chunk
-- Uncomment `development` chunk in "Read data" section
+- Create a new {fusen} project with `full` template
+- Run the content of the `description` chunk in the "dev_history.Rmd"
+- Uncomment `development` chunk in "Read data" section in the "flat_full.Rmd"
 - Play with data in `inst/` during development
+
+--
 
 *Bonus*
 
 - Create function `check_data_integrity()` that reads a dataset like `nyc_squirrels` and check its integrity
-  + For instance, `primary_fur_color` columns should only contains a unique color, there should not be any `+` sign inside this column.
+  + For instance, `primary_fur_color` columns should only contains a unique color, there should not be any `+` sign inside this column
   + Stop the function if the integrity is not good
   + Return a message if everything is ok
-- Create a reproducible example using the dataset saved in `inst` and `system.file()`
+- Create a reproducible example using the dataset saved in `inst/` with `system.file()`
 - Create unit tests with reproducible examples where function should fail
 
 ???

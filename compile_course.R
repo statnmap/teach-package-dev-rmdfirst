@@ -7,11 +7,11 @@ future::plan(future::multisession(workers = 4)) # Parallèle
 # plan(sequential) # Non parallèle. Default.
 
 # Client - Nom de dossier
-client_dir <- "user2021"
+client_dir <- "afh2022"
 
 # Combien de sessions
 all_sessions <- c("1") # Nom des sessions
-all_dates <- paste(21, "July 2021") # Dates des sessions
+all_dates <- paste(28, "June 2022") # Dates des sessions
 
 # First and last slides
 # first_last_slides
@@ -32,19 +32,19 @@ all_dates <- paste(21, "July 2021") # Dates des sessions
 # Partial - Create course - Nom du (de la) formateur.trice ====
 create_session <- purrr::partial(
   formation::create_session,
-  title = "How to build a package following 'Rmd First' method?",
-  formateur = "Sébastien Rochette, Emily Riederer",
-  email = "@statnmap, @EmilyRiederer",
+  title = "Build reproducible and shareable data analyses using R packages",
+  formateur = "Sébastien Rochette, Florence Mounier",
+  email = "sebastien@thinkr.fr, florence@thinkr.fr",
   telephone = "",
   dossier = here::here(),
   render_pdf = c("none", "pagedown")[2],
   types = c("stagiaire", "formateur")[1],
   # dataWD = dataWD,
-  footer = "S. Rochette, E. Riederer",
+  footer = "S. Rochette, F. Mounier",
   # add_footer_chapitre = FALSE,
-  url = "useR! 2021 - tutorial",
+  url = "AFH 2022 - tutorial",
   # css = here::here("prez.css"),
-  logo_home = here::here("courses/images/marmot.png"),
+  # logo_home = here::here("courses/images/marmot.png"),
   first_last_slides = here::here("courses/00-first-last-slides.Rmd"),
   first_last_slides_seal = FALSE,
   ... =
@@ -56,11 +56,14 @@ tous_les_cours <- list(
     "courses/C00-package-objectives.en.Rmd",
     # "courses/00-cruz.Rmd"#,
     "courses/C05-comment_utiliser_bakacode.en.Rmd",
-    "courses/C04-comment_interagir_zoom.en.Rmd",
+    # "courses/C04-comment_interagir_zoom.en.Rmd",
     "courses/C00-package_preambule.en.Rmd",
-    "courses/C01-package_express_fusen.en.Rmd",
-    "courses/C06-pkg_avance_test.en.Rmd",
-    "courses/C09-pkg_avance_data.en.Rmd"
+    "courses/C01a-package_fusen_discover.en.Rmd",
+    "courses/C01b-package_express_fusen.en.Rmd",
+    # "courses/C06-pkg_avance_test.en.Rmd"#,
+    "courses/C09-pkg_avance_data.en.Rmd",
+    "courses/C13-git_fusen.en.Rmd",
+    "courses/C14-data-analyses-packages.en.Rmd"
   )
 )
 

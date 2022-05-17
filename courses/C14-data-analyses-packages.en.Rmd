@@ -1,0 +1,41 @@
+---
+title: "What about data analyses in a package?"
+subtitle: "From Rmd to package to Rmd"
+code: ""
+prerequis: [""]
+output: formation::chapitre
+obj_pred: ["use packages for data analyses"]
+slug: data-analyses-packages
+---
+class: slide
+
+## Create shareable reports through packages
+
+### You need to create a package with your functions
+
+Then, two possible ways:
+
+- Classical package: Use external projects to use your package functions in Rmd reports
+- Compendium-like: Include the Rmd reports inside the package development project
+
+---
+class: slide 
+
+## Combine {fusen} and {rcompendium}
+
+The compendium logic is to separate code from the report output:
+
+- One place to store your R scripts in "R/"
+- One place to store the Rmarkdown report in "analyses/"
+
+This is similar to package logic:
+
+- One place to store R scripts in "R/"
+- One place to store Rmarkdown examples of use in "vignettes/"
+
+### Let's combine both worlds
+
+---
+class: slide
+
+## 
