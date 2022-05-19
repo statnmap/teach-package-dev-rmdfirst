@@ -1,0 +1,2335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Build reproducible and shareable data analyses using R packages</title>
+    <meta charset="utf-8">
+    <link href="stagiaire_complet_files/temp_files/thinkr-css-0.0.1/thinkr.css" rel="stylesheet" />
+    <link href="stagiaire_complet_files/temp_files/thinkr-css-0.0.1/toc.css" rel="stylesheet" />
+    <script src="stagiaire_complet_files/temp_files/thinkr-css-0.0.1/remark-latest.min.js"></script>
+    <script src="stagiaire_complet_files/temp_files/thinkr-css-0.0.1/myshowhide.js"></script>
+    <script src="stagiaire_complet_files/temp_files/mark.js-8.11.1/mark.min.js"></script>
+    <link href="stagiaire_complet_files/temp_files/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="stagiaire_complet_files/temp_files/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"top-right","caseSensitive":false,"showIcon":true,"autoSearch":true}) })</script>
+  </head>
+  <body>
+
+<div class="toc">
+<button class="btn btn-outline-primary d-lg-none ml-2 mt-1 btn-toc" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav" onclick="myshowhide()"><i class="fas fa-bars" aria-hidden="true"></i><span class="sr-only">Ξ</span></button>
+</div>
+    <div id="main-nav" class="collapse-lg" style="display: none;">
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+  <ul class="book-toc list-unstyled">
+<li><a class="" href="#build-reproducible-and-shareable-data-analyses-using-r-packages">Build reproducible and shareable data analyses using R packages</a></li>
+<li><a class="" href="#package-flash-build">One step package building</a></li>
+<li><a class="" href="#what-is-bakacode-en">What is Bakacode?</a></li>
+<li><a class="" href="#package-preambule-en">Start with the documentation</a></li>
+<li><a class="" href="#package-fusen-discover-en">Discover the structure of a package with {fusen}</a></li>
+<li><a class="" href="#package-express-fusen-en">Package express with {fusen}</a></li>
+<li><a class="" href="#encapsuler-donnees-en">Include datasets in your package</a></li>
+<li><a class="" href="#versionner-fusen-git-en">Versioning a {fusen} package with git</a></li>
+<li><a class="" href="#data-analyses-packages">What about data analyses in a package?</a></li>
+<li><a class="" href="#thanks-for-joining-this-tutorial">Thanks for joining this tutorial!</a></li>
+</ul>
+      </nav>
+</div>
+    <textarea id="source">
+
+layout: true
+
+<p class="bottom"><span class="remark-slide-number-left">​Build reproducible and shareable data analyses using R packages</span></p>
+---
+name: build-reproducible-and-shareable-data-analyses-using-r-packages
+class: center middle inverse title-slide
+
+
+
+
+
+&lt;style&gt;
+.top_left {
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+.top_left img {
+margin: 0;
+}
+&lt;/style&gt;
+
+.top_left[
+
+]
+
+
+# "Build reproducible and shareable data analyses using R packages
+
+## &lt;span style='color:#f26537;'&gt;_Conférence AFH 2022_&lt;/span&gt; 
+
+### Sébastien Rochette, Florence Mounier
+
+.prez_github[
+Material of this course is on Github: &lt;a href="https://github.com/statnmap/teach-package-dev-rmdfirst" target='_blank'&gt;&lt;span style='color:#f26537;'&gt;statnmap/teach-package-dev-rmdfirst&lt;/span&gt;&lt;/a&gt;
+]
+
+
+---
+
+
+layout: true
+
+<p class="bottom"><span class="remark-slide-number-left">​One step package building</span></p>
+---
+class: center, middle, inverse, title-slide
+name: package-flash-build
+
+## One step package building
+### From Rmd to package
+---
+class: slide 
+
+
+
+
+### Learning goals
+
+- Understand the methodology proposed by the "Rmd First" method
+- Be able to refactor a code into correctly formatted functions
+- Understand the structure of a package
+- Be able to build a documented and tested R package
+
+---
+class: slide
+
+### Building a package in a few steps
+
+- Start with a Rmd
+- Build your functions inside
+- Document your functions
+- Inflate as a Package
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C00-package-objectives.en_files/images/squirrels_rmd_html_snapshot.png" width="90%" /&gt;
+
+]
+.pull-right[
+&lt;img src="stagiaire_complet_files/C00-package-objectives.en_files/images/squirrels_inflated.png" width="90%" /&gt;
+]
+
+---
+class: slide
+
+### How this tutorial will be held
+
+- E-learning platform: https://bakacode.io
+- Instructors speak on slides
+&lt;!-- - Slack group: https://app.slack.com/client/T0270SMAND9/C0270SMATJP --&gt;
+&lt;!-- - Discussion, questions on the Slack group to keep track --&gt;
+- Quizz where every attendees will be able to participate
+- Direct questions where attendees are asked to participate
+- Hands-on parts, in breakout rooms, where attendees are asked to share their screens for instructors to help
+- A 5 minutes break every hour
+- We stop 15 minutes before the end to say goodbye
+
+
+---
+class: slide
+
+### Code of Conduct
+
+All conference participants agree to:
+
+- Be considerate in language and actions, and respect the boundaries of fellow participants.
+- Refrain from demeaning, discriminatory, or harassing behaviour and language. 
+- Alert a member of the ThinkR team if you notice someone in distress, or observe violations of this code of conduct, even if they seem inconsequential.
+
+<!--class: inverse, contact-slide
+
+# Contact
+
+## ThinkR - <a href="http://thinkr.fr">http://thinkr.fr</a>-->
+
+
+---
+
+
+layout: true
+
+<p class="bottom"><span class="remark-slide-number-left">​What is Bakacode?</span></p>
+---
+class: center, middle, inverse, title-slide
+name: what-is-bakacode-en
+
+## What is Bakacode?
+### The ThinkR e-learning platform
+---
+class: slide 
+
+
+
+### Take a tour!
+
+**BakACode** is the home-made [ThinkR](https://rtask.thinkr.fr) e-learning platform
+
+- Everything you need during the course is available in one place
+- The server has all dependencies required for your tutorial
+- You can communicate directly with your instructors
+
+&lt;br/&gt;&lt;br/&gt;
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/bakacode_long_3.png" width="55%" style="display: block; margin: auto;" /&gt;
+&lt;br/&gt;&lt;br/&gt;
+**Please take this tour to get used to the platform**
+
+---
+class: slide 
+
+### Take the tour and use it to answer the quiz at the end of the chapter
+
+- The instructor creates a file named "hello.Rmd" in the "shared/" directory
+  + You will need it for the quiz
+
+--
+
+Now we let you 3 minutes to read the following slides and answer the quiz at the end of this chapter
+
+
+---
+class: slide
+### Connection
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_login.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Connection
+
+- Use your credentials to connect with username and password
+]
+
+Connect to &lt;https://bakacode.io&gt;
+
+---
+class: slide
+### Sessions
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_sessions.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Sessions overview
+
+- View your current and past training sessions
+
+]
+
+---
+class: slide
+### Home page
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_courses.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Learning objectives
+
+- Learning objectives of the tutorial
+
+]
+
+---
+class: slide
+### Home page
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_courses.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Learning objectives
+
+- Learning objectives of the tutorial
+
+#### Sections
+
+- A box for each section
+- Date and description of the section
+- Click on the box to show chapters presented
+
+]
+
+
+---
+class: slide
+### Home page - launch
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_courses_launch.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Launch tutorial
+
+- Click on the Launch ("Lancer") button to start the tutorial
+
+]
+
+---
+class: slide
+
+### Pratice - presentation
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_rstudio.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Vertical separator
+
+- Maintain left click on the vertical bar and use the mouse to change left/right windows ratio
+
+]
+
+---
+class: slide
+
+### Pratice - presentation
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_rstudio.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Vertical separator
+
+- Maintain left click on the vertical bar and use the mouse to change left/right windows ratio
+
+#### Slides
+
+- Use arrows of your keyboard to go up and down in the slides
+- You can copy-paste code parts
+
+]
+
+---
+class: slide
+
+### Pratice - presentation
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_rstudio.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Vertical separator
+
+- Maintain left click on the vertical bar and use the mouse to change left/right windows ratio
+
+#### Slides
+
+- Use arrows of your keyboard to go up and down
+- You can copy-paste code parts
+
+#### RStudio server
+
+- RStudio project opened with your data and Rmd files for exercises
+- Be sure to work in a project!
+]
+
+---
+class: slide
+
+### Pratice - search
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_toc.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Search chapter
+
+- Click on the slides
+- Click on the black box in the top right corner to open the table of content
+- Choose your chapter
+- Click on the black box to quit the table of content and navigate
+
+]
+
+---
+class: slide
+
+### Pratice - search
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_search.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Search words
+
+- Click on the slides
+- Use CTRL + F to open the slides search bar or click on the magnifier icon
+- Write your word
+- Press Enter to find the next occurence of your word
+- Use ESC / ECH to quit the search bar and navigate
+
+]
+
+---
+class: slide
+
+### Pratice - export
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_export.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Download your files
+
+- Download files on your computer
+- Select one or more files in the file Pane using checkboxes
+- Open the 'More' menu
+- Choose 'Export'
+- 'Download'
+]
+
+&gt; We recommend that you export your full project at the end of the course
+
+---
+class: slide
+
+### Top menu
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_rstudio.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Home
+
+- Go back to home page "Accueil"
+
+]
+---
+class: slide
+
+### Top menu
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_rstudio.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Courses
+
+- Navigate through the list of courses sections available
+]
+
+---
+class: slide
+
+### Top menu
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_rstudio.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### RStudio
+
+- Opens your current RStudio session as full screen in a new tab
+- Note that this will close the RStudio session in the "Practice" interface
+
+]
+
+---
+class: slide
+
+### Top menu
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_rstudio.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+#### Resources
+
+- Opens a new tab with R cheatsheets as PDF
+- You can open or download them
+
+]
+
+---
+class: slide
+
+### Top menu
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C05-comment_utiliser_bakacode.en_files/images/baka_rstudio.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+#### Disconnect
+
+- Disconnect from BakACode
+
+]
+
+---
+class: slide
+
+## Quiz
+
+- Can you download the pdf of the courses?
+  + It is stored in the "pdf/" folder, in the Home directory 
+  + If you loose the connection, at least you have the slides
+  
+- Did you find the "shared/hello.Rmd" file ?
+  + You can open it and write your name in it.
+  + Save it quickly as it is shared with other attendees!
+  
+- Can you use the table of content or the search bar to retrieve my email somewhere at the end of the slides?
+  + Write it in the chat in private, and keep it for yourself, just in case
+
+<!--class: inverse, contact-slide
+
+# Contact
+
+## ThinkR - <a href="http://thinkr.fr">http://thinkr.fr</a>-->
+
+
+---
+
+
+layout: true
+
+<p class="bottom"><span class="remark-slide-number-left">​Start with the documentation</span></p>
+---
+class: center, middle, inverse, title-slide
+name: package-preambule-en
+
+## Start with the documentation
+### What are vignettes?
+---
+class: slide 
+
+
+
+
+### Do you know package {attachment}?
+
+Let's say you don't!
+
+#### How to discover what does a package?
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### My questions as a user
+
+- What does it do?
+- How to install it with its dependencies?
+- What are its function?
+- How to fill parameters of this function?
+- Can I have an example on how to use this function?
+- Can I have an example on how to use the package as a whole?
+- Will it work with the last version of R and dependencies?
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### What does it do?
+
+- CRAN page: https://cran.r-project.org/web/packages/attachment/index.html
+
+
+![](stagiaire_complet_files/C00-package_preambule.en_files/images/pkg_attachment_cran.png)
+&lt;!-- --&gt;
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### How to install it with its dependencies?
+
+- `install.packages('attachment')`
+
+???
+
+You don't have to think about dependencies...  
+The developers prepared everything for you
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### What are its functions?
+
+- Index of the package
+
+&lt;img src="stagiaire_complet_files/C00-package_preambule.en_files/images/pkg_attachment_index.png" width="70%" /&gt;
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### How to fill parameters of this function?
+
+- `?att_amend_desc`
+
+&lt;img src="stagiaire_complet_files/C00-package_preambule.en_files/images/pkg_attachment_doc_function.png" width="70%" /&gt;
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### Can I have an example on how to use this function?
+
+- `?att_amend_desc` =&gt; Examples
+
+&lt;img src="stagiaire_complet_files/C00-package_preambule.en_files/images/pkg_attachment_examples.png" width="90%" /&gt;
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### Can I have an overview on how to use the package as a whole?
+
+- Vignettes
+- GitHub: https://thinkr-open.github.io/attachment/articles/fill-pkg-description.html
+
+&lt;img src="stagiaire_complet_files/C00-package_preambule.en_files/images/pkg_attachment_vignette.png" width="50%" /&gt;
+
+---
+class: slide 
+
+### How to discover what does a package?
+#### Will it work with the last version of R and dependencies?
+
+- README Check, https://github.com/ThinkR-open/attachment
+- Unit tests, code coverage, Continuous Integration
+
+&lt;img src="stagiaire_complet_files/C00-package_preambule.en_files/images/pkg_attachment_badges.png" width="80%" /&gt;
+
+???
+
+Unit tests and CI are set up by developers to ensure reproducibility and maintainability
+
+---
+class: slide
+
+### How to discover what does a package?
+#### My answers as a user
+
+
+|Questions                                                    |Answers                                                                                                     |
+|:------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------|
+|What does it do?                                             |&lt;a href='https://cran.r-project.org/web/packages/attachment/index.html'&gt;CRAN page&lt;/a&gt;                       |
+|How to install it with its dependencies?                     |`install.packages('attachment')`                                                                            |
+|What are its functions?                                      |`?attachment` =&gt; Index                                                                                      |
+|How to fill parameters of this function?                     |`?att_amend_desc`                                                                                           |
+|Can I have an example on how to use this function?           |`?att_amend_desc` =&gt; Examples                                                                               |
+|Can I have an overview on how to use the package as a whole? |&lt;a href='https://thinkr-open.github.io/attachment/articles/fill-pkg-description.html'&gt;Vignettes, GitHub&lt;/a&gt; |
+|Will it work with the last version of R and dependencies?    |&lt;a href='https://github.com/ThinkR-open/attachment'&gt;README Check&lt;/a&gt;                                        |
+
+_There is a dedicated website that gathers all these answers: https://thinkr-open.github.io/attachment/_
+
+???
+
+We will explore this website later
+
+
+---
+class: slide
+
+### How to discover what does a package?
+#### Developers point of view
+
+- All these sources of information are adressed by developers
+
+--
+
+#### If you start with the documentation, from the vignette, you will not have to think too much about all of these
+
+???
+
+You will build all the doc along the way
+
+---
+class: slide
+
+### Let's talk again about vignettes
+
++ HTML pages telling the stories of the package
++ List vignettes using: `vignette(package = "thepackage")`.
+
+&lt;img src="stagiaire_complet_files/C00-package_preambule.en_files/images/vignette.png" width="90%" /&gt;
+
+---
+class: slide 
+
+### Let's talk again about vignettes
+ 
+#### Content of a vignette
+
+&lt;pre class='rcode-input'&gt;&lt;span class='functioncall'&gt;vignette&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol_argument'&gt;topic&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='string'&gt;"colwise"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='symbol_argument'&gt;package&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='string'&gt;"dplyr"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+&lt;img src="stagiaire_complet_files/C00-package_preambule.en_files/images/vignette2.png" width="60%" /&gt;
+ 
+???
+
+The story of the package as a whole
+ 
+---
+class: slide 
+
+### Let's talk again about vignettes
+
+#### Vignette = Rmarkdown (usually)
+
+- What is the story of the package
+- What is the function for
+- How to use it with or without parameters
+- Reproducible examples
+- Different outputs depending on chosen parameters
+
+--
+
+#### Let's start building our package from its story ! 
+ 
+---
+class: slide
+
+### Quizz: What is a vignette?
+
+- A: A website somewhere on Internet
+- B: A Sticker you can add on your laptop
+- C: A R script with the help of function accessible in the installed package
+- D: A html page built from a Rmd file, accessible in the installed package
+
+
+---
+class: slide
+
+### Quizz: Have you already built a package with all these?
+
+- A: Yes, everything. Functions, examples, tests, vignettes
+- B: Only part of documentation. Functions, examples, maybe vignettes
+- C: Only functions in a R/ directory
+- D: No. I never built a package from scratch
+
+<!--class: inverse, contact-slide
+
+# Contact
+
+## ThinkR - <a href="http://thinkr.fr">http://thinkr.fr</a>-->
+
+
+---
+
+
+layout: true
+
+<p class="bottom"><span class="remark-slide-number-left">​Discover the structure of a package with {fusen}</span></p>
+---
+class: center, middle, inverse, title-slide
+name: package-fusen-discover-en
+
+## Discover the structure of a package with {fusen}
+### Where does all of this come from?
+---
+class: slide 
+
+
+
+
+### {fusen} : adopt "Rmd-first" method
+
+- Start with documentation
+- Develop everything in a familiar place: the RMarkdown
+- {fusen} inflates the package for you
+
+&lt;br/&gt;
+
+&gt; What if there was a package that could take an Rmd file, kind of like a sheet of paper, and if you follow the right folding, you can blow it up like a package?
+
+&lt;img src="stagiaire_complet_files/C01a-package_fusen_discover.en_files/images/fusen_fold_inflate.png" width="80%" /&gt;
+
+---
+class: slide 
+### [Short version] - Preamble
+
+- What are the principal components of a package?
+- Where do I have to write what?
+- How does {fusen} make my life easier?
+
+
+
+We suggest you to :
+
++ Watch your trainers create a package {mytools} by following these short steps, without practicing yourself
+
+--
+
++ Redo this package {mytools} on your own in a new project
+
+--
+
+We won't explain everything here, but you will see the components of a package and where they fit. For the details, that's the goal of your complete training!
+
+---
+class: slide 
+### [Short] 1: Create a new {fusen} project
+
+In Rstudio : 
+
+- File &gt; New project &gt; New directory &gt; Package using {fusen} 
+- Choose the name of the package (explicit, in lower case) 
+  - Name of the package: "mytools"
+&gt; _no capital letters, underscores, spaces or special characters_
+- Choose the {fusen} template in the dropdown menu: "teaching"
+
+- Choose the directory where to save the project
+- Create the project
+
+&lt;img src="stagiaire_complet_files/C01a-package_fusen_discover.en_files/images/new_package_fusen_teaching.png" width="40%" /&gt;
+
+???
+
+- You are about to build a package. This is a set of tools for testing package structure.   
+Thus, {mytools}
+
+- The directory is the "Home" in our platform using `~`
+
+
+
+---
+class: slide 
+### [Short] 2: Open the {fusen} Rmd flat template
+
+- The project opens up on a flat template file: "flat_teaching.Rmd"
+
+--
+
+- Here are the main components of a package, in a unique Rmd file
+  + Note the name of the chunks that are required
+  + The present file is pre-filled with examples
+
+.pull-left[
+&lt;img src="stagiaire_complet_files/C01a-package_fusen_discover.en_files/images/fusen_skeleton_desc.png" width="75%" /&gt;
+]
+
+.pull-right[
+&lt;img src="stagiaire_complet_files/C01a-package_fusen_discover.en_files/images/fusen_skeleton_fun.png" width="75%" /&gt;
+]
+
+???
+
+You can see that {fusen} opens up the "flat_teaching.Rmd" file in RStudio.  
+There are a few additional files that we will explore later.  
+This Rmd file is the "teaching" template with different chunks, which you will not modify this time.
+
+Let's quickly explore the content of this Rmd. A description, some functions along with examples and tests.
+And a final 'development' chunk asking to inflate
+
+---
+class: slide 
+### [Short] 3 : Description
+
+Describe your future package: 
+
+- Change the name with yours in the `description` chunk
+- Execute the complete content of the `description` chunk
+  + "CTRL + SHIFT + ENTER" should be good
+  + There are two functions to execute here
+- A "DESCRIPTION" file appears with the same information
+
+--
+
+#### DESCRIPTION is the first source of documentation for your package
+
+&lt;img src="stagiaire_complet_files/C01a-package_fusen_discover.en_files/images/fusen_description_file.png" width="40%" /&gt;
+
+
+???
+
+Yeah, you started with documentation !  
+There are some more fields in the DESCRIPTION file, but we'll see them later
+
+---
+class: slide 
+### [Short] 4 : Inflate the package
+
+- Go down the Rmd file and inflate
+
+&lt;pre class='rcode-input'&gt;&lt;span class='package'&gt;fusen&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;inflate&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol_argument'&gt;flat_file&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='string'&gt;"dev/flat_teaching.Rmd"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+&lt;img src="stagiaire_complet_files/C01a-package_fusen_discover.en_files/images/fusen_fold_inflate.png" width="80%" /&gt;
+
+--
+
+**You built a package!**
+
+---
+class: slide 
+### [Short] 5 : Does it work ?
+
+- The 'Build' tab should already appear in RStudio
+  + Otherwise, restart your RStudio session
+
+- Install the package
+  + Panel Build &gt; Install and Restart
+  
+- Test the package directly in the console
+  + `mytools::add_one(value = 56)`
+
+- Test the knit of the *vignette*
+  + The vignette is opened "get-started.Rmd"
+  + Hit the "Knit" button
+  
+- Check that the help for your function appears
+  + `?add_one`
+  + Run the reproducible example from help
+
+---
+class: slide 
+### [Short] 5 : Does it work ?
+
+If you verified everything listed above, your RStudio should look like this
+
+&lt;img src="stagiaire_complet_files/C01a-package_fusen_discover.en_files/images/fusen_mytools_complete.png" width="100%" /&gt;
+
+---
+class: slide
+### Your turn
+
+#### Go back to section "[Short] 1" and execute the steps yourself until this slide
+
+<!--class: inverse, contact-slide
+
+# Contact
+
+## ThinkR - <a href="http://thinkr.fr">http://thinkr.fr</a>-->
+
+
+---
+
+
+layout: true
+
+<p class="bottom"><span class="remark-slide-number-left">​Package express with {fusen}</span></p>
+---
+class: center, middle, inverse, title-slide
+name: package-express-fusen-en
+
+## Package express with {fusen}
+### An Rmd is a package
+---
+class: slide 
+
+
+
+### Preparation: Tools
+ 
+To create a package, we will use:
+
++ RStudio.
++ {fusen} package
++ the packages {pkgbuild}, {devtools}, {usethis} and {attachment} to save time.
++ the {roxygen2} package to generate the documentation.
++ the {testthat} package to generate unit tests.
++ Rtools.exe (optional and under windows only).
+
+
+&lt;pre class='rcode-input'&gt;&lt;span class='functioncall'&gt;install.packages&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='functioncall'&gt;c&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"fusen"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='string'&gt;"devtools"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='string'&gt;"usethis"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='string'&gt;"pkgbuild"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='string'&gt;"roxygen2"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='string'&gt;"attachment"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='string'&gt;"testthat"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+Rtools is available here:   [https://cran.r-project.org/bin/windows/Rtools/](https://cran.r-project.org/bin/windows/Rtools/)  
+Once (properly) installed `pkgbuild::has_rtools()` should return `TRUE`. 
+Rtools installs everything needed to compile c++ etc.
+
+???
+
+All of these should be installed on the server already
+
+---
+class: slide 
+
+### {fusen}: adopt "Rmd-first" method
+
+- Start with documentation
+- Develop everything in a familiar place: the RMarkdown
+- {fusen} inflates the package for you
+
+&lt;br/&gt;
+
+&gt; What if there was a package that could take an Rmd file, kind of like a sheet of paper, and if you follow the right folding, you can blow it up like a package?
+
+&lt;img src="stagiaire_complet_files/C01b-package_express_fusen.en_files/images/fusen_fold_inflate.png" width="80%" /&gt;
+
+---
+class: slide
+
+### How {fusen} works?
+
+- {fusen} copy-pastes in the right place
+
+&lt;img src="stagiaire_complet_files/C01b-package_express_fusen.en_files/images/fusen_inflate_functions.png" width="100%" /&gt;
+
+---
+class: slide 
+### Longer version - Preamble
+
+This procedure contains **10 steps**, to be done in order.
+Some points are not explained in detail to allow you to obtain a functional R package quickly.
+
+We suggest you to:
+
++ Watch your trainers create a package by following these steps, without practicing yourself
+--
+
++ Do this package {hello} on your own in a new project
+
+--
+
+&gt; Procedure is split in two parts to let you practice. You will thus have 2 times: "Watch - Do"
+
+---
+class: slide 
+### Step 1: Create a new {fusen} project
+
+In Rstudio: 
+
+- File &gt; New project &gt; New directory &gt; Package using {fusen} 
+- Choose the name of the package (explicit, in lower case) 
+  - Name of the package: "hello"
+&gt; _no capital letters, underscores, spaces or special characters_
+- Choose the {fusen} template in the dropdown menu: "minimal"
+
+- Choose the directory where to save the project
+- Create the project
+
+
+&lt;img src="stagiaire_complet_files/C01b-package_express_fusen.en_files/images/new_package_fusen_minimal.png" width="30%" /&gt;
+
+&gt; You could also directly run: `fusen::create_fusen(path = "~/hello", template = "minimal")`
+
+???
+
+You are about to build a package. This is a set of tools to be polite with other people, starting by saying hello.   
+Thus, {hello}
+
+- The directory is the "Home" in our platform using `~`
+
+---
+class: slide
+
+### Step 2: Open the {fusen} Rmd templates
+
+This time the template is divided into two flat Rmd files
+
+- "0-dev_history.Rmd" with the general development commands. In particular the `description` part.
+- "flat_minimal.Rmd" with the empty skeleton for creating a function like in the previous "teaching" template
+
+&lt;img src="stagiaire_complet_files/C01b-package_express_fusen.en_files/images/flat_minimal_skeleton.png" width="50%" /&gt;
+
+???
+
+You can see that {fusen} opens up the "0-dev_history.Rmd" file in RStudio.  
+There are a few additional files that we will explore later.  
+This Rmd file is the "minimal" template with different chunks, empty or not empty, that we will fill together in the next steps
+
+---
+class: slide 
+### Step 3: Description
+
+The description of the package takes place in the first `description` chunk of the "dev_history.Rmd" file  
+  
+The first fields to fill in:
+
+- Title: "Quick Description of the Goal of your Package" (Title Case, no dot at the end)
+- Description: "Long description. Sentence case with a dot at the end of the sentences."
+- `Authors@R`: vector of one or more `person()` 
+  + `person("Sébastien", "Rochette", email = "sebastien@thinkr.fr", role = c("aut", "cre"))`
+- License: The choice of the license
+
+--
+
+#### Let's run the content of chunk `description`
+
+&gt; Observe the content of file "DESCRIPTION" created
+
+???
+
+You are about to build a package, you need to inform the user about its aim. Here, the aim is a set of tools to be polite with other people, starting by saying hello.     
+You also need to say who you are, so that users know who to call in case of problems.  
+Finally, the license allows you to say how you want your package to be used and shared. Without license, no one is supposed to use your package.
+
+Observe the content of DESCRIPTION. Note that what you wrote in the Rmd is now copied in this file, but you did not have to move from your Rmd. So we stay in the Rmd, and we continue the development.
+
+---
+class: slide 
+
+### Step 4: Documentation of the package
+
+A package is created to automate some operations.
+Starting with the documentation forces you to think about the structure of the package and the logical sequence of operations.
+
+- Say what you do in the Rmd text part
+- Do what you said in the `function` chunk
+
+#### Open the "flat_minimal.Rmd" template
+
+#### Let's run the content of chunk `development`
+
+---
+class: slide 
+
+### Step 4: Documentation of the package
+
+#### Let's see the process of writing a function
+
+
+.pull-left[
+````markdown
+## Say hello to someone
+
+You can say hello to someone in particular using `say_hello()`.
+
+```{r development}
+library(glue) # On top with others
+
+message("Hello someone")
+
+someone &lt;- "Seb"
+message(glue("Hello {someone}"))
+```
+````
+]
+
+
+.pull-right[
+1. Describe in words the first operation that the package will have to solve
+2. Define the input data, the possible modifiable parameters, the output result
+3. Write the R code to perform these operations in a `development` chunk
+4. Call necessary packages in a `development` chunk only, at the very beginning, with other `library()` calls
+]
+
+???
+
+Here we take a simple example with a code to say hello. This will be the first tool of our package to be polite with people around us.  
+Forget that you are about to build a package. Now we develop in a Rmd as usual.  
+First, we write what we are about to do.  
+Then, we write some code to say hello. But, I want it to be able to say hello to someone else than me. 
+So I add a parameter.  
+
+---
+class: slide 
+
+### Step 5: Embed in a function
+
+- Move code in the `function` chunk as soon as you transformed it as a function
+- Add examples of use in the `examples` chunk
+
+
+````markdown
+## Say hello to someone
+
+You can say hello to someone in particular using `say_hello()`.
+
+```{r function}
+say_hello &lt;- function(someone) {
+  message(glue("Hello {someone}"))
+}
+```
+
+```{r examples}
+say_hello(someone = "Seb")
+```
+````
+
+- Each chunk has a specific task
+- Run the chunk `function` to make it available
+- Run the function in the `examples` chunk of the Rmd to try it
+
+
+???
+
+- Use the code written previously.  
+- Embed in the `function()` function.  
+- Use the parameter as a parameter of the function.
+
+- In the examples chunk, we have a reproducible example.
+- We will use it as much as we can
+- We use it to illustrate the use of the function.
+- You'll see that we will also use it for unit tests. Later.
+
+---
+class: slide 
+
+### Step 5: Embed in a function
+
+The created function can now be documented
+
+- Add the doc in {roxygen2} format
+  + `@param` to present the content of inputs
+  + `@export` for the function to be accessible to the users
+  + `@importFrom package function` for functions coming from other packages
+  + `@return` to describe the object that comes out of the function
+
+- Use RStudio menu: Code &gt; Insert Roxygen Skeleton
+
+&gt; You must declare the dependencies for the package with `@importFrom`.
+The calls to `library()` are only there for development, like a classic Rmd, but are not used by the package when inflated
+
+???
+
+As you just wrote the code of your function, you know exactly 
+
+- what the aim is,
+- what are the parameters for,
+- what is the output 
+- what are the dependencies needed
+
+Write it now. In an hour, you will have forgotten it!
+
+Note that:
+
+- because we are in an Rmd, you won't be able to get the auto-completion for roxygen
+- because we are in an RStudio Server, the keyboard shortcut for roxygen may be in competition with your browser shortcuts
+
+Let's see how it looks on the next slide
+
+---
+class: slide 
+
+### Step 5: Embed in a function
+
+- Your "flat_minimal.Rmd" file should look like this:
+
+````markdown
+## Say hello to someone
+
+You can say hello to someone in particular using `say_hello()`.
+
+```{r function}
+#' Show a message in the console to say Hello to someone
+#' 
+#' @param someone Character. Name of the person to say hello to
+#' @importFrom glue glue
+#' @return Used for side effect. Outputs a message in the console
+#' @examples
+#' @export
+
+say_hello &lt;- function(someone) {
+  message(glue("Hello {someone}"))
+}
+```
+
+```{r examples}
+say_hello(someone = "Seb")
+```
+````
+
+???
+
+Here you can see the minimal roxygen content.  
+
+- Title
+- Use of param
+- importFrom external dependencies
+- return an output. This one's special. There is no re-usable output.
+- example is in the following chunk. We will let {fusen} deal with this. This is specific to {fusen} to not fill the example here. We'll see this later.
+- export the function to let it available to the user when they will call library(your package)
+- There may still be a `development` chunk. That's ok.
+
+
+---
+class: slide
+
+### Your turn!
+
+- We are in the half way point of the process
+- Got back to Step 1 of this Longer version
+- Follow the 5 steps until this slide
+
+???
+
+Tell us in the Chatroom when you are done
+
+---
+class: slide 
+
+### Step 6: Write a unit test
+
+- What do you look for when you run your example?
+- What makes you say "it works"?
+
+#### Write your thoughts into code
+
+````markdown
+```{r tests}
+test_that("say_hello works", {
+  expect_message(say_hello(someone = "Seb"), "Hello Seb")
+})
+```
+````
+
+???
+
+- We use the same exact example to write the unit test directly.  
+- I won't detail the syntax here, and I won't detail all possible test functions.
+- For now, I only want you to have the reflex to do it right after your example, because you already have the test in your mind
+
+---
+class: slide
+
+### Step 7: Inflate the package
+
+- Let {fusen} inflate the Rmd into a documented and tested package
+
+&lt;pre class='rcode-input'&gt;&lt;span class='package'&gt;fusen&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;inflate&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol_argument'&gt;flat_file&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='string'&gt;"dev/flat_minimal.Rmd"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='symbol_argument'&gt;vignette_name&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='string'&gt;"Say Hello!"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+&lt;img src="stagiaire_complet_files/C01b-package_express_fusen.en_files/images/fusen_fold_inflate.png" width="80%" /&gt;
+
+&gt; If there are any errors or warnings, read them carrefuly, address them in the "flat_minimal.Rmd" and inflate the package again.
+
+???
+
+- Let {fusen} inflate the Rmd into a package
+- There are multiple messages, we do not read all of them. 
+- We try to address errors at least and re-inflate if needed
+
+---
+class: slide
+
+### Step 8: Explore created folders and files
+
+- "DESCRIPTION" with dependencies
+- "R/" with the function
+- "man/" with LateX documentation
+- "tests/testthat/" with unit tests
+- &lt;span style='color:white;'&gt;"vignettes/" with documentation&lt;/span&gt;
+
+&lt;img src="stagiaire_complet_files/C01b-package_express_fusen.en_files/images/fusen_inflate_functions.png" width="80%" /&gt;
+
+
+---
+class: slide
+
+### Step 8: Explore created folders and files
+
+- "DESCRIPTION" with dependencies
+- "R/" with the function
+- "man/" with LateX documentation
+- "tests/testthat/" with unit tests
+- "vignettes/" with documentation
+
+&lt;img src="stagiaire_complet_files/C01b-package_express_fusen.en_files/images/fusen_inflate_vignette.png" width="80%" /&gt;
+
+
+---
+class: slide
+
+### Quiz: Find good definitions
+
+Link files to their description:
+
+.pull-left[
+*Files and folders*  
+
+1. DESCRIPTION  
+  
+2. dev_history / flat_minimal  
+  
+3. vignettes  
+  
+4. script with roxygen
+
+5. testthat
+
+&lt;br/&gt;
+&lt;br/&gt;
+&lt;br/&gt;
+**Possible answers:**
+
+- a: ACBDE
+
+- c: EABCD
+]
+.pull-right[
+*Documentation*  
+  
+A. Development process for developers
+  
+B. Present all the functions of the package and its story  
+   
+C. How to use each function (for the user)  
+
+D. Testing the functions for the developers
+  
+E. Content and objectives of the package for all  
+
+&lt;br/&gt;
+&lt;br/&gt;
+- b: EDCBA
+
+- d: BAECD
+]
+
+???
+- 1E and dependencies for installation
+- 2A reusable from one package to another
+- 3B with a story
+- 4C and build info (@importFrom, @export)
+- 5D unit tests
+
+---
+class: slide 
+
+### Step 9: Verify again the package
+
+Generate documentation
+
+- `attachment::att_amend_desc()`
+
+Check that the package follows the packages rules
+
+- `devtools::check()`  
+  
+- Solve potential problems in the "flat_minimal.Rmd"
+- Re-inflate the package if necessary
+
+- Reach **0 Error, 0 Warnings, 0 Notes**
+
+&gt; Store this commands in the "0-dev_history.Rmd" file
+
+&lt;br/&gt;
+
+&gt; Note that `fusen::inflate()` already launches this two commands, but who knows!
+
+???
+
+It is always good to know these commands, although `inflate()` already does them. You may need them if you go back to a classical way of maintaining your package
+
+---
+class: slide 
+
+### Step 10: Install and use your package
+
+- The 'Build' tab should already appear in RStudio
+  + Otherwise, restart your RStudio session
+  
+- Note that you can "check" in the 'Build' panel
+  + Panel "Build" &gt; "Check"
+  
+- Install the package
+  + Panel "Build" &gt; "Install and Restart
+  
+- Test the package directly in the console
+  + `hello::say_hello("Toto")`
+
+- Test the knit of the vignette
+  
+- Check that the help for your function appears
+  + `?say_hello`
+  + Run the reproducible example from help
+
+---
+class: slide
+
+### Your turn
+
+- Go back to step 6 of this Longer version
+- Continue development and inflate your package
+
+&gt; Edit "flat_minimal.Rmd" and re-execute `inflate()` as many times as necessary until everything runs smoothly.
+
+&lt;br/&gt;
+&lt;img src="stagiaire_complet_files/C01b-package_express_fusen.en_files/images/fusen_rmd_folds_pkg.png" width="90%" /&gt;
+
+&lt;br/&gt;
+&lt;br/&gt;
+&gt; Bonus: If you are motivated, you can start again from the beginning of the 10 steps procedure with a new package name {hello2}
+
+---
+class: slide
+
+### How to add new functionnalities?
+
+This would require to start over from 'Step 4' to:
+
+- Upgrade your existing function
+
+- Add a new function in the current flat template
+  + New entitled section with `function`, `examples`, `tests`
+  + Inflate
+  + Install
+  
+- There is a RStudio _Addin_ to "Add {fusen} chunks"
+
+--
+
+- Or create a new flat template using `fusen::add_flat_template("add")` for a new family of functions, thus new vignette
+
+- There is a RStudio _Addin_ to "Add {fusen} flat template"
+
+--
+
+- And `inflate()` this new "flat_additional.Rmd"
+
+---
+class: slide
+
+### And the classical way without {fusen}?
+
+- You can use the 'Rmd first ' approach writing your code in a Rmarkdown file
+  + this can directly be your vignette
+- Then, you'll need to fill / copy the different files yourself
+  - "R/"
+  - "tests/"
+  - "vignettes/"
+  
+
+---
+class: slide
+
+### And the classical way without {fusen}?
+
+- File &gt; New Project &gt; New directory &gt; Package with devtools
+- Fill DESCRIPTION file
+- Run function for the desired license
+  + `usethis::use_*_license()`
+- Develop in a Rmd
+  + Either in the sub-directory "dev/" + `usethis::use_build_ignore("dev/")`
+  + Or, develop in a vignette directly
+- Copy/Cut in the correct place
+  + functions + examples =&gt; "R/"
+      + `usethis::use_r("ma_fonction")`
+  + tests =&gt; "tests/testthat/"
+      + `usethis::use_testthat()`
+      + `usethis::use_test("ma_fonction")`
+  + vignettes =&gt; "vignettes/"
+      + `usethis::use_vignette("Le titre de ma vignette")`
+- Generate documentation
+  + Either `attachment::att_amend_desc()`
+  + Ou `roxygen2::roxygenise()` + Fill in DESCRIPTION (Suggests, Imports)
+- Check the package
+  + `devtools::check()` =&gt; `0 errors, 0 warnings, 0 notes`
+
+---
+class: slide
+
+### And the classical way without {fusen}?
+
+- You need to fill the different files yourself
+  - "R/"
+  - "tests/"
+  - "vignettes/"
+
+- While developing you could
+  - Run an example of your function in "R/" directly with Ctrl + Enter
+  - Run the unit test by clicking on "Run test"
+  - Run the vignette if your package is installed
+
+- Note that you can still do these actions using {fusen} after `inflate()`
+
+&gt; Be careful, when using {fusen}, if you want to modify some code, go back to the "flat_*.Rmd" and do `inflate()` again
+
+???
+
+Show that we can do it with fusen too as it is a real classical package
+
+---
+class: slide
+
+### Exercise: Take time to finish your drawings
+
+Where were moved the pieces of code from chunks:
+
+- `description`?
+- `function`?
+- `example`?
+- `tests`?
+- `development`?
+
+&gt; Verify and update your previous drawings.
+&gt; See each thing that {fusen} does for you!
+
+???
+
+- `description`: in DESCRIPTION
+- `function`: in the independent .R file with the name of the function
+- `example`: in the independent .R file
+  + in the independent .R file with the function name
+  + in the thumbnail
+- tests`: in the independent tests/testthat folder with the function name
+- development`: nowhere. it stays in the development tracking file "dev_history.Rmd
+
+<!--class: inverse, contact-slide
+
+# Contact
+
+## ThinkR - <a href="http://thinkr.fr">http://thinkr.fr</a>-->
+
+
+---
+
+
+layout: true
+
+<p class="bottom"><span class="remark-slide-number-left">​Include datasets in your package</span></p>
+---
+class: center, middle, inverse, title-slide
+name: encapsuler-donnees-en
+
+## Include datasets in your package
+### What about data?
+---
+class: slide 
+
+
+### Include datasets
+
+In a package, it can be useful to include data.
+
++ To demonstrate the use of a function with a relevant example
++ To disseminate information
+
+--
+
+There are three types of datasets to include, thus three ways to include them into a package. 
+
+1. A raw data file (xlsx, csv or other), **NOT** available to the end user, but accessible to the developers only, stored in `data-raw/` folder
+
+--
+
+2. An example dataset in `rda` format, to be loaded as is, available to the user, stored in the `data/` folder (such as `iris` or `mtcars` for example)
+&lt;!-- &gt; If you specified `LazyData: true` in your `DESCRIPTION`, these datasets will be loaded lazily, i.e., they will only be available if the user explicitly loads them.  --&gt;
+
+--
+
+3. A data file (xlsx, csv or other) not transformed into `rda`, available to the end user, stored in the `inst/` folder
+
+
+???
+
+Let's see how and why
+
+---
+class: slide 
+
+### 1. Include datasets in `data-raw/`
+ 
+#### Internal dataset, accessible to developers only
+ 
+- Developers store raw datasets to keep the source of examples close to them
+- Users can not access them, there are not installed
+
+--
+
+*Steps:*  
+
+- Create folder `data-raw/` at the root of the package using: `usethis::use_data_raw()`
+- Insert raw datasets inside
+- Use R/Rmd scripts to prepare a cleaner / smaller dataset for future examples  
+
+--
+
+*Information:*  
+
+- `data-raw` is not installed with the package
+  + It is not accessible to the user
+- Example: &lt;https://github.com/ThinkR-open/prenoms/tree/master/data-raw&gt;
+
+???
+
+- Prepare data that you will need for your reproducible examples
+- Keep the original source of your datasets in a safe place
+- Note that with {fusen}, you can realise the preparation steps in a `development` chunk.
+
+---
+class: slide 
+
+### 2. Include datasets in `data/`
+
+#### Exported dataset, accessible to the user
+
+- Developers includes a dataset in the package using: `usethis::use_data(my_dataset)` 
+- Users load the dataset named `my_dataset` using: `data(my_dataset)`
+
+--
+
+*Steps:*  
+
+- Create `data-raw/` to prepare your dataset using: `usethis::use_data_raw("my_dataset")`
+- Prepare your dataset as needed for reproducible examples
+- Store `my_dataset` as internal data
+
+&lt;pre class='rcode-input'&gt;&lt;span class='comment'&gt;# Read some raw data &lt;/span&gt;
+&lt;span class='comment'&gt;# my_data_to_clean &amp;lt;- readr::read_csv("my_raw_data.csv")&lt;/span&gt;
+
+&lt;span class='comment'&gt;# Or use existing dataset like `diamonds`&lt;/span&gt;
+&lt;span class='symbol'&gt;my_dataset&lt;/span&gt; &lt;span class='assignment'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='tidyverse_package package'&gt;dplyr&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;slice_sample&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol'&gt;diamonds&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='symbol_argument'&gt;prop&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='number'&gt;0.2&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+&lt;span class='package'&gt;usethis&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;use_data&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol'&gt;my_dataset&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='symbol_argument'&gt;overwrite&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='number'&gt;TRUE&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+- `overwrite = TRUE` overwrite the dataset if already exists, as for an update
+- Have a look at the content of newly created folder `data/`
+
+???
+
+- We use the directory `data-raw` previously created to prepare dataset
+- `use_data()` stores the reproducible example at the right place in the right format
+
+---
+class: slide 
+
+### 2. Include datasets in `data/`
+
+#### Exported dataset, accessible to the user
+
+- Developers includes a dataset in the package using: `usethis::use_data(my_dataset)` 
+- Users load the dataset named `my_dataset` using: `data(my_dataset)`
+
+
+*Information:*  
+
+- `my_dataset` is accessible to the user after package installation
+&lt;pre class='rcode-input'&gt;&lt;span class='functioncall'&gt;library&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol'&gt;mypackage&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+&lt;span class='functioncall'&gt;data&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol'&gt;my_dataset&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+- `my_dataset` is stored as `.rda` file, only readable by R, similar to `.RData` files
+
+???
+
+Package needs to be installed to access the dataset
+
+---
+class: slide 
+
+### 2. Include datasets in `data/`
+
+#### Exported dataset, accessible to the user
+
+- Exported datasets need to be documented, like functions
+- by convention the documentation will be written in a file of the form "R/doc_my_dataset.R".
+--
+
+- The following script will automatically build the documentation to be completed:
+
+
+&lt;pre class='rcode-input'&gt;&lt;span class='symbol'&gt;my_dataset&lt;/span&gt; &lt;span class='assignment'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='tidyverse_package package'&gt;dplyr&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;slice_sample&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol'&gt;diamonds&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='symbol_argument'&gt;prop&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='number'&gt;0.2&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+&lt;span class='package'&gt;usethis&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;use_data&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol'&gt;my_dataset&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='symbol_argument'&gt;overwrite&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='number'&gt;TRUE&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+
+&lt;span class='functioncall'&gt;cat&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='package'&gt;sinew&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;makeOxygen&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"my_dataset"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt;
+    &lt;span class='symbol_argument'&gt;file&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='string'&gt;"R/doc_my_dataset.R"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+&lt;span class='tidyverse_package package'&gt;rstudioapi&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;navigateToFile&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"R/doc_my_dataset.R"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+_à rajouter dans "data-raw/my_dataset.R"_
+
+
+???
+
+Documentation is always the key for a correct package. 
+Check will remind you of missing data documentation.
+
+
+---
+class: slide 
+
+### 2. Include datasets in `data/`
+
+#### Exported dataset, accessible to the user
+
+- Exported datasets need to be documented, like functions
+
+*Information:*  
+
+2 main tags:
+
+- `@format` (required) a summary of the data.
+  - if `@format` is not specified, then roxygen will edit a standard one.
+
+- `@source` : the origin of the data, the source.
+
+We do not `@export` a dataset.
+
+---
+class: slide 
+
+### 3. Include datasets in `inst/`
+
+#### Raw dataset, accessible to the user
+
+- Developers includes a dataset in the `inst/` folder as is directly
+- Users find the dataset using `system.file("my_dataset.csv", package = "mypackage")`
+
+--
+
+*Steps*
+
+- Create `inst/` folder using: `dir.create(here::here("inst"))`
+- Add a dataset inside
+- Install the package
+- Users can access the path of the dataset and read the file as usual
+
+&lt;pre class='rcode-input'&gt;&lt;span class='comment'&gt;# Store "my_dataset.csv" in "inst/" folder&lt;/span&gt;
+&lt;span class='symbol'&gt;the_data_path&lt;/span&gt; &lt;span class='assignment'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='functioncall'&gt;system.file&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"my_dataset.csv"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='symbol_argument'&gt;package&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='string'&gt;"mypackage"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+&lt;span class='symbol'&gt;the_data&lt;/span&gt; &lt;span class='assignment'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='tidyverse_package package'&gt;readr&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;read_csv&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol'&gt;the_data_path&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+---
+class: slide 
+
+### 3. Include datasets in `inst/`
+
+#### Raw dataset, accessible to the user
+
+- Developers includes a dataset in the `inst/` folder as is directly
+- Users find the dataset using `system.file("my_dataset.csv", package = "mypackage")`
+
+
+*Information*
+
+- Any type of data is allowed
+- Use the path for your reproducible examples
+- Organise the content of `inst/` as your want
+
+???
+
+- system.file() does not read the dataset, it returns the path to the dataset
+- The dataset is only available after installation of the package
+
+---
+class: slide
+
+### Deal with datasets during development
+
+- Datasets in `data/` or `inst/` are only available after package installation
+- Simulate installation using `pkgload::load_all()` during development
+  + `system.file()` temporarily returns development path (not installed path)
+
+--
+
+*Steps*
+
+- Check your reproducible examples in the Rmd file with package data
+
+&lt;pre class='rcode-input'&gt;&lt;span class='comment'&gt;# For development only&lt;/span&gt;
+&lt;span class='package'&gt;pkgload&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;load_all&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+
+&lt;span class='comment'&gt;# Same code to add in your `examples` or `tests`&lt;/span&gt;
+&lt;span class='comment'&gt;# Can be tested directly during development&lt;/span&gt;
+&lt;span class='symbol'&gt;the_data_path&lt;/span&gt; &lt;span class='assignment'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='functioncall'&gt;system.file&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"my_dataset.csv"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='symbol_argument'&gt;package&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='string'&gt;"mypackage"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+&lt;span class='symbol'&gt;the_data&lt;/span&gt; &lt;span class='assignment'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='tidyverse_package package'&gt;readr&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;read_csv&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol'&gt;the_data_path&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+--
+
+&gt; Note that `pkgload::load_all()` also loads functions in development, as it simulates a real installation
+
+???
+
+
+---
+class: slide 
+
+### Quizz
+
+If I want to provide a dataset to the user in any format I want, where do I store it?
+
+- A: `extdata/`
+- B: `inst/`
+- C: `data/`
+- D: `data-raw/`
+
+
+---
+class: slide 
+
+### Your turn!
+
+1. Look at the instructor demonstration with *Steps*
+2. Do it yourself
+
+*Steps*  
+
+- Create a new {fusen} project with `full` template
+- Run the content of the `description` chunk in the "dev_history.Rmd"
+- Uncomment `development` chunk in "Read data" section in the "flat_full.Rmd"
+- Play with data in `inst/` during development
+
+--
+
+*Bonus*
+
+- Create function `check_data_integrity()` that reads a dataset like `nyc_squirrels` and check its integrity
+  + For instance, `primary_fur_color` columns should only contains a unique color, there should not be any `+` sign inside this column
+  + Stop the function if the integrity is not good
+  + Return a message if everything is ok
+- Create a reproducible example using the dataset saved in `inst/` with `system.file()`
+- Create unit tests with reproducible examples where function should fail
+
+???
+
+https://github.com/statnmap/squirrels.fusen/blob/main/dev/dev_history.Rmd
+
+&lt;pre class='rcode-input'&gt;&lt;span class='roxygencomment'&gt;#' Check data integrity&lt;/span&gt;
+&lt;span class='roxygencomment'&gt;#'&lt;/span&gt;
+&lt;span class='roxygencomment'&gt;#' @param x dataframe with at least columns "lat", "long" and "primary_fur_color"&lt;/span&gt;
+&lt;span class='roxygencomment'&gt;#'&lt;/span&gt;
+&lt;span class='roxygencomment'&gt;#' @return Original dataframe if all tests are good. Otherwise stops.&lt;/span&gt;
+&lt;span class='roxygencomment'&gt;#' @export&lt;/span&gt;
+&lt;span class='symbol'&gt;check_data_integrity&lt;/span&gt; &lt;span class='assignment'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='keyword'&gt;function&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol_formalargs'&gt;x&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt; &lt;span class='keyword'&gt;{&lt;/span&gt;
+  &lt;span class='comment'&gt;# Verify points are in New York around Central Park&lt;/span&gt;
+  &lt;span class='symbol'&gt;all_coords_ok&lt;/span&gt; &lt;span class='assignment'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='functioncall'&gt;all&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;
+    &lt;span class='functioncall'&gt;c&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;
+      &lt;span class='functioncall'&gt;min&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol'&gt;x&lt;/span&gt;&lt;span class='keyword'&gt;[[&lt;/span&gt;&lt;span class='string'&gt;"lat"&lt;/span&gt;&lt;span class='keyword'&gt;]&lt;/span&gt;&lt;span class='keyword'&gt;]&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt; &lt;span class='keyword'&gt;&amp;gt;&lt;/span&gt; &lt;span class='number'&gt;40.76400&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt;
+      &lt;span class='functioncall'&gt;max&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol'&gt;x&lt;/span&gt;&lt;span class='keyword'&gt;[[&lt;/span&gt;&lt;span class='string'&gt;"lat"&lt;/span&gt;&lt;span class='keyword'&gt;]&lt;/span&gt;&lt;span class='keyword'&gt;]&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt; &lt;span class='keyword'&gt;&amp;lt;&lt;/span&gt; &lt;span class='number'&gt;40.80100&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt;
+      &lt;span class='functioncall'&gt;min&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol'&gt;x&lt;/span&gt;&lt;span class='keyword'&gt;[[&lt;/span&gt;&lt;span class='string'&gt;"long"&lt;/span&gt;&lt;span class='keyword'&gt;]&lt;/span&gt;&lt;span class='keyword'&gt;]&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt; &lt;span class='keyword'&gt;&amp;gt;&lt;/span&gt; &lt;span class='keyword'&gt;-&lt;/span&gt;&lt;span class='number'&gt;73.98300&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt;
+      &lt;span class='functioncall'&gt;max&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol'&gt;x&lt;/span&gt;&lt;span class='keyword'&gt;[[&lt;/span&gt;&lt;span class='string'&gt;"long"&lt;/span&gt;&lt;span class='keyword'&gt;]&lt;/span&gt;&lt;span class='keyword'&gt;]&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt; &lt;span class='keyword'&gt;&amp;lt;&lt;/span&gt; &lt;span class='keyword'&gt;-&lt;/span&gt;&lt;span class='number'&gt;73.94735&lt;/span&gt;
+    &lt;span class='keyword'&gt;)&lt;/span&gt;
+  &lt;span class='keyword'&gt;)&lt;/span&gt;
+  &lt;span class='keyword'&gt;if&lt;/span&gt; &lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='keyword'&gt;!&lt;/span&gt;&lt;span class='symbol'&gt;all_coords_ok&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt; &lt;span class='keyword'&gt;{&lt;/span&gt;&lt;span class='functioncall'&gt;stop&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"Not all data are in Central Park"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;span class='keyword'&gt;}&lt;/span&gt;
+
+  &lt;span class='comment'&gt;# Verify there is only one color in primary_fur_color.&lt;/span&gt;
+  &lt;span class='comment'&gt;# A `+` in the column is a sign of multiple colours&lt;/span&gt;
+  &lt;span class='keyword'&gt;if&lt;/span&gt; &lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='functioncall'&gt;any&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='functioncall'&gt;grepl&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"+"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='symbol'&gt;x&lt;/span&gt;&lt;span class='keyword'&gt;[[&lt;/span&gt;&lt;span class='string'&gt;"primary_fur_color"&lt;/span&gt;&lt;span class='keyword'&gt;]&lt;/span&gt;&lt;span class='keyword'&gt;]&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='symbol_argument'&gt;fixed&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='number'&gt;TRUE&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt; &lt;span class='keyword'&gt;{&lt;/span&gt;
+    &lt;span class='functioncall'&gt;stop&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"There are multiple colors in some 'primary_fur_color'"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+  &lt;span class='keyword'&gt;}&lt;/span&gt;
+
+  &lt;span class='functioncall'&gt;message&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"All tests are good !"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+&lt;span class='keyword'&gt;}&lt;/span&gt;&lt;/pre&gt;
+
+&lt;pre class='rcode-input'&gt;&lt;span class='comment'&gt;# A working example&lt;/span&gt;
+&lt;span class='symbol'&gt;my_data_example&lt;/span&gt; &lt;span class='assignment'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='functioncall'&gt;data.frame&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;
+  &lt;span class='symbol_argument'&gt;lat&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='functioncall'&gt;c&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='number'&gt;40.77&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='number'&gt;40.78&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt;
+  &lt;span class='symbol_argument'&gt;long&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='functioncall'&gt;c&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='keyword'&gt;-&lt;/span&gt;&lt;span class='number'&gt;73.95&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='keyword'&gt;-&lt;/span&gt;&lt;span class='number'&gt;73.96&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt;
+  &lt;span class='symbol_argument'&gt;primary_fur_color&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='functioncall'&gt;c&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"grey"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='string'&gt;"black"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+&lt;span class='keyword'&gt;)&lt;/span&gt;
+&lt;span class='functioncall'&gt;check_data_integrity&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol'&gt;my_data_example&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+<!--class: inverse, contact-slide
+
+# Contact
+
+## ThinkR - <a href="http://thinkr.fr">http://thinkr.fr</a>-->
+
+
+---
+
+
+layout: true
+
+<p class="bottom"><span class="remark-slide-number-left">​Versioning a {fusen} package with git</span></p>
+---
+class: center, middle, inverse, title-slide
+name: versionner-fusen-git-en
+
+## Versioning a {fusen} package with git
+### And the particular case of {fusen}?
+---
+class: slide 
+
+## Version a {fusen} package
+
+2 possibilities:
+
+- Your {fusen} package has not been created yet, and you want to set up the versioning before starting the developments
+
+- Your {fusen} package has already been created, and you now want to version it
+
+---
+class: slide
+
+## Versioning a {fusen} package
+
+#### Case of a new {fusen} package
+
+- Initialize the empty project on GitLab _(remembering to use the name of your future package as project name)_
+
+- Get the `https` link to your project by clicking on the `clone` button
+
+- In RStudio, create the new project File &gt; New Project &gt; Version Control &gt; git and link to the Repository URL
+
+Initiate your new {fusen} package:
+
+&lt;pre class='rcode-input'&gt;&lt;span class='package'&gt;fusen&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;create_fusen&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol_argument'&gt;path&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='string'&gt;"."&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt;
+                    &lt;span class='symbol_argument'&gt;template&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='string'&gt;"minimal"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt;
+                    &lt;span class='symbol_argument'&gt;overwrite&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='number'&gt;TRUE&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+---
+class: slide
+
+## Versioning a {fusen} package
+
+#### Case of a new {fusen} package
+
+In the  *Terminal*, 
+
+ + Switch in a new _main_ branch:
+ 
+&lt;pre class='rcode-input'&gt;
+git switch -c main
+&lt;/pre&gt;
+
++ Select modified files in your project:
+
+&lt;pre class='rcode-input'&gt;
+git add .
+&lt;/pre&gt;
+
++ Write a commit (with an explicit message):
+
+&lt;pre class='rcode-input'&gt;
+git commit -m "Init fusen package"
+&lt;/pre&gt;
+
++ Push your changes back to the remote:
+
+&lt;pre class='rcode-input'&gt;
+git push -u origin main
+&lt;/pre&gt;
+
+You can now begin your developments.
+
+---
+class: slide
+
+## Versioning a {fusen} package
+
+#### Case of an existing {fusen} package
+
+&gt; This procedure can be used for any type of R project, and therefore for any type of package (not only {fusen} packages)
+
+--
+
+- Initialize the empty project on GitLab _(remembering to use the name of your package as project name)_
+
+- Retrieve the `https` link to your project by clicking on the `clone` button
+
+- Open the RStudio project and run the command `usethis::use_git()` in the console _(the {usethis} package must be installed)_
+
+- Answer yes to all the questions asked in the console, if relevant. A first "Initial Commit" is done for you.
+
+- RStudio restarts and git is operational locally
+
+???
+
+ATTENTION
+Si vous modifiez cette slide, modifiez aussi M14S01C06 pour git1jour
+
+---
+class: slide
+
+## Versioning a {fusen} package
+
+#### Case of an existing {fusen} package
+
+Now you have to link this project to your **`remote`**:
+
+&lt;pre class='rcode-input'&gt;&lt;span class='package'&gt;usethis&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;use_git_remote&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"origin"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt;
+                        &lt;span class='symbol_argument'&gt;url&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='string'&gt;"https://gitlab.com/my_name/mypackage.git"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt;
+                        &lt;span class='symbol_argument'&gt;overwrite&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='number'&gt;TRUE&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+In the *Terminal*, type:
+
+```
+git push -u origin main
+```
+
+You just added a **`remote`** and made a first **`push`** on the **`main`** branch.
+
+???
+
+ATTENTION
+Si vous modifiez cette slide, modifiez aussi M14S01C06 pour git1jour
+
+---
+class: slide
+
+## Exercise
+
+Set up the _git_ versioning for your `{hello}` package
+
+<!--class: inverse, contact-slide
+
+# Contact
+
+## ThinkR - <a href="http://thinkr.fr">http://thinkr.fr</a>-->
+
+
+---
+
+
+layout: true
+
+<p class="bottom"><span class="remark-slide-number-left">​What about data analyses in a package?</span></p>
+---
+class: center, middle, inverse, title-slide
+name: data-analyses-packages
+
+## What about data analyses in a package?
+### From Rmd to package to Rmd
+---
+class: slide
+
+## Create shareable reports through packages
+
+### Create a package with your functions
+
+Then, two possible ways to build your analysis reports:
+
+- Classical package: Use external projects to use your package functions in Rmd reports
+- Compendium-like: Include the Rmd reports inside the package development project
+
+---
+class: slide 
+
+## A Compendium is like a package
+
+The compendium logic is to separate code from the report output:
+
+- One place to store your R scripts in "R/"
+- One place to store the Rmarkdown report in "analyses/"
+
+This is similar to package logic:
+
+- One place to store R scripts in "R/"
+- One place to store Rmarkdown examples of use in "vignettes/"
+
+### Let's combine both worlds to benefit from robustness of packages
+
+---
+class: slide
+
+## Combine {fusen} and Compendium structure
+
+- Create a {fusen} project, versioned with git  
+
+&lt;pre class='rcode-input'&gt;&lt;span class='comment'&gt;# install.packages("fusen")&lt;/span&gt;
+&lt;span class='package'&gt;fusen&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;create_fusen&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='symbol_argument'&gt;template&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='string'&gt;"full"&lt;/span&gt;&lt;span class='keyword'&gt;,&lt;/span&gt; &lt;span class='symbol_argument'&gt;with_git&lt;/span&gt; &lt;span class='argument'&gt;=&lt;/span&gt; &lt;span class='number'&gt;TRUE&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+- Add a "reports/" directory that will not interfer with the package
+
+&lt;pre class='rcode-input'&gt;&lt;span class='functioncall'&gt;dir.create&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"reports"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+&lt;span class='package'&gt;usethis&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;use_build_ignore&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"reports"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+
+_Note: you can add the Compendium structure in the "reports/" sub-directory, with package {rcompendium}_
+  
+&lt;pre class='rcode-input'&gt;&lt;span class='comment'&gt;# install.packages("rcompendium")&lt;/span&gt;
+&lt;span class='package'&gt;rcompendium&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;add_compendium&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"reports"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+---
+class: slide
+
+## Combine {fusen} and Compendium structure
+
+- Add a reduced dataset for the package in "inst/" or "data/"
+  + Use it for examples, unit tests, documentation
+  
+  
+- Build your functions in a "flat" file, like any {fusen} package
+  + Write the content of the vignette as a reduced version of your future report
+  + Create examples, unit tests, documentation as usual
+  + Commit regularly
+  
+  
+- Use the "reports/" directory to store your reports and outputs, while using the functions of your package
+  + Create a Rmarkdown report using your functions loaded with `library(my.package)`
+  + Do not forget to install your package prior to building your report
+
+---
+class: slide
+
+## Why would I include my analysis inside my package?
+
+**Because of:**
+
+- {rim}: manage R versions
+- {renv}: manage R packages versions
+- and Docker: manage OS and system dependencies
+
+---
+class: slide
+
+## Why would I include my analysis inside my package?
+
+- Develop your project in a controled environment, with fixed versions of packages
+  - Functions, tests and examples are valid for a specific set of packages versions with a specific R version
+  - Use your functions for your analysis reports with the same working environment
+  - Use `attachment::create_renv_for_dev()` (&gt;=0.2.5) to build your "renv.lock" file
+  
+- Allow other users to create their analyses in the same environment, by cloning your repository
+  + Share your work with the world, without bothering about their R installation
+  
+- You can build a Docker container to also fix system dependencies when using your package. {dockerfiler} can help you to set up the container.
+
+---
+class: slide
+
+## Share your work
+
+- Build and publish your {pkgdown} website to present how to use your package
+
+&lt;pre class='rcode-input'&gt;&lt;span class='comment'&gt;# Have a proper Readme - Fill and knit&lt;/span&gt;
+&lt;span class='package'&gt;usethis&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;use_readme_rmd&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+
+&lt;span class='comment'&gt;# Allow {pkgdown}&lt;/span&gt;
+&lt;span class='package'&gt;usethis&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;use_pkgdown&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+
+&lt;span class='comment'&gt;# Try it locally&lt;/span&gt;
+&lt;span class='package'&gt;pkgdown&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;build_site&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+
+&lt;span class='comment'&gt;# GitHub&lt;/span&gt;
+&lt;span class='comment'&gt;# Add your credentials for GitHub&lt;/span&gt;
+&lt;span class='package'&gt;gitcreds&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;gitcreds_set&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+&lt;span class='comment'&gt;# Send your project to a new GitHub project&lt;/span&gt;
+&lt;span class='package'&gt;usethis&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;use_github&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+
+&lt;span class='comment'&gt;# Build and publish with GitHub Actions&lt;/span&gt;
+&lt;span class='package'&gt;usethis&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;use_github_action&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='string'&gt;"pkgdown"&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;
+
+&lt;span class='comment'&gt;# Build and publish on GitLab&lt;/span&gt;
+&lt;span class='package'&gt;gitlabr&lt;/span&gt;&lt;span class='keyword'&gt;::&lt;/span&gt;&lt;span class='functioncall'&gt;use_gitlab_ci&lt;/span&gt;&lt;span class='keyword'&gt;(&lt;/span&gt;&lt;span class='keyword'&gt;)&lt;/span&gt;&lt;/pre&gt;
+
+<!--class: inverse, contact-slide
+
+# Contact
+
+## ThinkR - <a href="http://thinkr.fr">http://thinkr.fr</a>-->
+
+---
+name: thanks-for-joining-this-tutorial
+
+layout:true
+.remark-slide-number-left[​]
+
+---
+class: slide
+
+## Thanks for joining this tutorial!
+
+### &lt;span style="color:#000000"&gt;Sébastien Rochette, Florence Mounier&lt;/span&gt;
+### sebastien@thinkr.fr, florence@thinkr.fr
+
+Material of this course is on Github (with answers): &lt;a href="https://github.com/statnmap/teach-package-dev-rmdfirst" target='_blank'&gt;&lt;span style='color:#f26537;'&gt;statnmap/teach-package-dev-rmdfirst&lt;/span&gt;&lt;/a&gt;
+
+&lt;img src="stagiaire_complet_files/temp_files/images/fusen-write-package.png" width="50%" /&gt;
+
+<!--class: inverse, contact-slide
+
+# Contact
+
+## ThinkR - <a href="http://thinkr.fr">http://thinkr.fr</a>-->
+
+    </textarea>
+
+<!-- xaringan style print function -->
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+
+<!-- launch remark.js -->
+<script>
+var nature = {
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "<div class=\"remark-slide-number-right\">S. Rochette, F. Mounier - <a href=\"AFH 2022 - tutorial\">AFH 2022 - tutorial</a> &nbsp;&nbsp; %current% / %total%</div>"
+} ;
+
+var slideshow = remark.create(nature);
+
+if (window.HTMLWidgets){
+  slideshow.on('afterShowSlide', function (slide) {
+    window.dispatchEvent(new Event('resize'));
+  });
+}
+
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+// xaringan print functions
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+
+</script>
+
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+
+  </body>
+</html>

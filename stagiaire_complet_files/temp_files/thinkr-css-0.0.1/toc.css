@@ -1,0 +1,191 @@
+/* Page structure ----------------------------------------------------------
+
+*/
+
+.collapse-lg {
+  /*display: none;*/
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  background: #fafafa;
+  /*margin-top: 0.5rem;*/
+  margin-bottom: 1rem;
+  box-shadow: 5px 5px 10px rgba(0.1, 0.1, 0.1, 0.5);
+  border: 1px solid var(--primary);
+  position: absolute;
+  z-index: 10;
+  height: 99%;
+  overflow: auto;
+  font-size: 1.2em;
+  margin-left: 10px;
+  right: 2vw;
+}
+
+
+.sidebar-book {
+  padding-left: 1rem;
+}
+.sidebar-book {
+  margin-top: 1rem;
+}
+
+
+.collapse-lg.show {
+  display: block;
+}
+
+/* TOC content ----------------------------------------- */
+
+#main-nav h2 {
+  margin: 5px 0;
+}
+#main-nav .book-toc {
+ /* column-count: 2; */
+}
+#main-nav .book-toc.list-unstyled {
+  padding-left: 1.5em;
+  margin: 0 auto;
+}
+
+/* TOC button ----------------------------------------- */
+
+.toc {
+  /*width: 100%;*/
+  /* height: 100%; */
+  /* font-size: 0.8rem;  */
+  /* font-size: 80%; */
+  display: flex;
+  position: absolute;
+  z-index: 1000;
+  right: 0;
+}
+.btn-toc {
+  /*z-index: 12;*/
+  /*height: 3%;*/
+  /*width: 100%;*/
+  /*font-size: 0.8rem;  */
+  /* font-size: min(max(16px, 1vw), 22px); */
+  font-size: 2.5vw;
+  padding: 0.5vw;
+  border: 0.5px solid #c3c3c3;
+	color: #fff;
+	background-color: #373737;
+}
+/*
+@media (max-width: 900px) {
+	.btn-toc {
+		font-size: 0.4rem;
+	}
+}
+*/
+
+/* Chapter nav ----------------------------------------- */
+
+
+/* Sidebar ------------------------------------------------------ */
+
+.book-toc .active {
+  font-weight: bolder;
+}
+
+/* Sticky footer ----------------------------------------- */
+
+
+/* Scrollspy --------------------------------------------- */
+
+nav[data-toggle="toc"] .nav > li {
+  margin-bottom: calc(0.5rem - 3px);
+}
+
+nav[data-toggle="toc"] .nav > li > a {
+  padding: 3px;
+  display: block;
+}
+
+nav[data-toggle="toc"] .nav > li > a:hover {
+  text-decoration: underline;
+}
+
+nav[data-toggle="toc"] .nav a.nav-link.active,
+nav[data-toggle="toc"] .nav .nav-link.active > li > a {
+  background-color: #eee;
+}
+
+/* Nav: second level (shown on .active) */
+nav[data-toggle="toc"] .nav-link + ul {
+  display: none;
+}
+nav[data-toggle="toc"] .nav-link.active + ul {
+  margin-top: 3px;
+  display: block;
+}
+
+nav[data-toggle="toc"] .nav .nav > li {
+  margin-bottom: 0;
+}
+nav[data-toggle="toc"] .nav .nav > li > a {
+  margin-left: 10px;
+}
+/* Figures -------------------------------------------- */
+/* Headings -------------------------------------------- */
+
+.dropdown-item .header-section-number {
+  position: absolute;
+  width: 2rem;
+  left: -1rem;
+  display: block;
+  text-align: right;
+}
+
+/* Tables ---------------------------------------------- */
+
+
+/* Footnotes --------------------------------------------- */
+
+/* Search ---------------------------------------------- */
+
+mark {
+  background: linear-gradient(-100deg,
+    hsla(48,92%,75%,.3),
+    hsla(48,92%,75%,.7) 95%,
+    hsla(48,92%,75%,.1)
+  )
+}
+
+.algolia-autocomplete .aa-hint {
+  color: #999;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: min(100%, 20rem);
+  background-color: #fff;
+  border: 1px solid var(--gray);
+  border-radius: 0.2rem;
+  margin-top: 2px;
+
+  max-height: 50vh;
+  overflow-y: auto;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  cursor: pointer;
+  padding: 5px 4px;
+  border-bottom: 1px #ddd solid;
+  font-size: 0.9rem;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  background-color: #B2D7FF;
+}
+
+/* Code ------------------------------------------------ */
+
+/* copy button */
+
+/* Misc typography ---------------------------------------------- */
+
+a {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* special callout blocks */
+
+
+/* Cover image */
