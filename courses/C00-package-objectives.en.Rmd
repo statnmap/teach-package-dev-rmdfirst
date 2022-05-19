@@ -52,15 +52,15 @@ class: slide
 
 ### How this tutorial will be held
 
-- E-learning platform: https://baka.thinkr.fr
+- E-learning platform: https://bakacode.io
 - Instructors speak on slides
-- Slack group: https://app.slack.com/client/T0270SMAND9/C0270SMATJP
-- Discussion, questions on the Slack group to keep track
-- Quizz where every attendees will be able to participate on Slack
+<!-- - Slack group: https://app.slack.com/client/T0270SMAND9/C0270SMATJP -->
+<!-- - Discussion, questions on the Slack group to keep track -->
+- Quizz where every attendees will be able to participate
 - Direct questions where attendees are asked to participate
 - Hands-on parts, in breakout rooms, where attendees are asked to share their screens for instructors to help
 - A 5 minutes break every hour
-- We stop everything 15 minutes before the end to say goodbye
+- We stop 15 minutes before the end to say goodbye
 
 
 ---
@@ -71,6 +71,7 @@ class: slide
 All conference participants agree to:
 
 - Be considerate in language and actions, and respect the boundaries of fellow participants.
-- Refrain from demeaning, discriminatory, or harassing behaviour and language. Please refer to [Unacceptable Behaviour](https://user2021.r-project.org/participation/coc/#unacceptable-behaviour) for more details.
-- Alert a member of the [Code Of Conduct Response Team](https://user2021.r-project.org/participation/coc/#code-of-conduct-response-team) if you notice someone in distress, or observe violations of this code of conduct, even if they seem inconsequential. Please refer to the section titled [What To Do If You Witness or Are Subject To Unacceptable Behaviour](https://user2021.r-project.org/participation/coc/#what-to-do-if-you-witness-or-are-subject-to-unacceptable-behaviour) for more details.
+- Refrain from demeaning, discriminatory, or harassing behaviour and language. 
+- Alert a member of the ThinkR team if you notice someone in distress, or observe violations of this code of conduct, even if they seem inconsequential. 
+
 

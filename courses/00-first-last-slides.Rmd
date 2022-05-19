@@ -1,6 +1,6 @@
 ---
-title: "How to build a package following Rmd Driven Development"
-subtitle: "useR! 2021 - remote"
+title: "Build reproducible and shareable data analyses using R packages"
+subtitle: "AFH 2022"
 output: 
   formation::chapitre:
     seal: false
@@ -38,19 +38,19 @@ margin: 0;
 
 .top_left[
 ```{r logo, echo=FALSE, out.width="20%", eval=TRUE}
-knitr::include_graphics("images/marmot.png")
+# knitr::include_graphics("images/marmot.png")
 ```
 ]
 
 
-# How to build a package following the 'Rmd First' method?
+# "Build reproducible and shareable data analyses using R packages
 
-## <span style='color:#f26537;'>_useR! 2021 - remote_</span> 
+## <span style='color:#f26537;'>_Conférence AFH 2022_</span> 
 
-### Sébastien Rochette, Emily Riederer
+### Sébastien Rochette, Florence Mounier
 
 .prez_github[
-Material of this course is on Github: <a href="https://github.com/statnmap/user2021.rmdd" target='_blank'><span style='color:#f26537;'>statnmap/user2021.rmdd</span></a>
+Material of this course is on Github: <a href="https://github.com/statnmap/teach-package-dev-rmdfirst" target='_blank'><span style='color:#f26537;'>statnmap/teach-package-dev-rmdfirst</span></a>
 ]
 
 ---
@@ -63,10 +63,10 @@ class: slide
 
 ## Thanks for joining this tutorial!
 
-### <span style="color:#000000">Sébastien Rochette, Emily Riederer</span>
-### @statnmap, @EmilyRiederer
+### <span style="color:#000000">Sébastien Rochette, Florence Mounier</span>
+### sebastien@thinkr.fr, florence@thinkr.fr
 
-Material of this course is on Github (with answers): <a href="https://github.com/statnmap/user2021.rmdd" target='_blank'><span style='color:#f26537;'>statnmap/user2021.rmdd</span></a>
+Material of this course is on Github (with answers): <a href="https://github.com/statnmap/teach-package-dev-rmdfirst" target='_blank'><span style='color:#f26537;'>statnmap/teach-package-dev-rmdfirst</span></a>
 
 ```{r meetup-lille-21, out.width="50%", echo=FALSE}
 knitr::include_graphics("images/fusen-write-package.png")

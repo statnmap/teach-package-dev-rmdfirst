@@ -1,0 +1,139 @@
+---
+title: "What about data analyses in a package?"
+subtitle: "From Rmd to package to Rmd"
+code: ""
+prerequis: [""]
+output: formation::chapitre
+obj_pred: ["use packages for data analyses"]
+slug: data-analyses-packages
+---
+class: slide
+
+## Create shareable reports through packages
+
+### Create a package with your functions
+
+Then, two possible ways to build your analysis reports:
+
+- Classical package: Use external projects to use your package functions in Rmd reports
+- Compendium-like: Include the Rmd reports inside the package development project
+
+---
+class: slide 
+
+## A Compendium is like a package
+
+The compendium logic is to separate code from the report output:
+
+- One place to store your R scripts in "R/"
+- One place to store the Rmarkdown report in "analyses/"
+
+This is similar to package logic:
+
+- One place to store R scripts in "R/"
+- One place to store Rmarkdown examples of use in "vignettes/"
+
+### Let's combine both worlds to benefit from robustness of packages
+
+---
+class: slide
+
+## Combine {fusen} and Compendium structure
+
+- Create a {fusen} project, versioned with git  
+
+```{r, eval=FALSE}
+# install.packages("fusen")
+fusen::create_fusen(template = "full", with_git = TRUE)
+```
+
+- Add a "reports/" directory that will not interfer with the package
+
+```{r, eval=FALSE}
+dir.create("reports")
+usethis::use_build_ignore("reports")
+```
+
+
+_Note: you can add the Compendium structure in the "reports/" sub-directory, with package {rcompendium}_
+  
+```{r, eval=FALSE}
+# install.packages("rcompendium")
+rcompendium::add_compendium("reports")
+```
+
+---
+class: slide
+
+## Combine {fusen} and Compendium structure
+
+- Add a reduced dataset for the package in "inst/" or "data/"
+  + Use it for examples, unit tests, documentation
+  
+  
+- Build your functions in a "flat" file, like any {fusen} package
+  + Write the content of the vignette as a reduced version of your future report
+  + Create examples, unit tests, documentation as usual
+  + Commit regularly
+  
+  
+- Use the "reports/" directory to store your reports and outputs, while using the functions of your package
+  + Create a Rmarkdown report using your functions loaded with `library(my.package)`
+  + Do not forget to install your package prior to building your report
+
+---
+class: slide
+
+## Why would I include my analysis inside my package?
+
+**Because of:**
+
+- {rim}: manage R versions
+- {renv}: manage R packages versions
+- and Docker: manage OS and system dependencies
+
+---
+class: slide
+
+## Why would I include my analysis inside my package?
+
+- Develop your project in a controled environment, with fixed versions of packages
+  - Functions, tests and examples are valid for a specific set of packages versions with a specific R version
+  - Use your functions for your analysis reports with the same working environment
+  - Use `attachment::create_renv_for_dev()` (>=0.2.5) to build your "renv.lock" file
+  
+- Allow other users to create their analyses in the same environment, by cloning your repository
+  + Share your work with the world, without bothering about their R installation
+  
+- You can build a Docker container to also fix system dependencies when using your package. {dockerfiler} can help you to set up the container.
+
+---
+class: slide
+
+## Share your work
+
+- Build and publish your {pkgdown} website to present how to use your package
+
+```{r, eval=FALSE}
+# Have a proper Readme - Fill and knit
+usethis::use_readme_rmd()
+
+# Allow {pkgdown}
+usethis::use_pkgdown()
+
+# Try it locally
+pkgdown::build_site()
+
+# GitHub
+# Add your credentials for GitHub
+gitcreds::gitcreds_set()
+# Send your project to a new GitHub project
+usethis::use_github()
+
+# Build and publish with GitHub Actions
+usethis::use_github_action("pkgdown")
+
+# Build and publish on GitLab
+gitlabr::use_gitlab_ci()
+```
+

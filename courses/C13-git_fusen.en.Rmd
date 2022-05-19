@@ -1,0 +1,135 @@
+---
+title: "Versioning a {fusen} package with git"
+subtitle: "And the particular case of {fusen}?"
+code: "M13S02C13"
+output: formation::chapitre
+prerequis: [""]
+obj_ped: "Know how to version a {fusen} package"
+slug: versionner-fusen-git-en
+---
+class: slide 
+
+## Version a {fusen} package
+
+2 possibilities:
+
+- Your {fusen} package has not been created yet, and you want to set up the versioning before starting the developments
+
+- Your {fusen} package has already been created, and you now want to version it
+
+---
+class: slide
+
+## Versioning a {fusen} package
+
+#### Case of a new {fusen} package
+
+- Initialize the empty project on GitLab _(remembering to use the name of your future package as project name)_
+
+- Get the `https` link to your project by clicking on the `clone` button
+
+- In RStudio, create the new project File > New Project > Version Control > git and link to the Repository URL
+
+Initiate your new {fusen} package:
+
+```{r, eval=FALSE}
+fusen::create_fusen(path = ".", 
+                    template = "minimal", 
+                    overwrite = TRUE)
+```
+
+---
+class: slide
+
+## Versioning a {fusen} package
+
+#### Case of a new {fusen} package
+
+In the  *Terminal*, 
+
+ + Switch in a new _main_ branch:
+ 
+```{bash eval=FALSE}
+git switch -c main
+```
+
++ Select modified files in your project:
+
+```{bash eval=FALSE}
+git add .
+```
+
++ Write a commit (with an explicit message):
+
+```{bash eval=FALSE}
+git commit -m "Init fusen package"
+```
+
++ Push your changes back to the remote:
+
+```{bash eval=FALSE}
+git push -u origin main
+```
+
+You can now begin your developments.
+
+---
+class: slide
+
+## Versioning a {fusen} package
+
+#### Case of an existing {fusen} package
+
+> This procedure can be used for any type of R project, and therefore for any type of package (not only {fusen} packages)
+
+--
+
+- Initialize the empty project on GitLab _(remembering to use the name of your package as project name)_
+
+- Retrieve the `https` link to your project by clicking on the `clone` button
+
+- Open the RStudio project and run the command `usethis::use_git()` in the console _(the {usethis} package must be installed)_
+
+- Answer yes to all the questions asked in the console, if relevant. A first "Initial Commit" is done for you.
+
+- RStudio restarts and git is operational locally
+
+???
+
+ATTENTION
+Si vous modifiez cette slide, modifiez aussi M14S01C06 pour git1jour
+
+---
+class: slide
+
+## Versioning a {fusen} package
+
+#### Case of an existing {fusen} package
+
+Now you have to link this project to your **`remote`**:
+
+```{r eval=FALSE}
+usethis::use_git_remote("origin", 
+                        url = "https://gitlab.com/my_name/mypackage.git", 
+                        overwrite = TRUE)
+```
+
+In the *Terminal*, type:
+
+```
+git push -u origin main
+```
+
+You just added a **`remote`** and made a first **`push`** on the **`main`** branch.
+
+???
+
+ATTENTION
+Si vous modifiez cette slide, modifiez aussi M14S01C06 pour git1jour
+
+---
+class: slide
+
+## Exercise
+
+Set up the _git_ versioning for your `{hello}` package

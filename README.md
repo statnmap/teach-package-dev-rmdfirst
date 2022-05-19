@@ -3,14 +3,17 @@
 
 # How to build a package with “Rmd First” method
 
+> Build reproducible and shareable data analyses using R packages
+
 <!-- badges: start -->
 <!-- badges: end -->
 
 This repository contains the course material of our [useR! 2021
-tutorial](https://user2021.r-project.org/).
+tutorial](https://user2021.r-project.org/), then [AFH
+2022](https://www.association-francaise-halieutique.fr).
 
-Instructors: [Sébastien Rochette](https://statnmap.com), [Emily
-Riederer](emily.rbind.io)
+Instructors: [Sébastien Rochette](https://statnmap.com), Florence
+Mounier
 
 ## Tutorial purpose
 
@@ -109,7 +112,13 @@ The content of the course is:
 -   courses/C00-package-objectives.en.Rmd: What we will present during
     this tutorial, and how it will be held
 -   courses/00-cruz.Rmd: How the e-learning platform works
--   courses/C00-package\_preambule.en.Rmd: What means package first ?
--   courses/C01-package\_express\_fusen.en.Rmd: Build a package using
+-   courses/C00-package_preambule.en.Rmd: What means package first ?
+-   courses/C01a-package_fusen_discover.en.Rmd: Discover the structure
+    of a package with {fusen}
+-   courses/C01b-package_express_fusen.en.Rmd: Build a package using
     {fusen}
--   courses/C06-pkg\_avance\_test.Rmd: Go further with unit tests
+    <!-- - courses/C06-pkg_avance_test.Rmd: Go further with unit tests -->
+-   courses/C09-pkg_avance_data.en.Rmd: Include datasets in your package
+-   courses/C13-git_fusen.en.Rmd: Use git with {fusen} projects
+-   courses/C14-data-analyses-packages.en.Rmd: What about data analyses
+    in a package?

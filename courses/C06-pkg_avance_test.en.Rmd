@@ -5,11 +5,11 @@ code: "M13S02C06"
 output: formation::chapitre
 prerequis: ["M06-rbase"]
 obj_ped: "savoir mettre en place des tests unitaires"
-slug: tester-son-code
+slug: tester-son-code-en
 ---
 class: slide 
-exclude: true
-<!-- Add what to test exactly ? How do you think your code may fail ? -->
+
+<!-- Add what to test exactly? How do you think your code may fail? -->
 
 ### Automate the testing of your code
 
@@ -43,7 +43,9 @@ class: slide
   + Adds {testthat} to the `Suggests` of DESCRIPTION
   + Creates "test/testthat.R" (do not touch)
 - Create a test file for each function or function family
-  + Consistent with function script files in "R/" + Create a test file for each function or function family
+  + Consistent with function script files in "R/" 
+
+--
 
 > Note that {fusen} will initiate all of these from the `tests` chunks
 
@@ -84,8 +86,8 @@ class: slide
 ### Writing tests 
 
 - Your test functions start with `expect_*(object, expected)`
-  + `object` : actual output
-  + `expected` : the expected one. 
+  + `object`: actual output
+  + `expected`: the expected one. 
 - If the test fails, the function returns an error
 - If the test passes, the function returns nothing
 
@@ -158,7 +160,7 @@ test_that("log fails ", {
 ---
 class: slide 
 
-### Quizz: What does this code do ? 
+### Quizz: What does this code do? 
 
 - `save_as_csv()` takes a `dataframe` and a `path` as input and save it as csv using the `path`
   + It outputs the `path`
@@ -220,10 +222,10 @@ class: slide
 
 ### Quiz: How to test what is supposed to fail?
 
-- A : `expect_equal()`
-- B : `expect_false()`
-- C : `expect_error()`
-- D : `expect_warning()`
+- A - `expect_equal()`
+- B - `expect_false()`
+- C - `expect_error()`
+- D - `expect_warning()`
 
 ???
 
@@ -237,19 +239,10 @@ Generally speaking, a warning should be something that the user has to correct i
 
 ---
 class: slide 
-exclude: true
 
-### Do it yourself!
+### TD - Exercise 1
 
-**Version A**
-
-Add unit tests to your {mytools} package containing functions `save_as_csv()` and `clean_names()`.
-
-> Your package must be documented, **tested** and return 0 errors, 0 warnings, and 0 notes
-
-**Bonus**
-
-- Add to your {mytools} package, while working in a new Rmd:
+- Create a {mytools} package:
 
   + A function that returns the first 6 values of a chosen column (as a parameter) from a dataset. The output is a vector.
       + `extract_six_from_col(mtcars, "mpg")` works
@@ -262,7 +255,7 @@ Add unit tests to your {mytools} package containing functions `save_as_csv()` an
 class: slide
 
 
-### TD - Version B
+### TD - Exercise 2
 
 - Add checks to your `say_hello()` function in the {hello} package to ensure that the input variable is a `character`, of size `1`. Stop the function otherwise with `stop()`.
 - Provide the message text as a `character` output of the function, reusable for future processing
